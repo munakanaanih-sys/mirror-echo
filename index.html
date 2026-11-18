@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مرآة وصدى – ومضات ذكية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Rubik:wght@400;500;700;800&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#ff4757; --orange:#ffa502; --yellow:#eccc68; --green:#2ed573; --blue:#1e90ff; --purple:#9c27b0;
+    --bg:#f8f9fa; --card:#ffffff; --ink:#2f3542; --muted:#57606f; --soft:#a4b0be; --line:#eceef1;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Cairo','Rubik','Poppins',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6;overflow-x:hidden}
+  html[lang="he"] body{font-family:'Rubik','Cairo',sans-serif}
+  html[lang="en"] body{font-family:'Poppins','Rubik',sans-serif}
+  body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:linear-gradient(135deg,rgba(255,71,87,.05),rgba(255,165,2,.05),rgba(46,213,115,.05),rgba(30,144,255,.05))}
+  .sparks{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+  .sparks i{position:absolute;width:6px;height:6px;border-radius:50%;opacity:.0;animation:twinkle 5s infinite ease-in-out}
+  @keyframes twinkle{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:.55;transform:scale(1)}}
+
+  .wrap{max-width:820px;margin:0 auto;padding:18px 16px 40px}
+  .top-nav{display:flex;justify-content:center;margin-bottom:18px}
+  .lang-switcher{display:flex;gap:6px;background:#fff;padding:6px;border-radius:30px;box-shadow:0 4px 15px rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.05)}
+  .lang-btn{border:none;background:none;padding:7px 18px;font-size:14px;font-weight:700;cursor:pointer;border-radius:25px;font-family:inherit;color:#747d8c;transition:background-color .25s,color .25s,box-shadow .25s}
+  .lang-btn:hover:not(.active){background:rgba(30,144,255,.08);color:var(--blue)}
+  .lang-btn.active{background:linear-gradient(45deg,var(--blue),#00d2d3);color:#fff;box-shadow:0 4px 12px rgba(30,144,255,.3)}
+
+  header{text-align:center;margin-bottom:26px}
+  .logo-container{width:132px;height:132px;margin:0 auto 14px;border-radius:50%;padding:5px;
+    background:linear-gradient(45deg,var(--red),var(--orange),var(--green),var(--blue),var(--purple));
+    box-shadow:0 10px 30px rgba(0,0,0,.12);animation:glow 4s ease-in-out infinite}
+  @keyframes glow{0%,100%{box-shadow:0 10px 30px rgba(30,144,255,.18)}50%{box-shadow:0 10px 34px rgba(255,165,2,.35)}}
+  .logo-img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;background:#0f1a3a}
+  .brand{font-size:.95rem;font-weight:700;color:var(--muted);margin-bottom:2px}
+  h1{font-size:2.1rem;font-weight:900;line-height:1.3;margin-bottom:6px;
+    background:linear-gradient(45deg,#ff4757,#1e90ff,#2ed573);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .subtitle{color:var(--muted);font-weight:500}
+
+  .card{background:var(--card);border-radius:24px;padding:18px;margin-bottom:14px;box-shadow:0 8px 20px rgba(0,0,0,.04);border:2px solid transparent;transition:border-color .3s,box-shadow .3s}
+  .info{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .info label{font-size:.88rem;color:var(--muted);display:block;margin-bottom:4px;font-weight:600}
+  .info input{width:100%;padding:10px 14px;border:2px solid var(--line);border-radius:14px;font:inherit;background:#fbfcfd;outline:none;transition:border-color .2s}
+  .info input:focus{border-color:var(--blue)}
+  .legend{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted);margin-top:12px;font-weight:600}
+  .progress{height:10px;background:var(--line);border-radius:99px;overflow:hidden;margin:12px 0 6px}
+  .progress span{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--red),var(--orange),var(--green),var(--blue),var(--purple));background-size:820px 100%;transition:width .35s}
+  html[dir="rtl"] .progress span{margin-inline-start:0}
+  .ptext{font-size:.85rem;color:var(--muted);text-align:center;font-weight:600}
+
+  .section-head{display:flex;align-items:center;gap:10px;margin:26px 4px 12px}
+  .section-head .dot{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-size:1.2rem;color:#fff}
+  .section-head h2{font-size:1.2rem;font-weight:800}
+
+  .q{display:flex;gap:12px;align-items:flex-start}
+  .num{flex:0 0 34px;height:34px;border-radius:50%;font-weight:800;display:grid;place-items:center;font-family:'Poppins',sans-serif;font-size:.95rem}
+  .q p{margin:3px 0 12px;font-weight:600;font-size:1.04rem}
+  .scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+  .scale input{position:absolute;opacity:0;pointer-events:none}
+  .scale label{border:2px solid var(--line);border-radius:14px;padding:7px 2px;text-align:center;cursor:pointer;user-select:none;transition:background-color .15s,border-color .15s,transform .15s}
+  .scale label b{display:block;font-size:1.2rem;font-family:'Poppins',sans-serif}
+  .scale label small{display:block;font-size:.7rem;color:var(--muted);line-height:1.2;min-height:1.7em}
+  .scale label:hover{border-color:#cfd5dc;transform:translateY(-2px)}
+  .scale input:focus-visible + label{outline:3px solid var(--blue);outline-offset:2px}
+  .scale input:checked + label{color:#fff;border-color:transparent}
+  .scale input:checked + label small{color:#fff}
+  .scale input[value="1"]:checked + label{background:var(--red)}
+  .scale input[value="2"]:checked + label{background:var(--orange)}
+  .scale input[value="3"]:checked + label{background:#d6b44a}
+  .scale input[value="4"]:checked + label{background:#20bf6b}
+  .scale input[value="5"]:checked + label{background:var(--blue)}
+  .card.missing{border-color:var(--red);box-shadow:0 0 0 4px rgba(255,71,87,.12)}
+
+  .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+  button.main,button.ghost{font:inherit;font-weight:800;border-radius:30px;padding:12px 30px;cursor:pointer;transition:transform .2s,box-shadow .2s}
+  button.main{border:0;color:#fff;background:linear-gradient(45deg,var(--blue),#00d2d3);box-shadow:0 6px 18px rgba(30,144,255,.3)}
+  button.main:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(30,144,255,.38)}
+  button.ghost{background:#fff;border:2px solid var(--blue);color:var(--blue)}
+  button.ghost:hover{background:rgba(30,144,255,.07)}
+  .msg{color:var(--red);text-align:center;margin-top:10px;min-height:1.4em;font-weight:700}
+
+  #result{display:none;border-color:transparent;position:relative;overflow:hidden}
+  #result::before{content:'';position:absolute;inset:0 0 auto 0;height:6px;background:linear-gradient(90deg,var(--red),var(--orange),var(--green),var(--blue),var(--purple))}
+  .score{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:8px}
+  .ring{--p:0;width:140px;height:140px;border-radius:50%;flex:0 0 auto;background:conic-gradient(var(--rc,var(--blue)) calc(var(--p)*1%),var(--line) 0);display:grid;place-items:center}
+  .ring div{width:112px;height:112px;border-radius:50%;background:#fff;display:grid;place-items:center;text-align:center;align-content:center}
+  .ring strong{font-size:2.3rem;font-weight:800;line-height:1;font-family:'Poppins',sans-serif}
+  .ring span{font-size:.8rem;color:var(--muted);font-family:'Poppins',sans-serif}
+  .who{font-size:.9rem;color:var(--muted);font-weight:600}
+  .level{font-size:1.4rem;font-weight:900;margin:2px 0}
+  .bars{display:grid;gap:10px;margin-top:18px}
+  .bar-row{display:grid;grid-template-columns:150px 1fr 48px;gap:10px;align-items:center;font-size:.92rem;font-weight:600}
+  .bar-track{height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+  .bar-fill{height:100%;border-radius:99px;width:0;transition:width .8s}
+  .bar-row .pct{font-family:'Poppins',sans-serif;font-weight:700;text-align:center}
+  h3{margin:22px 0 10px;font-size:1.12rem;font-weight:800}
+  ul{padding-inline-start:20px}
+  li{margin-bottom:10px}
+  .tag{display:inline-block;font-size:.72rem;padding:1px 10px;border-radius:99px;background:rgba(255,165,2,.12);color:#c77d00;margin-inline-start:6px;font-weight:800}
+  .tag.low{background:rgba(255,71,87,.12);color:var(--red)}
+  .general{background:rgba(30,144,255,.06);border-radius:16px;padding:12px 14px}
+  footer{padding:24px 16px 20px;color:var(--soft);font-size:.88rem;text-align:center}
+  footer a{color:var(--blue);font-weight:700;text-decoration:none}
+
+  @media (max-width:560px){
+    .info{grid-template-columns:1fr}
+    h1{font-size:1.6rem}
+    .scale{gap:5px}
+    .scale label small{font-size:.6rem}
+    .bar-row{grid-template-columns:105px 1fr 42px;font-size:.82rem}
+    .logo-container{width:112px;height:112px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<style>
+  .hint{font-size:.85rem;color:var(--muted);margin:-6px 0 10px;font-weight:500}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chips input,.rating10 input{position:absolute;opacity:0;pointer-events:none}
+  .chips label{border:2px solid var(--line);border-radius:30px;padding:6px 14px;cursor:pointer;font-weight:600;font-size:.93rem;user-select:none;transition:background-color .15s,border-color .15s,color .15s}
+  .chips label:hover{border-color:#cfd5dc}
+  .chips input:focus-visible + label,.rating10 input:focus-visible + label{outline:3px solid var(--blue);outline-offset:2px}
+  .chips input:checked + label{background:var(--chip,var(--blue));border-color:transparent;color:#fff}
+  .other-in,textarea{width:100%;margin-top:10px;padding:10px 14px;border:2px solid var(--line);border-radius:14px;font:inherit;background:#fbfcfd;outline:none}
+  .other-in:focus,textarea:focus{border-color:var(--blue)}
+  textarea{min-height:90px;resize:vertical}
+  .opt{font-size:.78rem;color:var(--soft);font-weight:600}
+  .stages{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:6px 0 14px}
+  .stage{border:2px solid var(--line);border-radius:16px;padding:10px 6px;text-align:center;font-weight:700;font-size:.92rem;color:var(--soft);transition:all .3s}
+  .stage .ic{font-size:1.5rem;display:block}
+  .stage.on{color:#fff;border-color:transparent;transform:scale(1.04);box-shadow:0 8px 20px rgba(0,0,0,.12)}
+  .bar-row.nop{grid-template-columns:170px 1fr}
+  .plan{background:linear-gradient(135deg,rgba(30,144,255,.06),rgba(46,213,115,.06));border:2px dashed rgba(30,144,255,.35);border-radius:18px;padding:14px 16px}
+  .plan dt{font-weight:800;margin-top:10px;font-size:.95rem}
+  .plan dt:first-child{margin-top:0}
+  .plan dd{margin:2px 0 0}
+  .tip-row{margin-bottom:10px}
+  .rating10{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
+  .rating10 label{border:2px solid var(--line);border-radius:12px;padding:8px 0;text-align:center;font-family:'Poppins',sans-serif;font-weight:700;cursor:pointer;transition:background-color .15s,transform .15s}
+  .rating10 label:hover{transform:translateY(-2px)}
+  .rating10 input:checked + label{background:linear-gradient(45deg,var(--blue),#00d2d3);color:#fff;border-color:transparent}
+
+  /* hub */
+  .hub-section{margin:30px 4px 14px}
+  .hub-section h2{font-size:1.4rem;font-weight:900}
+  .hub-section p{color:var(--muted);font-weight:500}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+  .fcard{position:relative;background:#fff;border-radius:24px;padding:24px 16px 18px;text-align:center;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.04);border:2px solid transparent;transition:transform .3s,box-shadow .3s,border-color .3s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:175px;outline:none}
+  .fcard:not(.soon):hover,.fcard:not(.soon):focus-visible{border-color:var(--c);transform:translateY(-5px);box-shadow:0 12px 25px rgba(0,0,0,.08)}
+  .ficon{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;font-size:1.75rem;background:var(--cs)}
+  .ftitle{font-weight:800;font-size:1.08rem;line-height:1.4}
+  .fmeta{font-size:.8rem;color:var(--muted);font-weight:600}
+  .info-btn{position:absolute;top:10px;inset-inline-end:10px;width:28px;height:28px;border-radius:50%;border:none;background:rgba(30,144,255,.1);color:var(--blue);font-weight:800;cursor:pointer;font-family:'Poppins',sans-serif}
+  .tip{position:absolute;left:8px;right:8px;top:calc(100% + 8px);background:#2f3542;color:#fff;font-size:.88rem;line-height:1.6;padding:10px 12px;border-radius:14px;z-index:30;opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .2s,transform .2s,visibility .2s;box-shadow:0 10px 25px rgba(0,0,0,.2);text-align:start;font-weight:500;cursor:default}
+  .tip::before{content:'';position:absolute;top:-6px;left:50%;margin-left:-6px;border:6px solid transparent;border-top:0;border-bottom-color:#2f3542}
+  @media (hover:hover){.fcard:hover .tip{opacity:1;visibility:visible;transform:none}}
+  .fcard.open .tip{opacity:1;visibility:visible;transform:none}
+  .fcard.soon{opacity:.6;cursor:default}
+  .fcard:hover,.fcard.open,.fcard:focus-within{z-index:40}
+  .soon-badge{background:rgba(255,165,2,.1);color:#c77d00;border:1px solid rgba(255,165,2,.3);padding:2px 10px;border-radius:30px;font-size:.75rem;font-weight:700}
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+  .backlink{display:inline-flex;gap:6px;align-items:center;background:#fff;border:2px solid var(--blue);color:var(--blue);padding:6px 16px;border-radius:30px;font-weight:700;text-decoration:none;font-size:.92rem;transition:background-color .2s,color .2s}
+  .backlink:hover{background:var(--blue);color:#fff}
+  .mini-brand{display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:8px;color:var(--muted);font-weight:700;font-size:.92rem}
+  .mini-brand img{width:46px;height:46px;border-radius:50%;padding:2px;background:linear-gradient(45deg,var(--red),var(--orange),var(--green),var(--blue),var(--purple))}
+  .fhead{text-align:center;margin:4px 0 18px}
+  .fhead .ficon{margin:0 auto 10px;width:64px;height:64px;font-size:2rem}
+  .fhead h1{font-size:1.9rem}
+  .metas{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+  .metas span{background:var(--bg);border-radius:20px;padding:4px 12px;font-size:.85rem;font-weight:600}
+  .priv{font-size:.92rem;color:var(--ink);background:rgba(46,213,115,.09);border-radius:12px;padding:9px 12px;margin-top:6px}
+  .intro h3{margin-top:0}
+  .send-status{margin-top:10px;font-weight:700}
+  .home-intro{max-width:620px;margin:0 auto;text-align:center;color:var(--muted)}
+  @media (max-width:560px){.bar-row.nop{grid-template-columns:120px 1fr}.stage{font-size:.8rem}.rating10{grid-template-columns:repeat(5,1fr)}.fhead h1{font-size:1.5rem}}
+</style>
+</head>
+<body>
+<div class="sparks" id="sparks"></div>
+<div class="wrap" id="app"></div>
+
+<script>
+const LOGO = "data:image/jpeg;base64,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";
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbz0rsXRGckb6WRZTmlCi9NRDVTftlBPYbA8074WTjFeNczsi8nO4_XsaQ2NKvA0Bu_q/exec";
+const PLATFORM_URL = "https://munakanaanih-sys.github.io/Smart_Flashes_with_muna/";
+
+const COMMON = {
+ ar:{dir:"rtl",brand:"ومضات ذكية مع منى مصطفى",hubTitle:"مرآة وصدى",hubSub:"منصة استمارات التقييم الذاتي وتقييم الفعاليات والبرامج",
+  hubIntro:"اختر الاستمارة المناسبة. مرّر الفأرة على البطاقة (أو اضغط ⓘ في الهاتف) لتعرف ماذا تفحص.",
+  selfH:"🪞 مرآة – تقييم ذاتي",selfP:"استمارات تساعدك على فهم نفسك وتحسين أدائك. النتيجة لك وحدك.",
+  evH:"📣 صدى – تقييم فعاليات وبرامج",evP:"شاركنا رأيك في الفعاليات والبرامج لنجعلها أفضل في المرة القادمة.",
+  min:n=>`⏱️ ${n} دقائق`,qn:n=>`📝 ${n} سؤالًا`,soon:"⏳ قريبًا",back:"🏠 العودة إلى المنصة",start:"ابدأ الاستمارة ✨",aboutH:"عن هذه الاستمارة",
+  privSelf:"🔒 إجاباتك لا تُحفظ ولا تُرسل لأحد — النتيجة تظهر لك وحدك.",
+  privEvent:"🔒 الاستمارة بدون اسم. إجاباتك تُرسل للمعلمة لتحسين الفعاليات القادمة.",
+  scale:["لا أوافق بالمرّة","لا أوافق","محايد","أوافق","أوافق جدًا"],legend1:"1 = لا أوافق بالمرّة",legend5:"5 = أوافق جدًا",
+  progress:(n,t)=>`أجبت عن ${n} من ${t}`,multi:"يمكنك اختيار أكثر من إجابة",other:"أخرى…",otherPh:"اكتب هنا…",optional:"(اختياري)",
+  missing:n=>`بقي ${n} سؤال/أسئلة بدون إجابة.`,reset:"ابدأ من جديد",copy:"نسخ النتيجة",edit:"تعديل الإجابات",
+  copied:"تم النسخ ✔",copyFail:"تعذّر النسخ، يمكنك أخذ لقطة شاشة.",
+  evLbl:"اسم الفعالية",evPh:"مثال: رحلة الجليل",evMissing:"اكتب اسم الفعالية في الأعلى.",clsLbl:"الصف (اختياري)",clsPh:"مثال: الثامن 2",
+  sending:"⏳ جارٍ إرسال رأيك…",sent:"✔ وصل رأيك، شكرًا لك!",sendFail:"⚠️ تعذّر إرسال رأيك. تأكّد من اتصال الإنترنت وحاول مرة أخرى.",retry:"إعادة الإرسال",thanks:"شكرًا لمشاركتك! 💙",
+  footer:"© 2026 جميع الحقوق محفوظة — المعلمة ومركزة التقييم منى مصطفى - كناعنة",platform:"← إلى منصة ومضات ذكية"},
+ he:{dir:"rtl",brand:"הבזקים חכמים עם מונא מוסטפא",hubTitle:"מראה והד",hubSub:"פלטפורמת שאלוני הערכה עצמית והערכת אירועים ותוכניות",
+  hubIntro:"בחרו את השאלון המתאים. העבירו את העכבר על הכרטיס (או לחצו ⓘ בטלפון) כדי לראות מה הוא בודק.",
+  selfH:"🪞 מראה – הערכה עצמית",selfP:"שאלונים שעוזרים לכם להבין את עצמכם ולשפר את הביצועים. התוצאה שלכם בלבד.",
+  evH:"📣 הד – הערכת אירועים ותוכניות",evP:"שתפו אותנו בדעתכם על אירועים ותוכניות כדי שיהיו טובים יותר בפעם הבאה.",
+  min:n=>`⏱️ ${n} דקות`,qn:n=>`📝 ${n} שאלות`,soon:"⏳ בקרוב",back:"🏠 חזרה לפלטפורמה",start:"התחל/י את השאלון ✨",aboutH:"על השאלון",
+  privSelf:"🔒 התשובות שלך לא נשמרות ולא נשלחות לאף אחד — התוצאה מוצגת רק לך.",
+  privEvent:"🔒 השאלון אנונימי. התשובות נשלחות למורה לשיפור האירועים הבאים.",
+  scale:["לא מסכים/ה בכלל","לא מסכים/ה","ניטרלי","מסכים/ה","מסכים/ה מאוד"],legend1:"1 = לא מסכים/ה בכלל",legend5:"5 = מסכים/ה מאוד",
+  progress:(n,t)=>`ענית על ${n} מתוך ${t}`,multi:"אפשר לבחור יותר מתשובה אחת",other:"אחר…",otherPh:"כתבו כאן…",optional:"(לא חובה)",
+  missing:n=>`נשארו ${n} שאלות ללא תשובה.`,reset:"להתחיל מחדש",copy:"העתק תוצאה",edit:"עריכת התשובות",
+  copied:"הועתק ✔",copyFail:"ההעתקה נכשלה, אפשר לצלם את המסך.",
+  evLbl:"שם האירוע",evPh:"לדוגמה: טיול לגליל",evMissing:"כתבו את שם האירוע למעלה.",clsLbl:"כיתה (לא חובה)",clsPh:"לדוגמה: ח'2",
+  sending:"⏳ שולח את דעתך…",sent:"✔ הדעה שלך התקבלה, תודה!",sendFail:"⚠️ השליחה נכשלה. בדקו את החיבור לאינטרנט ונסו שוב.",retry:"שליחה חוזרת",thanks:"תודה על ההשתתפות! 💙",
+  footer:"© 2026 כל הזכויות שמורות — המורה ורכזת ההערכה מונא מוסטפא - כנאענה",platform:"← לפלטפורמת הבזקים חכמים"},
+ en:{dir:"ltr",brand:"Smart Flashes with Muna Mustafa",hubTitle:"Mirror & Echo",hubSub:"Self-assessment and event & program evaluation forms",
+  hubIntro:"Pick a form. Hover over a card (or tap ⓘ on your phone) to see what it covers.",
+  selfH:"🪞 Mirror – Self-assessment",selfP:"Forms that help you understand yourself and improve. The result is for you alone.",
+  evH:"📣 Echo – Events & programs",evP:"Tell us what you thought of events and programs so we can make them better next time.",
+  min:n=>`⏱️ ${n} min`,qn:n=>`📝 ${n} questions`,soon:"⏳ Coming soon",back:"🏠 Back to the platform",start:"Start the form ✨",aboutH:"About this form",
+  privSelf:"🔒 Your answers aren't saved or sent anywhere — only you see the result.",
+  privEvent:"🔒 This form is anonymous. Your answers go to the teacher to improve future events.",
+  scale:["Strongly disagree","Disagree","Neutral","Agree","Strongly agree"],legend1:"1 = Strongly disagree",legend5:"5 = Strongly agree",
+  progress:(n,t)=>`Answered ${n} of ${t}`,multi:"You can choose more than one",other:"Other…",otherPh:"Write here…",optional:"(optional)",
+  missing:n=>`${n} question(s) still unanswered.`,reset:"Start over",copy:"Copy result",edit:"Edit answers",
+  copied:"Copied ✔",copyFail:"Copy failed — take a screenshot instead.",
+  evLbl:"Event name",evPh:"e.g. Galilee trip",evMissing:"Please write the event name at the top.",clsLbl:"Class (optional)",clsPh:"e.g. 8-2",
+  sending:"⏳ Sending your feedback…",sent:"✔ Your feedback was received — thank you!",sendFail:"⚠️ Couldn't send your feedback. Check your internet connection and try again.",retry:"Send again",thanks:"Thanks for taking part! 💙",
+  footer:"© 2026 All rights reserved — Teacher & Assessment Coordinator Muna Mustafa - Kanaaneh",platform:"Go to the Smart Flashes platform →"}
+};
+
+const SELFDEF = {
+ ar:{nameLbl:"اسم الطالب/ة (اختياري)",namePh:"مثال: سارة",submit:"احسب نتيجتي",generalH:"✨ نصيحة عامة",priority:"أولوية",improveTag:"تحسين",scoreW:"النتيجة",strW:"نقاط القوة",impW:"للتحسين"},
+ he:{nameLbl:"שם התלמיד/ה (לא חובה)",namePh:"לדוגמה: שרה",submit:"חשב את התוצאה שלי",generalH:"✨ עצה כללית",priority:"עדיפות",improveTag:"לשיפור",scoreW:"תוצאה",strW:"חוזקות",impW:"לשיפור"},
+ en:{nameLbl:"Student name (optional)",namePh:"e.g. Sarah",submit:"Calculate my result",generalH:"✨ General advice",priority:"Priority",improveTag:"Improve",scoreW:"Result",strW:"Strengths",impW:"To improve"}
+};
+const EVDEF = {
+ ar:{submit:"أرسل رأيي",sumH:"📋 ملخّص رأيك",barsH:"📊 رضاك عن جوانب الفعالية",pEvent:"الفعالية",pOverall:"التقييم العام",pLiked:"أكثر ما أعجبني",pSugg:"اقتراحي"},
+ he:{submit:"שלח/י את דעתי",sumH:"📋 סיכום הדעה שלך",barsH:"📊 שביעות הרצון שלך מתחומי האירוע",pEvent:"האירוע",pOverall:"ציון כללי",pLiked:"מה הכי אהבתי",pSugg:"ההצעה שלי"},
+ en:{submit:"Send my feedback",sumH:"📋 Your feedback summary",barsH:"📊 Your satisfaction by area",pEvent:"Event",pOverall:"Overall rating",pLiked:"What I liked most",pSugg:"My suggestion"}
+};
+
+const FORMS = [
+ {id:"exam-self",kind:"self",mode:"score",icon:"📝",c:"var(--blue)",cs:"rgba(30,144,255,.12)",minutes:5,
+  title:{ar:"التقييم الذاتي بعد الامتحان",he:"הערכה עצמית אחרי המבחן",en:"Post-Exam Self-Assessment"},
+  desc:{ar:"تفحص عاداتك الدراسية، وتحضيرك للامتحان، وتصرّفك أثناءه، وطريقة تفكيرك في نتيجتك. تحصل على علامة من 100 واقتراحات لرفع تحصيلك أو الحفاظ عليه.",he:"בודק את הרגלי הלמידה, ההכנה למבחן, ההתנהלות במהלכו והדרך שבה את/ה חושב/ת על התוצאה. מקבלים ציון מתוך 100 והמלצות לשיפור ההישגים.",en:"Looks at your study habits, exam prep, what you did during the exam, and how you think about your result. You get a score out of 100 and tips to raise or keep your achievement."},
+  data:(function(){
+const UI = {
+  ar:{dir:"rtl",brand:"ومضات ذكية مع منى مصطفى",title:"التقييم الذاتي بعد الامتحان",
+      subtitle:"قيّم نفسك بصدق: إلى أي حد ينطبق عليك كل ادعاء؟",
+      nameLbl:"اسم الطالب/ة (اختياري)",namePh:"مثال: سارة",subjLbl:"المادة / الامتحان (اختياري)",subjPh:"مثال: رياضيات",
+      legend1:"1 = لا أوافق بالمرّة",legend5:"5 = أوافق جدًا",progress:(n,t)=>`أجبت عن ${n} من ${t}`,
+      scale:["لا أوافق بالمرّة","لا أوافق","محايد","أوافق","أوافق جدًا"],
+      submit:"احسب علامتي",reset:"ابدأ من جديد",missing:n=>`بقي ${n} ادعاء/ات بدون إجابة.`,
+      strengthsH:"💪 نقاط قوتك",improveH:"🎯 ماذا عليك أن تفعل لترفع تحصيلك",generalH:"✨ نصيحة عامة",
+      copy:"نسخ النتيجة",edit:"تعديل الإجابات",copied:"تم نسخ النتيجة ✔",copyFail:"تعذّر النسخ، يمكنك أخذ لقطة شاشة للنتيجة.",
+      priority:"أولوية",improveTag:"تحسين",none:"لا توجد نقاط ضعف واضحة — استمر على نفس الطريقة!",
+      resultFor:"نتيجة التقييم الذاتي",scoreW:"العلامة",strW:"نقاط القوة",impW:"للتحسين",
+      footer:"© 2026 جميع الحقوق محفوظة — المعلمة ومركزة التقييم منى مصطفى - كناعنة",platform:"← إلى منصة ومضات ذكية",
+      levels:[
+        ["ممتاز 🌟","عاداتك الدراسية قوية جدًا، وهذا غالبًا سبب نجاحك.","حافظ على نفس الروتين ولا تتهاون في الامتحانات القادمة. تحدَّ نفسك بأسئلة أصعب، أو اشرح المادة لزميل — التعليم أفضل طريقة لتثبيت الفهم."],
+        ["جيد جدًا 👍","أنت على الطريق الصحيح، وبقي القليل لتصل للتميّز.","اختر نقطة أو نقطتين من قائمة التحسين واجعلها عادة خلال الأسبوعين القادمين، وستلاحظ الفرق في الامتحان القادم."],
+        ["متوسط 🙂","عندك أساس جيد، لكن بعض العادات تحتاج إلى تقوية.","اختر أهم 3 اقتراحات من القائمة واكتبها على ورقة قرب مكان دراستك. التغيير التدريجي والثابت أفضل من محاولة تغيير كل شيء مرة واحدة."],
+        ["يحتاج إلى تحسين 💡","لا بأس — معرفة نقاط الضعف هي الخطوة الأولى للتحسّن.","ابدأ بخطوة صغيرة اليوم: 20 دقيقة مراجعة يوميًا وحلّ الوظائف في وقتها. اطلب المساعدة من المعلم أو زميل متفوّق؛ التحسّن ممكن جدًا مع الاستمرار."]
+      ]},
+  he:{dir:"rtl",brand:"הבזקים חכמים עם מונא מוסטפא",title:"הערכה עצמית אחרי המבחן",
+      subtitle:"העריכו את עצמכם בכנות: עד כמה כל היגד מתאר אתכם?",
+      nameLbl:"שם התלמיד/ה (לא חובה)",namePh:"לדוגמה: שרה",subjLbl:"מקצוע / מבחן (לא חובה)",subjPh:"לדוגמה: מתמטיקה",
+      legend1:"1 = לא מסכים/ה בכלל",legend5:"5 = מסכים/ה מאוד",progress:(n,t)=>`ענית על ${n} מתוך ${t}`,
+      scale:["לא מסכים/ה בכלל","לא מסכים/ה","ניטרלי","מסכים/ה","מסכים/ה מאוד"],
+      submit:"חשב את הציון שלי",reset:"להתחיל מחדש",missing:n=>`נשארו ${n} היגדים ללא תשובה.`,
+      strengthsH:"💪 החוזקות שלך",improveH:"🎯 מה כדאי לעשות כדי לשפר את ההישגים",generalH:"✨ עצה כללית",
+      copy:"העתק תוצאה",edit:"עריכת התשובות",copied:"התוצאה הועתקה ✔",copyFail:"ההעתקה נכשלה, אפשר לצלם את המסך.",
+      priority:"עדיפות",improveTag:"לשיפור",none:"אין נקודות חולשה בולטות — המשיכו כך!",
+      resultFor:"תוצאת ההערכה העצמית",scoreW:"ציון",strW:"חוזקות",impW:"לשיפור",
+      footer:"© 2026 כל הזכויות שמורות — המורה ורכזת ההערכה מונא מוסטפא - כנאענה",platform:"← לפלטפורמת הבזקים חכמים",
+      levels:[
+        ["מצוין 🌟","הרגלי הלמידה שלך חזקים מאוד, וזו כנראה הסיבה להצלחה.","שמרו על אותה שגרה ואל תרפו במבחנים הבאים. אתגרו את עצמכם בשאלות קשות יותר או הסבירו את החומר לחבר — ללמד אחרים זו הדרך הטובה ביותר לבסס הבנה."],
+        ["טוב מאוד 👍","אתם בדרך הנכונה, ונשאר מעט כדי להגיע להצטיינות.","בחרו נקודה אחת או שתיים מרשימת השיפור והפכו אותן להרגל בשבועיים הקרובים — תרגישו את ההבדל במבחן הבא."],
+        ["בינוני 🙂","יש לכם בסיס טוב, אבל חלק מההרגלים צריכים חיזוק.","בחרו את 3 ההמלצות החשובות ביותר וכתבו אותן על דף ליד מקום הלמידה. שינוי הדרגתי ועקבי עדיף על ניסיון לשנות הכול בבת אחת."],
+        ["דורש שיפור 💡","זה בסדר — לזהות את נקודות החולשה זה הצעד הראשון לשיפור.","התחילו היום בצעד קטן: 20 דקות חזרה ביום והכנת שיעורי בית בזמן. בקשו עזרה מהמורה או מחבר מצטיין; שיפור בהחלט אפשרי עם התמדה."]
+      ]},
+  en:{dir:"ltr",brand:"Smart Flashes with Muna Mustafa",title:"Post-Exam Self-Assessment",
+      subtitle:"Be honest: how well does each statement describe you?",
+      nameLbl:"Student name (optional)",namePh:"e.g. Sarah",subjLbl:"Subject / exam (optional)",subjPh:"e.g. Math",
+      legend1:"1 = Strongly disagree",legend5:"5 = Strongly agree",progress:(n,t)=>`Answered ${n} of ${t}`,
+      scale:["Strongly disagree","Disagree","Neutral","Agree","Strongly agree"],
+      submit:"Calculate my score",reset:"Start over",missing:n=>`${n} statement(s) still unanswered.`,
+      strengthsH:"💪 Your strengths",improveH:"🎯 What to do to raise your achievement",generalH:"✨ General advice",
+      copy:"Copy result",edit:"Edit answers",copied:"Result copied ✔",copyFail:"Copy failed — take a screenshot instead.",
+      priority:"Priority",improveTag:"Improve",none:"No clear weak spots — keep doing what you're doing!",
+      resultFor:"Self-assessment result",scoreW:"Score",strW:"Strengths",impW:"To improve",
+      footer:"© 2026 All rights reserved — Teacher & Assessment Coordinator Muna Mustafa - Kanaaneh",platform:"Go to the Smart Flashes platform →",
+      levels:[
+        ["Excellent 🌟","Your study habits are very strong — that's likely why you succeed.","Keep the same routine and don't ease off for the next exams. Challenge yourself with harder questions, or explain the material to a classmate — teaching is the best way to lock in understanding."],
+        ["Very good 👍","You're on the right track, and just a little away from excellence.","Pick one or two points from the improvement list and turn them into habits over the next two weeks — you'll feel the difference in the next exam."],
+        ["Average 🙂","You have a good base, but some habits need strengthening.","Choose the 3 most important suggestions and write them on a note near your study spot. Steady, gradual change beats trying to change everything at once."],
+        ["Needs improvement 💡","That's okay — knowing your weak points is the first step to improving.","Start small today: 20 minutes of review a day and homework done on time. Ask your teacher or a strong classmate for help; real improvement is very possible with persistence."]
+      ]}
+};
+
+const SECTIONS = [
+  {icon:"📚",color:"var(--red)",   soft:"rgba(255,71,87,.12)", t:{ar:"عاداتي الدراسية",he:"הרגלי הלמידה שלי",en:"My study habits"}},
+  {icon:"📝",color:"var(--orange)",soft:"rgba(255,165,2,.14)",t:{ar:"التحضير للامتحان",he:"ההכנה למבחן",en:"Preparing for the exam"}},
+  {icon:"⏱️",color:"#20bf6b",      soft:"rgba(46,213,115,.14)",t:{ar:"أثناء الامتحان",he:"במהלך המבחן",en:"During the exam"}},
+  {icon:"🔍",color:"var(--blue)",  soft:"rgba(30,144,255,.12)",t:{ar:"التفكير في نتيجتي",he:"חשיבה על התוצאה שלי",en:"Reflecting on my result"}}
+];
+
+// r:true = reverse-scored (agreeing indicates a weakness)
+const ITEMS = [
+ {s:0,t:{ar:"أراجع المواد التي تعلّمتها في الصف كل يوم.",he:"אני חוזר/ת על החומר שלמדתי בכיתה כל יום.",en:"I review what I learned in class every day."},
+  g:{ar:"المراجعة اليومية",he:"חזרה יומית",en:"Daily review"},
+  a:{ar:"راجع ما تعلمته في نفس اليوم ولو لـ 15–20 دقيقة؛ المراجعة اليومية القصيرة تثبّت المعلومة أفضل من الحفظ في الليلة الأخيرة.",he:"חזרו על מה שלמדתם באותו יום, אפילו 15–20 דקות; חזרה יומית קצרה מקבעת את הידע טוב יותר משינון בלילה האחרון.",en:"Review the day's lesson the same day, even for 15–20 minutes; short daily review sticks far better than last-night cramming."}},
+ {s:0,t:{ar:"أخصص ساعة على الأقل للدراسة يوميًا.",he:"אני מקדיש/ה לפחות שעה ללמידה בכל יום.",en:"I set aside at least one hour a day for studying."},
+  g:{ar:"وقت دراسة يومي ثابت",he:"זמן למידה יומי קבוע",en:"A fixed daily study time"},
+  a:{ar:"ضع جدولًا أسبوعيًا فيه ساعة دراسة يوميًا في نفس الوقت، وقسّمها لفترات (25 دقيقة دراسة + 5 دقائق استراحة).",he:"בנו לוח שבועי עם שעת למידה קבועה בכל יום, וחלקו אותה למקטעים (25 דקות למידה + 5 דקות הפסקה).",en:"Make a weekly timetable with one study hour at the same time each day, split into blocks (25 min study + 5 min break)."}},
+ {s:0,t:{ar:"أنجز وظائفي البيتية بانتظام وفي وقتها.",he:"אני מכין/ה את שיעורי הבית באופן קבוע ובזמן.",en:"I do my homework regularly and on time."},
+  g:{ar:"إنجاز الوظائف البيتية",he:"הכנת שיעורי בית",en:"Doing homework"},
+  a:{ar:"اجعل حلّ الوظيفة أول مهمة بعد العودة للبيت؛ الوظائف تدريب مباشر على نوع أسئلة الامتحان.",he:"הפכו את שיעורי הבית למשימה הראשונה כשאתם חוזרים הביתה; הם תרגול ישיר לסוג השאלות במבחן.",en:"Make homework the first task when you get home; it's direct practice for the kind of questions on the exam."}},
+ {s:0,t:{ar:"أنتبه وأشارك في الحصة وأسأل عندما لا أفهم.",he:"אני מקשיב/ה ומשתתף/ת בשיעור ושואל/ת כשאני לא מבין/ה.",en:"I pay attention, participate in class, and ask when I don't understand."},
+  g:{ar:"المشاركة والانتباه في الحصة",he:"השתתפות וקשב בשיעור",en:"Attention & participation in class"},
+  a:{ar:"اجلس في مكان يساعدك على التركيز، وسجّل كل سؤال لم تفهمه واسأله للمعلم في الحصة أو بعدها مباشرة.",he:"שבו במקום שעוזר לכם להתרכז, רשמו כל שאלה שלא הבנתם ושאלו את המורה בשיעור או מיד אחריו.",en:"Sit where you can focus, write down anything you didn't get, and ask the teacher during or right after class."}},
+ {s:0,t:{ar:"أدرس في مكان هادئ وبعيد عن الهاتف والمشتّتات.",he:"אני לומד/ת במקום שקט, רחוק מהטלפון ומהסחות דעת.",en:"I study in a quiet place, away from my phone and distractions."},
+  g:{ar:"بيئة دراسة مركّزة",he:"סביבת למידה ממוקדת",en:"A focused study environment"},
+  a:{ar:"خصّص مكانًا ثابتًا وهادئًا للدراسة، وضع الهاتف في غرفة أخرى أو على وضع الطيران أثناء الدراسة.",he:"הקצו מקום קבוע ושקט ללמידה, והניחו את הטלפון בחדר אחר או במצב טיסה בזמן הלמידה.",en:"Keep a fixed, quiet study spot and put your phone in another room or on airplane mode while studying."}},
+ {s:0,t:{ar:"ألخّص المادة بطريقتي (ملخصات، خرائط ذهنية، بطاقات).",he:"אני מסכם/ת את החומר בדרך שלי (סיכומים, מפות חשיבה, כרטיסיות).",en:"I summarize material my own way (notes, mind maps, flashcards)."},
+  g:{ar:"التلخيص وتنظيم المادة",he:"סיכום וארגון החומר",en:"Summarizing & organizing material"},
+  a:{ar:"بعد كل درس اكتب ملخصًا قصيرًا بكلماتك أو ارسم خريطة ذهنية؛ إعادة صياغة المادة تكشف لك ما لم تفهمه.",he:"אחרי כל שיעור כתבו סיכום קצר במילים שלכם או ציירו מפת חשיבה; ניסוח מחדש חושף את מה שלא הבנתם.",en:"After each lesson, write a short summary in your own words or draw a mind map; rephrasing reveals what you haven't understood."}},
+
+ {s:1,t:{ar:"بدأت التحضير للامتحان قبل أسبوع على الأقل.",he:"התחלתי להתכונן למבחן לפחות שבוע מראש.",en:"I started preparing for the exam at least a week ahead."},
+  g:{ar:"التخطيط المبكر للامتحان",he:"תכנון מוקדם למבחן",en:"Planning early for the exam"},
+  a:{ar:"ابدأ التحضير قبل الامتحان بأسبوع أو أكثر، ووزّع المادة على الأيام بحيث يبقى يوم أخير للمراجعة الشاملة فقط.",he:"התחילו להתכונן שבוע או יותר לפני המבחן, וחלקו את החומר על פני הימים כך שהיום האחרון יישאר לחזרה כללית בלבד.",en:"Start a week or more before the exam and spread the material across the days, leaving the last day for an overall review only."}},
+ {s:1,t:{ar:"قمت بحل أسئلة نموذجية أو امتحانات سابقة قبل الامتحان.",he:"פתרתי שאלות לדוגמה או מבחנים קודמים לפני המבחן.",en:"I solved sample questions or past exams before the exam."},
+  g:{ar:"التدرّب على أسئلة نموذجية",he:"תרגול שאלות לדוגמה",en:"Practicing sample questions"},
+  a:{ar:"اطلب من المعلم امتحانات سابقة أو أسئلة نموذجية، وحلّها بوقت محدد كأنك في الامتحان، ثم صحّح أخطاءك بنفسك.",he:"בקשו מהמורה מבחנים קודמים או שאלות לדוגמה, פתרו אותם בזמן מוגבל כאילו אתם במבחן, ובדקו את הטעויות בעצמכם.",en:"Ask your teacher for past exams or sample questions, solve them under a time limit as if in the exam, then check your own mistakes."}},
+ {s:1,t:{ar:"درست جميع المواضيع المطلوبة للامتحان وليس جزءًا منها فقط.",he:"למדתי את כל הנושאים הנדרשים למבחן ולא רק חלק מהם.",en:"I studied all the topics required for the exam, not just some of them."},
+  g:{ar:"تغطية جميع المواضيع",he:"כיסוי כל הנושאים",en:"Covering every topic"},
+  a:{ar:"اكتب قائمة بكل مواضيع الامتحان وضع إشارة ✔ بجانب كل موضوع تنهيه؛ هكذا لا يسقط أي موضوع من حسابك.",he:"כתבו רשימה של כל נושאי המבחן וסמנו ✔ ליד כל נושא שסיימתם; כך אף נושא לא יישכח.",en:"List every exam topic and tick ✔ each one as you finish it, so nothing slips through the cracks."}},
+ {s:1,t:{ar:"طلبت المساعدة من المعلم أو الزملاء عندما واجهت صعوبة في موضوع ما.",he:"ביקשתי עזרה מהמורה או מחברים כשנתקלתי בקושי בנושא מסוים.",en:"I asked my teacher or classmates for help when I struggled with a topic."},
+  g:{ar:"طلب المساعدة في الوقت المناسب",he:"בקשת עזרה בזמן",en:"Asking for help in time"},
+  a:{ar:"لا تؤجل الصعوبة لما قبل الامتحان؛ اسأل المعلم أو ادرس مع زميل متفوّق فور شعورك أن موضوعًا غير واضح.",he:"אל תדחו קושי עד לפני המבחן; פנו למורה או למדו עם חבר מצטיין ברגע שנושא לא ברור לכם.",en:"Don't leave difficulties until exam eve; ask the teacher or study with a strong classmate as soon as a topic feels unclear."}},
+ {s:1,t:{ar:"قبل الامتحان شعرت أنني جاهز ومتمكّن من كل المواضيع.",he:"לפני המבחן הרגשתי מוכן/ה ושולט/ת בכל הנושאים.",en:"Before the exam, I felt ready and confident in all the topics."},
+  g:{ar:"الجاهزية والتمكّن من المادة",he:"מוכנות ושליטה בחומר",en:"Readiness & command of the material"},
+  a:{ar:"اختبر نفسك قبل الامتحان بيومين: إن لم تستطع شرح موضوع أو حل سؤال عليه دون كتاب، فهو يحتاج مراجعة إضافية.",he:"בדקו את עצמכם יומיים לפני המבחן: אם אינכם מצליחים להסביר נושא או לפתור עליו שאלה בלי ספר, הוא צריך חזרה נוספת.",en:"Test yourself two days before: if you can't explain a topic or solve a question on it without the book, it needs more review."}},
+ {s:1,t:{ar:"نمت جيدًا (7–8 ساعات) ليلة الامتحان.",he:"ישנתי טוב (7–8 שעות) בלילה שלפני המבחן.",en:"I slept well (7–8 hours) the night before the exam."},
+  g:{ar:"النوم الكافي قبل الامتحان",he:"שינה מספקת לפני המבחן",en:"Enough sleep before the exam"},
+  a:{ar:"لا تسهر ليلة الامتحان؛ النوم الكافي يقوّي الذاكرة والتركيز أكثر من ساعات دراسة إضافية متأخرة.",he:"אל תישארו ערים בלילה שלפני המבחן; שינה מספקת מחזקת זיכרון וריכוז יותר משעות למידה מאוחרות.",en:"Don't stay up the night before; enough sleep boosts memory and focus more than extra late-night study."}},
+
+ {s:2,t:{ar:"قرأت الأسئلة بتمعّن وأدرت وقتي جيدًا أثناء الامتحان.",he:"קראתי את השאלות בעיון וניהלתי את הזמן היטב במהלך המבחן.",en:"I read the questions carefully and managed my time well during the exam."},
+  g:{ar:"قراءة الأسئلة وإدارة الوقت",he:"קריאת השאלות וניהול זמן",en:"Reading questions & managing time"},
+  a:{ar:"اقرأ كل سؤال مرتين وضع خطًا تحت المطلوب، ابدأ بالأسئلة السهلة، ووزّع الوقت حسب علامة كل سؤال.",he:"קראו כל שאלה פעמיים וסמנו את המבוקש, התחילו מהשאלות הקלות, וחלקו את הזמן לפי הניקוד של כל שאלה.",en:"Read each question twice and underline what's asked, start with the easy ones, and divide your time by each question's points."}},
+ {s:2,t:{ar:"بقيت هادئًا وسيطرت على التوتر أثناء الامتحان.",he:"נשארתי רגוע/ה ושלטתי בלחץ במהלך המבחן.",en:"I stayed calm and controlled my stress during the exam."},
+  g:{ar:"الهدوء والسيطرة على التوتر",he:"רוגע ושליטה בלחץ",en:"Staying calm under pressure"},
+  a:{ar:"عند الشعور بالتوتر خذ 3 أنفاس عميقة وانتقل لسؤال تعرفه؛ والتدرّب المسبق على أسئلة بوقت محدد يقلّل التوتر كثيرًا.",he:"כשאתם מרגישים לחץ קחו 3 נשימות עמוקות ועברו לשאלה שאתם יודעים; תרגול מראש בזמן מוגבל מפחית מאוד את הלחץ.",en:"When stress hits, take 3 deep breaths and move to a question you know; practicing timed questions beforehand greatly reduces anxiety."}},
+ {s:2,t:{ar:"راجعت إجاباتي قبل تسليم الامتحان.",he:"בדקתי את התשובות שלי לפני שהגשתי את המבחן.",en:"I checked my answers before handing in the exam."},
+  g:{ar:"مراجعة الإجابات قبل التسليم",he:"בדיקת התשובות לפני ההגשה",en:"Checking answers before submitting"},
+  a:{ar:"اترك 5–10 دقائق في نهاية الامتحان لمراجعة الإجابات والحسابات، ولا تسلّم مبكرًا قبل التأكد.",he:"השאירו 5–10 דקות בסוף המבחן לבדיקת תשובות וחישובים, ואל תגישו מוקדם לפני שבדקתם.",en:"Save 5–10 minutes at the end to check answers and calculations, and don't hand in early before checking."}},
+
+ {s:3,r:true,t:{ar:"الأسئلة التي أخطأت بها كانت صعبة وتحتاج ذكاءً لا أملكه.",he:"השאלות שטעיתי בהן היו קשות ודורשות אינטליגנציה שאין לי.",en:"The questions I got wrong were hard and need intelligence I don't have."},
+  g:{ar:"الثقة بقدرتك على التطوّر",he:"אמונה ביכולת שלך להשתפר",en:"Believing you can grow"},
+  a:{ar:"الذكاء ليس ثابتًا، والأسئلة الصعبة تُتقن بالتدريب. حلّل كل سؤال أخطأت به مع المعلم، وتدرّب على أسئلة مشابهة بالتدريج من السهل للصعب.",he:"אינטליגנציה אינה קבועה, ושאלות קשות נלמדות בתרגול. נתחו עם המורה כל שאלה שטעיתם בה, ותרגלו שאלות דומות בהדרגה מהקל אל הקשה.",en:"Intelligence isn't fixed — hard questions are mastered through practice. Go over each mistake with your teacher and practice similar questions, easy to hard."}},
+ {s:3,r:true,t:{ar:"الأسئلة التي أخطأت بها كانت سهلة لكنني لم أدرسها جيدًا.",he:"השאלות שטעיתי בהן היו קלות, אבל לא למדתי אותן מספיק טוב.",en:"The questions I got wrong were easy, but I didn't study them well."},
+  g:{ar:"الدراسة الكافية لكل جزء",he:"למידה מספקת של כל חלק",en:"Studying every part thoroughly"},
+  a:{ar:"هذه أسهل علامات يمكنك استرجاعها! خصّص وقتًا أكبر للدراسة، واختبر نفسك على كل موضوع بدل الاكتفاء بقراءته.",he:"אלה הנקודות הקלות ביותר להחזיר! הקדישו יותר זמן ללמידה, ובחנו את עצמכם על כל נושא במקום רק לקרוא אותו.",en:"These are the easiest points to win back! Give studying more time and quiz yourself on each topic instead of just reading it."}},
+ {s:3,r:true,t:{ar:"أخطأت في أسئلة كنت أعرف حلّها بسبب التسرّع أو عدم الانتباه.",he:"טעיתי בשאלות שידעתי לפתור בגלל חיפזון או חוסר תשומת לב.",en:"I got questions wrong that I knew how to solve, because I rushed or wasn't careful."},
+  g:{ar:"الدقة وتجنّب أخطاء التسرّع",he:"דיוק והימנעות מטעויות חיפזון",en:"Accuracy & avoiding careless errors"},
+  a:{ar:"اقرأ السؤال حتى النهاية قبل الحل، وتحقّق من الحسابات والوحدات، وتدرّب على الإجابة بهدوء دون استعجال.",he:"קראו את השאלה עד הסוף לפני הפתרון, בדקו חישובים ויחידות, ותרגלו לענות בנחת בלי למהר.",en:"Read each question to the end before solving, double-check calculations and units, and practice answering calmly without rushing."}},
+ {s:3,t:{ar:"أؤمن أنني أستطيع رفع علامتي إذا غيّرت طريقة دراستي.",he:"אני מאמין/ה שאוכל לשפר את הציון שלי אם אשנה את דרך הלמידה.",en:"I believe I can raise my grade if I change the way I study."},
+  g:{ar:"الإيمان بالقدرة على التحسّن",he:"אמונה ביכולת להשתפר",en:"Believing in improvement"},
+  a:{ar:"علامة اليوم ليست حكمًا نهائيًا. ضع هدفًا صغيرًا وواقعيًا للامتحان القادم (مثلًا +10 علامات) وغيّر عادة واحدة فقط للوصول إليه.",he:"הציון של היום אינו גזר דין. הציבו יעד קטן ומציאותי למבחן הבא (למשל +10 נקודות) ושנו הרגל אחד בלבד כדי להגיע אליו.",en:"Today's grade isn't a final verdict. Set a small, realistic goal for the next exam (e.g. +10 points) and change just one habit to reach it."}},
+ {s:3,t:{ar:"سأراجع أخطائي في الامتحان بعد استلامه وأتعلّم منها.",he:"אעבור על הטעויות שלי במבחן אחרי שאקבל אותו ואלמד מהן.",en:"I will go over my exam mistakes once I get it back and learn from them."},
+  g:{ar:"التعلّم من الأخطاء",he:"למידה מטעויות",en:"Learning from mistakes"},
+  a:{ar:"عند استلام الامتحان اكتب كل خطأ في دفتر خاص مع الحل الصحيح وسبب الخطأ، وراجع هذا الدفتر قبل الامتحان القادم.",he:"כשתקבלו את המבחן, רשמו כל טעות במחברת מיוחדת עם הפתרון הנכון וסיבת הטעות, וחזרו עליה לפני המבחן הבא.",en:"When you get the exam back, log each mistake in a special notebook with the correct solution and the reason, and review it before the next exam."}}
+];
+
+
+return {UI,SECTIONS,ITEMS};
+})()},
+ {id:"behavior-self",kind:"self",mode:"score",icon:"🤝",c:"#20bf6b",cs:"rgba(46,213,115,.14)",minutes:5,
+  title:{ar:"السلوك والانتماء الصفي",he:"התנהגות ושייכות בכיתה",en:"Classroom Behavior & Belonging"},
+  desc:{ar:"تفحص احترامك لزملائك ومعلميك، والتزامك بقوانين الصف، وشعورك بالانتماء والأمان، ومبادرتك ومشاركتك. تحصل على نتيجة من 100 واقتراحات عملية.",he:"בודק כבוד לחברים ולמורים, עמידה בכללי הכיתה, תחושת שייכות וביטחון, יוזמה והשתתפות. מקבלים תוצאה מתוך 100 והמלצות מעשיות.",en:"Looks at respect for classmates and teachers, following class rules, your sense of belonging and safety, and your initiative. You get a result out of 100 and practical tips."},
+  data:(function(){
+const UI = {
+  ar:{dir:"rtl",brand:"ومضات ذكية مع منى مصطفى",title:"التقييم الذاتي: السلوك والانتماء الصفي",
+      subtitle:"فكّر بصدق: إلى أي حد ينطبق عليك كل ادعاء في صفك؟",
+      nameLbl:"اسم الطالب/ة (اختياري)",namePh:"مثال: سارة",subjLbl:"الصف (اختياري)",subjPh:"مثال: السابع 2",
+      legend1:"1 = لا أوافق بالمرّة",legend5:"5 = أوافق جدًا",progress:(n,t)=>`أجبت عن ${n} من ${t}`,
+      scale:["لا أوافق بالمرّة","لا أوافق","محايد","أوافق","أوافق جدًا"],
+      submit:"احسب نتيجتي",reset:"ابدأ من جديد",missing:n=>`بقي ${n} ادعاء/ات بدون إجابة.`,
+      strengthsH:"💪 نقاط قوتك",improveH:"🎯 ماذا يمكنك أن تفعل لتكون أفضل في صفك",generalH:"✨ نصيحة عامة",
+      careH:"💙 رسالة لك",care:"لاحظنا أنك لا تشعر دائمًا بالراحة أو بالانتماء في صفك. هذا شعور مهم ويستحق الاهتمام — أنت لست وحدك. تحدّث مع المربّي/ة أو المستشار/ة التربوي/ة أو شخص بالغ تثق به؛ هم موجودون لمساعدتك.",
+      copy:"نسخ النتيجة",edit:"تعديل الإجابات",copied:"تم نسخ النتيجة ✔",copyFail:"تعذّر النسخ، يمكنك أخذ لقطة شاشة للنتيجة.",
+      priority:"أولوية",improveTag:"تحسين",none:"لا توجد نقاط ضعف واضحة — استمر على نفس الطريقة!",
+      resultFor:"نتيجة التقييم الذاتي – السلوك والانتماء",scoreW:"النتيجة",strW:"نقاط القوة",impW:"للتحسين",
+      footer:"© 2026 جميع الحقوق محفوظة — المعلمة ومركزة التقييم منى مصطفى - كناعنة",platform:"← إلى منصة ومضات ذكية",
+      levels:[
+        ["طالب نموذجي 🌟","سلوكك وانتماؤك لصفك رائعان، وأنت تضيف الكثير لزملائك.","استمر على هذا النهج، وكن قدوة لغيرك: ساعد زميلًا يحتاج دعمًا، أو اقترح نشاطًا يقرّب طلاب الصف من بعضهم."],
+        ["جيد جدًا 👍","أنت عضو إيجابي في صفك، وبقي القليل لتكون نموذجًا.","اختر نقطة أو نقطتين من قائمة التحسين وركّز عليها خلال الأسبوعين القادمين، ولاحظ كيف يتغيّر جوّ الصف من حولك."],
+        ["متوسط 🙂","عندك جوانب إيجابية، وبعض السلوكيات تحتاج إلى انتباه.","اختر أهم 3 اقتراحات واكتبها في دفترك. كل تصرّف صغير إيجابي — كلمة لطيفة أو مساعدة — يصنع فرقًا كبيرًا في الصف."],
+        ["يحتاج إلى اهتمام 💡","لا بأس — أن تعرف ما يحتاج إلى تحسين هو أول خطوة.","ابدأ بخطوة واحدة صغيرة هذا الأسبوع، وتحدّث مع المربّي/ة عمّا يزعجك أو يصعب عليك في الصف. التغيير ممكن، ولست مضطرًا أن تفعله وحدك."]
+      ]},
+  he:{dir:"rtl",brand:"הבזקים חכמים עם מונא מוסטפא",title:"הערכה עצמית: התנהגות ושייכות בכיתה",
+      subtitle:"חשבו בכנות: עד כמה כל היגד מתאר אתכם בכיתה?",
+      nameLbl:"שם התלמיד/ה (לא חובה)",namePh:"לדוגמה: שרה",subjLbl:"כיתה (לא חובה)",subjPh:"לדוגמה: ז'2",
+      legend1:"1 = לא מסכים/ה בכלל",legend5:"5 = מסכים/ה מאוד",progress:(n,t)=>`ענית על ${n} מתוך ${t}`,
+      scale:["לא מסכים/ה בכלל","לא מסכים/ה","ניטרלי","מסכים/ה","מסכים/ה מאוד"],
+      submit:"חשב את התוצאה שלי",reset:"להתחיל מחדש",missing:n=>`נשארו ${n} היגדים ללא תשובה.`,
+      strengthsH:"💪 החוזקות שלך",improveH:"🎯 מה אפשר לעשות כדי להיות טובים יותר בכיתה",generalH:"✨ עצה כללית",
+      careH:"💙 מסר בשבילך",care:"שמנו לב שלא תמיד נוח לך או שאתה לא תמיד מרגיש/ה שייכות בכיתה. זו תחושה חשובה שראויה לתשומת לב — אינך לבד. דבר/י עם המחנך/ת, היועץ/ת או מבוגר/ת שאת/ה סומך/ת עליו; הם כאן כדי לעזור.",
+      copy:"העתק תוצאה",edit:"עריכת התשובות",copied:"התוצאה הועתקה ✔",copyFail:"ההעתקה נכשלה, אפשר לצלם את המסך.",
+      priority:"עדיפות",improveTag:"לשיפור",none:"אין נקודות חולשה בולטות — המשיכו כך!",
+      resultFor:"תוצאת ההערכה העצמית – התנהגות ושייכות",scoreW:"תוצאה",strW:"חוזקות",impW:"לשיפור",
+      footer:"© 2026 כל הזכויות שמורות — המורה ורכזת ההערכה מונא מוסטפא - כנאענה",platform:"← לפלטפורמת הבזקים חכמים",
+      levels:[
+        ["תלמיד/ה לדוגמה 🌟","ההתנהגות והשייכות שלך לכיתה נהדרות, ואת/ה תורם/ת הרבה לחברים.","המשיכו כך והיו דוגמה לאחרים: עזרו לחבר שזקוק לתמיכה, או הציעו פעילות שמקרבת את תלמידי הכיתה."],
+        ["טוב מאוד 👍","את/ה חבר/ה חיובי/ת בכיתה, ונשאר מעט כדי להיות דוגמה.","בחרו נקודה אחת או שתיים מרשימת השיפור והתמקדו בהן בשבועיים הקרובים — תראו איך האווירה בכיתה משתנה."],
+        ["בינוני 🙂","יש לך צדדים חיוביים, וחלק מההתנהגויות דורשות תשומת לב.","בחרו את 3 ההמלצות החשובות ביותר וכתבו אותן במחברת. כל מעשה קטן וחיובי — מילה טובה או עזרה — עושה הבדל גדול בכיתה."],
+        ["דורש תשומת לב 💡","זה בסדר — לדעת מה צריך שיפור זה הצעד הראשון.","התחילו בצעד קטן אחד השבוע, ודברו עם המחנך/ת על מה שמפריע לכם או קשה לכם בכיתה. שינוי אפשרי, ולא צריך לעשות אותו לבד."]
+      ]},
+  en:{dir:"ltr",brand:"Smart Flashes with Muna Mustafa",title:"Self-Assessment: Classroom Behavior & Belonging",
+      subtitle:"Be honest: how well does each statement describe you in your class?",
+      nameLbl:"Student name (optional)",namePh:"e.g. Sarah",subjLbl:"Class (optional)",subjPh:"e.g. 7-2",
+      legend1:"1 = Strongly disagree",legend5:"5 = Strongly agree",progress:(n,t)=>`Answered ${n} of ${t}`,
+      scale:["Strongly disagree","Disagree","Neutral","Agree","Strongly agree"],
+      submit:"Calculate my result",reset:"Start over",missing:n=>`${n} statement(s) still unanswered.`,
+      strengthsH:"💪 Your strengths",improveH:"🎯 What you can do to be your best in class",generalH:"✨ General advice",
+      careH:"💙 A note for you",care:"It looks like you don't always feel comfortable or that you belong in your class. That feeling matters and deserves attention — you're not alone. Talk to your homeroom teacher, the school counselor, or an adult you trust; they're there to help.",
+      copy:"Copy result",edit:"Edit answers",copied:"Result copied ✔",copyFail:"Copy failed — take a screenshot instead.",
+      priority:"Priority",improveTag:"Improve",none:"No clear weak spots — keep it up!",
+      resultFor:"Self-assessment – Behavior & Belonging",scoreW:"Result",strW:"Strengths",impW:"To improve",
+      footer:"© 2026 All rights reserved — Teacher & Assessment Coordinator Muna Mustafa - Kanaaneh",platform:"Go to the Smart Flashes platform →",
+      levels:[
+        ["Role model 🌟","Your behavior and sense of belonging are excellent, and you add a lot to your classmates.","Keep it up and be an example: support a classmate who needs it, or suggest an activity that brings the class closer together."],
+        ["Very good 👍","You're a positive member of your class, just a little away from being a role model.","Pick one or two points from the improvement list and focus on them for the next two weeks — watch how the class atmosphere changes."],
+        ["Average 🙂","You have positive sides, and some behaviors need attention.","Choose the 3 most important suggestions and write them in your notebook. Every small positive act — a kind word or a helping hand — makes a big difference."],
+        ["Needs attention 💡","That's okay — knowing what needs work is the first step.","Start with one small step this week, and talk to your homeroom teacher about what bothers you or feels hard in class. Change is possible, and you don't have to do it alone."]
+      ]}
+};
+
+const SECTIONS = [
+  {icon:"🤝",color:"var(--red)",   soft:"rgba(255,71,87,.12)", t:{ar:"الاحترام والعلاقات",he:"כבוד ויחסים",en:"Respect & relationships"}},
+  {icon:"📏",color:"var(--orange)",soft:"rgba(255,165,2,.14)",t:{ar:"الالتزام والمسؤولية",he:"מחויבות ואחריות",en:"Commitment & responsibility"}},
+  {icon:"💙",color:"#20bf6b",      soft:"rgba(46,213,115,.14)",t:{ar:"الانتماء لصفي",he:"שייכות לכיתה",en:"Belonging to my class"}},
+  {icon:"🌱",color:"var(--blue)",  soft:"rgba(30,144,255,.12)",t:{ar:"المشاركة والمبادرة",he:"השתתפות ויוזמה",en:"Participation & initiative"}}
+];
+
+// r:true = reverse-scored (agreeing indicates a weakness); care:true = wellbeing item
+const ITEMS = [
+ {s:0,t:{ar:"أحترم زملائي وأتحدث معهم بلطف.",he:"אני מכבד/ת את חבריי לכיתה ומדבר/ת אליהם בנימוס.",en:"I respect my classmates and speak to them kindly."},
+  g:{ar:"احترام الزملاء",he:"כבוד לחברים",en:"Respecting classmates"},
+  a:{ar:"قبل أن تتكلّم اسأل نفسك: هل كنت أحب أن يُقال لي هذا؟ استعمل كلمات مثل «من فضلك» و«شكرًا» يوميًا.",he:"לפני שאתם מדברים שאלו את עצמכם: הייתי רוצה שיגידו לי את זה? השתמשו כל יום במילים כמו «בבקשה» ו«תודה».",en:"Before speaking, ask yourself: would I like someone to say this to me? Use “please” and “thank you” every day."}},
+ {s:0,t:{ar:"أحترم المعلم وأستمع إليه عندما يتكلّم.",he:"אני מכבד/ת את המורה ומקשיב/ה כשהוא/היא מדבר/ת.",en:"I respect my teacher and listen when they are speaking."},
+  g:{ar:"احترام المعلم والإصغاء",he:"כבוד למורה והקשבה",en:"Respecting & listening to the teacher"},
+  a:{ar:"انظر إلى المعلم أثناء الشرح وانتظر دورك للكلام برفع اليد؛ الإصغاء الجيد احترام ويساعدك على الفهم أيضًا.",he:"הסתכלו על המורה בזמן ההסבר וחכו לתורכם בהצבעה; הקשבה טובה היא כבוד, והיא גם עוזרת להבין.",en:"Look at the teacher while they explain and raise your hand to speak; good listening shows respect and helps you understand."}},
+ {s:0,t:{ar:"أتقبّل آراء الآخرين حتى لو اختلفت عن رأيي.",he:"אני מקבל/ת את דעות האחרים גם כשהן שונות משלי.",en:"I accept other people's opinions even when they differ from mine."},
+  g:{ar:"تقبّل الرأي الآخر",he:"קבלת דעה אחרת",en:"Accepting different opinions"},
+  a:{ar:"عندما يختلف رأي زميلك، استمع حتى النهاية ثم قل: «أفهم رأيك، ورأيي هو…» — الاختلاف لا يعني الخصام.",he:"כשחבר חושב אחרת, הקשיבו עד הסוף ואז אמרו: «אני מבין/ה אותך, ולדעתי…» — מחלוקת אינה ריב.",en:"When a classmate disagrees, listen to the end, then say: “I see your point, and I think…” — disagreeing isn't fighting."}},
+ {s:0,r:true,t:{ar:"أحيانًا أسخر من زملائي أو أستهزئ بهم.",he:"לפעמים אני צוחק/ת על חבריי או לועג/ת להם.",en:"Sometimes I make fun of or mock my classmates."},
+  g:{ar:"الامتناع عن السخرية والتنمّر",he:"הימנעות מלעג ומבריונות",en:"Avoiding mocking & bullying"},
+  a:{ar:"ما يبدو مزحة لك قد يجرح زميلك بعمق. توقّف قبل التعليق على شكل أحد أو أخطائه، وإن أخطأت فاعتذر له مباشرة.",he:"מה שנראה לכם כבדיחה עלול לפגוע עמוקות בחבר. עצרו לפני שאתם מעירים על מראה או טעויות של מישהו, ואם טעיתם — התנצלו מיד.",en:"What feels like a joke to you can hurt a classmate deeply. Stop before commenting on someone's looks or mistakes, and if you slip, apologize right away."}},
+ {s:0,t:{ar:"أحلّ الخلافات بالحوار وليس بالصراخ أو العنف.",he:"אני פותר/ת מחלוקות בשיחה ולא בצעקות או באלימות.",en:"I solve conflicts by talking, not by shouting or violence."},
+  g:{ar:"حلّ الخلافات بالحوار",he:"פתרון מחלוקות בשיחה",en:"Resolving conflicts by talking"},
+  a:{ar:"عند الغضب ابتعد قليلًا وخذ أنفاسًا عميقة، ثم تحدّث بهدوء عمّا أزعجك. وإن لم تنجح، اطلب مساعدة المعلم بدل الرد بالعنف.",he:"כשאתם כועסים התרחקו קצת ונשמו עמוק, ואז דברו ברוגע על מה שהפריע לכם. אם זה לא עוזר, בקשו עזרה מהמורה במקום להגיב באלימות.",en:"When angry, step away and breathe deeply, then calmly say what bothered you. If that doesn't work, ask a teacher for help instead of reacting with force."}},
+
+ {s:1,t:{ar:"ألتزم بقوانين الصف والمدرسة.",he:"אני שומר/ת על כללי הכיתה ובית הספר.",en:"I follow the class and school rules."},
+  g:{ar:"الالتزام بالقوانين",he:"שמירה על הכללים",en:"Following the rules"},
+  a:{ar:"تذكّر أن القوانين وُضعت لتحمي حق الجميع في التعلّم والأمان. اختر قانونًا واحدًا تجد صعوبة فيه وركّز على الالتزام به هذا الأسبوع.",he:"זכרו שהכללים נועדו להגן על זכותם של כולם ללמוד ולהרגיש בטוחים. בחרו כלל אחד שקשה לכם איתו והתמקדו בו השבוע.",en:"Remember rules exist to protect everyone's right to learn and feel safe. Pick one rule you struggle with and focus on keeping it this week."}},
+ {s:1,t:{ar:"أصل إلى الحصص في الوقت المحدد.",he:"אני מגיע/ה לשיעורים בזמן.",en:"I arrive to lessons on time."},
+  g:{ar:"الالتزام بالمواعيد",he:"עמידה בזמנים",en:"Being on time"},
+  a:{ar:"جهّز حقيبتك في الليلة السابقة، وعد إلى الصف فور انتهاء الاستراحة؛ التأخير يضيّع عليك بداية الشرح ويقاطع زملاءك.",he:"הכינו את התיק בערב הקודם, וחזרו לכיתה מיד בסוף ההפסקה; איחור מפספס את תחילת ההסבר ומפריע לחברים.",en:"Pack your bag the night before and head back to class as soon as break ends; being late means missing the start and interrupting others."}},
+ {s:1,t:{ar:"أحضر كتبي ودفاتري وأدواتي اللازمة.",he:"אני מביא/ה את הספרים, המחברות והציוד הנדרש.",en:"I bring the books, notebooks and supplies I need."},
+  g:{ar:"الاستعداد بالأدوات اللازمة",he:"הגעה עם הציוד הנדרש",en:"Coming prepared"},
+  a:{ar:"علّق برنامج الحصص قرب مكان دراستك، ورتّب حقيبتك حسبه كل مساء.",he:"תלו את מערכת השעות ליד מקום הלמידה, וסדרו את התיק לפיה בכל ערב.",en:"Hang your timetable near your desk at home and pack your bag by it every evening."}},
+ {s:1,t:{ar:"أحافظ على نظافة الصف وممتلكاته.",he:"אני שומר/ת על ניקיון הכיתה ועל הציוד שלה.",en:"I keep the classroom and its property clean and cared for."},
+  g:{ar:"المحافظة على الصف",he:"שמירה על הכיתה",en:"Caring for the classroom"},
+  a:{ar:"الصف بيتك الثاني: ارمِ النفايات في مكانها، ورتّب مكانك قبل الخروج، وتعامل مع الأدوات المشتركة بحرص.",he:"הכיתה היא הבית השני שלכם: זרקו פסולת לפח, סדרו את המקום לפני היציאה, והשתמשו בציוד המשותף בזהירות.",en:"Your class is your second home: bin your rubbish, tidy your spot before leaving, and handle shared equipment with care."}},
+ {s:1,r:true,t:{ar:"أتحدّث أو أنشغل بالهاتف أثناء الشرح وأشتّت الآخرين.",he:"אני מדבר/ת או עסוק/ה בטלפון בזמן ההסבר ומפריע/ה לאחרים.",en:"I chat or use my phone during lessons and distract others."},
+  g:{ar:"التركيز وعدم تشتيت الآخرين",he:"ריכוז ואי-הפרעה לאחרים",en:"Staying focused, not distracting others"},
+  a:{ar:"أبقِ الهاتف مغلقًا في الحقيبة، واجلس بعيدًا عمّن يشجّعك على الحديث. أجّل كلامك مع زملائك إلى الاستراحة.",he:"השאירו את הטלפון כבוי בתיק, ושבו רחוק ממי שגורם לכם לפטפט. שמרו את השיחות עם החברים להפסקה.",en:"Keep your phone off in your bag and sit away from whoever gets you chatting. Save conversations for break time."}},
+
+ {s:2,care:true,t:{ar:"أشعر أنني جزء مهم من صفي.",he:"אני מרגיש/ה שאני חלק חשוב מהכיתה שלי.",en:"I feel I'm an important part of my class."},
+  g:{ar:"الشعور بالأهمية في الصف",he:"תחושת חשיבות בכיתה",en:"Feeling valued in class"},
+  a:{ar:"لكل طالب مكانه وقدراته. اكتشف ما تجيده (الرسم، التنظيم، المساعدة، الدعابة…) واعرضه في نشاط صفي.",he:"לכל תלמיד יש מקום ויכולות. גלו במה אתם טובים (ציור, ארגון, עזרה, הומור…) והציעו את זה בפעילות כיתתית.",en:"Everyone has a place and a talent. Find what you're good at (drawing, organizing, helping, humor…) and offer it in a class activity."}},
+ {s:2,care:true,t:{ar:"أشعر بالأمان والراحة في صفي.",he:"אני מרגיש/ה בטוח/ה ונוח לי בכיתה.",en:"I feel safe and comfortable in my class."},
+  g:{ar:"الشعور بالأمان",he:"תחושת ביטחון",en:"Feeling safe"},
+  a:{ar:"إذا كان هناك ما يجعلك غير مرتاح أو غير آمن في الصف، فمن حقك أن تخبر المربّي/ة أو المستشار/ة — لا تحتفظ بذلك لنفسك.",he:"אם משהו גורם לכם לאי-נוחות או לחוסר ביטחון בכיתה, זכותכם לספר למחנך/ת או ליועץ/ת — אל תשמרו את זה בבטן.",en:"If something makes you uncomfortable or unsafe in class, you have every right to tell your homeroom teacher or counselor — don't keep it to yourself."}},
+ {s:2,t:{ar:"لدي أصدقاء في الصف أستطيع الاعتماد عليهم.",he:"יש לי חברים בכיתה שאני יכול/ה לסמוך עליהם.",en:"I have friends in class I can count on."},
+  g:{ar:"صداقات داعمة",he:"חברויות תומכות",en:"Supportive friendships"},
+  a:{ar:"الصداقة تبدأ بخطوة صغيرة: اجلس مع زميل جديد في الاستراحة، أو اقترح أن تدرسا معًا، أو انضم لنشاط يحب الآخرون المشاركة فيه.",he:"חברות מתחילה בצעד קטן: שבו עם חבר חדש בהפסקה, הציעו ללמוד יחד, או הצטרפו לפעילות שאחרים אוהבים.",en:"Friendship starts small: sit with someone new at break, suggest studying together, or join an activity others enjoy."}},
+ {s:2,r:true,care:true,t:{ar:"أشعر أحيانًا أنني وحيد أو مُهمَل في الصف.",he:"לפעמים אני מרגיש/ה בודד/ה או מוזנח/ת בכיתה.",en:"Sometimes I feel lonely or left out in class."},
+  g:{ar:"التواصل وعدم الشعور بالوحدة",he:"קשר עם אחרים במקום בדידות",en:"Feeling connected, not alone"},
+  a:{ar:"الشعور بالوحدة يمرّ به كثيرون، وهو ليس عيبًا فيك. شارك ما تشعر به مع المربّي/ة أو شخص تثق به، وجرّب الانضمام لمجموعة أو نشاط واحد صغير.",he:"תחושת בדידות מוכרת לרבים, והיא לא פגם בכם. שתפו את המחנך/ת או מישהו שאתם סומכים עליו, ונסו להצטרף לקבוצה או לפעילות קטנה אחת.",en:"Many people feel lonely sometimes — it's not a flaw in you. Share how you feel with your homeroom teacher or someone you trust, and try joining one small group or activity."}},
+ {s:2,t:{ar:"أفتخر بصفي وبإنجازاته.",he:"אני גאה בכיתה שלי ובהישגים שלה.",en:"I'm proud of my class and its achievements."},
+  g:{ar:"الفخر بالصف",he:"גאווה בכיתה",en:"Pride in your class"},
+  a:{ar:"ساهم في إنجاز يفخر به الجميع: اقترح مشروعًا مشتركًا، أو زيّن لوحة الصف، أو هنّئ زملاءك على نجاحاتهم.",he:"תרמו להישג שכולם יהיו גאים בו: הציעו פרויקט משותף, קשטו את לוח הכיתה, או ברכו חברים על הצלחותיהם.",en:"Help create something everyone's proud of: suggest a joint project, decorate the class board, or congratulate classmates on their successes."}},
+
+ {s:3,t:{ar:"أساعد زملائي عندما يحتاجون إلى المساعدة.",he:"אני עוזר/ת לחבריי כשהם צריכים עזרה.",en:"I help my classmates when they need it."},
+  g:{ar:"مساعدة الزملاء",he:"עזרה לחברים",en:"Helping classmates"},
+  a:{ar:"لاحظ من يواجه صعوبة واعرض مساعدتك بلطف: شرح سؤال، أو إعارة أداة، أو كلمة تشجيع.",he:"שימו לב למי שמתקשה והציעו עזרה בעדינות: הסבר של שאלה, השאלת ציוד או מילת עידוד.",en:"Notice who's struggling and gently offer help: explain a question, lend a supply, or say an encouraging word."}},
+ {s:3,t:{ar:"أشارك في نشاطات وفعاليات الصف والمدرسة.",he:"אני משתתף/ת בפעילויות ובאירועים של הכיתה ובית הספר.",en:"I take part in class and school activities and events."},
+  g:{ar:"المشاركة في النشاطات",he:"השתתפות בפעילויות",en:"Joining activities"},
+  a:{ar:"اختر فعالية واحدة قادمة (رحلة، يوم رياضي، احتفال) والتزم بالمشاركة فيها؛ النشاطات أفضل طريقة للتقرّب من زملائك.",he:"בחרו אירוע אחד קרוב (טיול, יום ספורט, חגיגה) והתחייבו להשתתף; פעילויות הן הדרך הטובה ביותר להתקרב לחברים.",en:"Pick one upcoming event (a trip, sports day, celebration) and commit to joining; activities are the best way to get closer to classmates."}},
+ {s:3,t:{ar:"أتطوّع لمهام ومسؤوليات في الصف.",he:"אני מתנדב/ת לתפקידים ולמשימות בכיתה.",en:"I volunteer for tasks and responsibilities in class."},
+  g:{ar:"التطوّع وتحمّل المسؤولية",he:"התנדבות ולקיחת אחריות",en:"Volunteering & taking responsibility"},
+  a:{ar:"تطوّع لمهمة بسيطة (توزيع أوراق، ترتيب المكتبة، مسؤول نظافة)؛ المسؤولية تزيد ثقتك بنفسك وتقديرك بين زملائك.",he:"התנדבו למשימה פשוטה (חלוקת דפים, סידור הספרייה, אחראי ניקיון); אחריות מחזקת את הביטחון העצמי ואת ההערכה מהחברים.",en:"Volunteer for a simple task (handing out papers, tidying the library, cleanliness monitor); responsibility builds confidence and respect."}},
+ {s:3,t:{ar:"أرحّب بالطلاب الجدد وأُشرك من يجلس وحده.",he:"אני מקבל/ת בברכה תלמידים חדשים ומשתף/ת את מי שיושב לבד.",en:"I welcome new students and include those who sit alone."},
+  g:{ar:"إشراك الآخرين",he:"שיתוף אחרים",en:"Including others"},
+  a:{ar:"ابحث في الاستراحة عمّن يجلس وحده وادعُه للانضمام إليكم؛ تصرّف بسيط قد يغيّر يومه كله.",he:"חפשו בהפסקה מי שיושב לבד והזמינו אותו להצטרף; מעשה פשוט שיכול לשנות לו את כל היום.",en:"At break, look for someone sitting alone and invite them to join you; a small gesture can change their whole day."}},
+ {s:3,t:{ar:"أعترف بخطئي وأعتذر عندما أخطئ.",he:"אני מודה בטעות ומתנצל/ת כשאני טועה.",en:"I admit my mistakes and apologize when I'm wrong."},
+  g:{ar:"الاعتراف بالخطأ والاعتذار",he:"הודאה בטעות והתנצלות",en:"Owning mistakes & apologizing"},
+  a:{ar:"الاعتذار قوة وليس ضعفًا. قل بوضوح: «أنا آسف لأنني…» واقترح كيف تصلح ما حدث.",he:"התנצלות היא כוח ולא חולשה. אמרו בבירור: «אני מצטער/ת ש…» והציעו איך לתקן.",en:"Apologizing is strength, not weakness. Say clearly, “I'm sorry that I…” and suggest how you'll make it right."}}
+];
+
+return {UI,SECTIONS,ITEMS};
+})()},
+ {id:"incident-self",kind:"self",mode:"stage",icon:"🧭",c:"var(--orange)",cs:"rgba(255,165,2,.14)",minutes:6,
+  title:{ar:"تقييم ذاتي بعد مشكلة في الصف",he:"הערכה עצמית אחרי אירוע בכיתה",en:"Self-Reflection After a Classroom Incident"},
+  desc:{ar:"بعد موقف صعب أو شغب في الصف: تساعدك على فهم ما حدث وما شعرت به وأثره على الآخرين، وتبني معك خطة شخصية للإصلاح تحضرها للقاء مع المعلم/ة.",he:"אחרי אירוע קשה או הפרעה בכיתה: עוזר להבין מה קרה, מה הרגשת ואיך זה השפיע על אחרים, ובונה איתך תוכנית אישית לתיקון לשיחה עם המורה.",en:"After a difficult moment or disruption in class: helps you understand what happened, how you felt and how it affected others, and builds a personal repair plan to bring to your teacher."},
+  data:(function(){
+const UI = {
+ ar:{dir:"rtl",brand:"ومضات ذكية مع منى مصطفى",title:"تقييم ذاتي بعد مشكلة في الصف",
+  subtitle:"هذه ليست عقوبة — إنها فرصة لتفهم ما حدث وتصلحه.",
+  nameLbl:"اسم الطالب/ة (اختياري)",namePh:"مثال: أحمد",classLbl:"الصف والتاريخ (اختياري)",classPh:"مثال: الثامن 1 – 12/11",
+  legend1:"1 = لا أوافق بالمرّة",legend5:"5 = أوافق جدًا",progress:(n,t)=>`أجبت عن ${n} من ${t}`,
+  scale:["لا أوافق بالمرّة","لا أوافق","محايد","أوافق","أوافق جدًا"],
+  multi:"يمكنك اختيار أكثر من إجابة",other:"أخرى…",otherPh:"اكتب هنا…",optional:"(اختياري)",
+  submit:"اعرض نتيجتي وخطتي",reset:"ابدأ من جديد",missing:n=>`بقي ${n} سؤال/أسئلة بدون إجابة.`,
+  indicatorH:"🧭 مؤشّر الاستعداد لتحمّل المسؤولية والإصلاح",
+  stages:[["🌱","بداية الطريق"],["🚶","في الطريق الصحيح"],["🌟","مستعد للإصلاح"]],
+  levelText:["أنت في بداية الطريق، والمهم أنك توقّفت لتفكّر. خطوة صغيرة وصادقة الآن تصنع فرقًا كبيرًا.","أنت تفهم جزءًا كبيرًا مما حدث، وبقي أن تحوّل هذا الفهم إلى خطوات عملية.","أنت تتحمّل مسؤوليتك وتفهم أثر تصرّفك — هذا نضج حقيقي. الآن نفّذ خطتك."],
+  strengthsH:"💪 ما يميّزك في هذا الموقف",improveH:"🎯 ما يمكنك العمل عليه",tipsH:"💡 نصائح حسب ما شعرت به",
+  careH:"💙 رسالة لك",care:"يبدو أن هناك ما يثقل عليك أو أنك تحتاج إلى دعم. هذا مهم — لست مضطرًا لحمله وحدك. تحدّث مع المربّي/ة أو المستشار/ة التربوي/ة أو شخص بالغ تثق به.",
+  planH:"📋 خطتي الشخصية",pWhat:"ما حدث",pFeel:"ما شعرت به",pSteps:"خطواتي للإصلاح",pMsg:"رسالتي للمعلم/ة",pHelp:"طلبت مساعدة من شخص بالغ حتى لا يتكرّر ذلك ✔",pStage:"مؤشّر الاستعداد",
+  generalH:"✨ ماذا الآن؟",general:"خذ هذه الخطة إلى لقاء قصير مع المعلم/ة أو المربّي/ة، وتحدّثا عنها معًا. ما يهمّ ليس ما حدث فقط، بل ما ستفعله من الآن.",
+  copy:"نسخ خطتي",edit:"تعديل الإجابات",copied:"تم نسخ الخطة ✔",copyFail:"تعذّر النسخ، يمكنك أخذ لقطة شاشة.",
+  priority:"أولوية",improveTag:"للعمل عليه",none:"أجبت بوعي كبير في كل الجوانب — أحسنت!",resultFor:"خطة شخصية بعد مشكلة في الصف",
+  footer:"© 2026 جميع الحقوق محفوظة — المعلمة ومركزة التقييم منى مصطفى - كناعنة",platform:"← إلى منصة ومضات ذكية"},
+ he:{dir:"rtl",brand:"הבזקים חכמים עם מונא מוסטפא",title:"הערכה עצמית אחרי אירוע בכיתה",
+  subtitle:"זה לא עונש — זו הזדמנות להבין מה קרה ולתקן.",
+  nameLbl:"שם התלמיד/ה (לא חובה)",namePh:"לדוגמה: אחמד",classLbl:"כיתה ותאריך (לא חובה)",classPh:"לדוגמה: ח'1 – 12/11",
+  legend1:"1 = לא מסכים/ה בכלל",legend5:"5 = מסכים/ה מאוד",progress:(n,t)=>`ענית על ${n} מתוך ${t}`,
+  scale:["לא מסכים/ה בכלל","לא מסכים/ה","ניטרלי","מסכים/ה","מסכים/ה מאוד"],
+  multi:"אפשר לבחור יותר מתשובה אחת",other:"אחר…",otherPh:"כתבו כאן…",optional:"(לא חובה)",
+  submit:"הצג את התוצאה והתוכנית שלי",reset:"להתחיל מחדש",missing:n=>`נשארו ${n} שאלות ללא תשובה.`,
+  indicatorH:"🧭 מדד המוכנות לקחת אחריות ולתקן",
+  stages:[["🌱","תחילת הדרך"],["🚶","בדרך הנכונה"],["🌟","מוכן/ה לתקן"]],
+  levelText:["את/ה בתחילת הדרך, והחשוב הוא שעצרת לחשוב. צעד קטן וכן עכשיו עושה הבדל גדול.","את/ה מבין/ה חלק גדול ממה שקרה, ונשאר להפוך את ההבנה לצעדים מעשיים.","את/ה לוקח/ת אחריות ומבין/ה את השפעת המעשה — זו בגרות אמיתית. עכשיו בצע/י את התוכנית."],
+  strengthsH:"💪 מה מאפיין אותך לטובה במצב הזה",improveH:"🎯 על מה כדאי לעבוד",tipsH:"💡 טיפים לפי מה שהרגשת",
+  careH:"💙 מסר בשבילך",care:"נראה שמשהו מכביד עליך או שאת/ה זקוק/ה לתמיכה. זה חשוב — לא צריך לשאת את זה לבד. דבר/י עם המחנך/ת, היועץ/ת או מבוגר/ת שאת/ה סומך/ת עליו.",
+  planH:"📋 התוכנית האישית שלי",pWhat:"מה קרה",pFeel:"מה הרגשתי",pSteps:"הצעדים שלי לתיקון",pMsg:"המסר שלי למורה",pHelp:"ביקשתי עזרה ממבוגר כדי שזה לא יחזור ✔",pStage:"מדד המוכנות",
+  generalH:"✨ ומה עכשיו?",general:"קחו את התוכנית לשיחה קצרה עם המורה או המחנך/ת ודברו עליה יחד. מה שחשוב הוא לא רק מה שקרה, אלא מה שתעשו מעכשיו.",
+  copy:"העתק את התוכנית",edit:"עריכת התשובות",copied:"התוכנית הועתקה ✔",copyFail:"ההעתקה נכשלה, אפשר לצלם את המסך.",
+  priority:"עדיפות",improveTag:"לעבודה",none:"עניתם במודעות רבה בכל התחומים — כל הכבוד!",resultFor:"תוכנית אישית אחרי אירוע בכיתה",
+  footer:"© 2026 כל הזכויות שמורות — המורה ורכזת ההערכה מונא מוסטפא - כנאענה",platform:"← לפלטפורמת הבזקים חכמים"},
+ en:{dir:"ltr",brand:"Smart Flashes with Muna Mustafa",title:"Self-Reflection After a Classroom Incident",
+  subtitle:"This isn't a punishment — it's a chance to understand what happened and make it right.",
+  nameLbl:"Student name (optional)",namePh:"e.g. Ahmad",classLbl:"Class & date (optional)",classPh:"e.g. 8-1 – 12/11",
+  legend1:"1 = Strongly disagree",legend5:"5 = Strongly agree",progress:(n,t)=>`Answered ${n} of ${t}`,
+  scale:["Strongly disagree","Disagree","Neutral","Agree","Strongly agree"],
+  multi:"You can choose more than one",other:"Other…",otherPh:"Write here…",optional:"(optional)",
+  submit:"Show my result & plan",reset:"Start over",missing:n=>`${n} question(s) still unanswered.`,
+  indicatorH:"🧭 Readiness to take responsibility & repair",
+  stages:[["🌱","Starting out"],["🚶","On the right track"],["🌟","Ready to repair"]],
+  levelText:["You're at the start of the road — and what matters is that you stopped to think. One small, honest step now makes a big difference.","You understand a lot of what happened; now turn that understanding into practical steps.","You're taking responsibility and you understand the impact of your actions — that's real maturity. Now carry out your plan."],
+  strengthsH:"💪 What you're doing well here",improveH:"🎯 What to work on",tipsH:"💡 Tips based on how you felt",
+  careH:"💙 A note for you",care:"It seems something is weighing on you, or you could use some support. That matters — you don't have to carry it alone. Talk to your homeroom teacher, the school counselor, or an adult you trust.",
+  planH:"📋 My personal plan",pWhat:"What happened",pFeel:"How I felt",pSteps:"My steps to repair",pMsg:"My message to the teacher",pHelp:"I asked an adult for help so it won't happen again ✔",pStage:"Readiness",
+  generalH:"✨ What now?",general:"Bring this plan to a short meeting with your teacher or homeroom teacher and talk it through together. What matters isn't only what happened, but what you do from now on.",
+  copy:"Copy my plan",edit:"Edit answers",copied:"Plan copied ✔",copyFail:"Copy failed — take a screenshot instead.",
+  priority:"Priority",improveTag:"Work on",none:"You answered with real awareness in every area — well done!",resultFor:"Personal plan after a classroom incident",
+  footer:"© 2026 All rights reserved — Teacher & Assessment Coordinator Muna Mustafa - Kanaaneh",platform:"Go to the Smart Flashes platform →"}
+};
+
+const SECTIONS = [
+ {icon:"🔎",color:"var(--purple)",soft:"rgba(156,39,176,.12)",t:{ar:"ماذا حدث؟",he:"מה קרה?",en:"What happened?"}},
+ {icon:"🙋",color:"var(--red)",soft:"rgba(255,71,87,.12)",t:{ar:"تحمّل المسؤولية",he:"לקיחת אחריות",en:"Taking responsibility"}},
+ {icon:"👥",color:"var(--orange)",soft:"rgba(255,165,2,.14)",t:{ar:"أثر تصرّفي على الآخرين",he:"ההשפעה של המעשה שלי על אחרים",en:"How my actions affected others"}},
+ {icon:"🧠",color:"#20bf6b",soft:"rgba(46,213,115,.14)",t:{ar:"فهم نفسي",he:"להבין את עצמי",en:"Understanding myself"}},
+ {icon:"🛠️",color:"var(--blue)",soft:"rgba(30,144,255,.12)",t:{ar:"الإصلاح والالتزام",he:"תיקון ומחויבות",en:"Repair & commitment"}}
+];
+
+// Multiple-choice questions
+const MC = {
+ what:{s:0,q:{ar:"ماذا حدث؟",he:"מה קרה?",en:"What happened?"},opts:[
+  {ar:"تكلّمت أو ضحكت أثناء الشرح",he:"דיברתי או צחקתי בזמן ההסבר",en:"I talked or laughed during the lesson"},
+  {ar:"تشاجرت كلاميًا مع زميل",he:"רבתי במילים עם חבר",en:"I had a verbal argument with a classmate"},
+  {ar:"تشاجرت جسديًا (دفع أو ضرب)",he:"הייתה קטטה פיזית (דחיפה או מכה)",en:"I got into a physical fight (pushing or hitting)"},
+  {ar:"سخرت من أحد أو أهنته",he:"לעגתי למישהו או העלבתי אותו",en:"I mocked or insulted someone"},
+  {ar:"لم أنفّذ تعليمات المعلم/ة",he:"לא מילאתי את הוראות המורה",en:"I didn't follow the teacher's instructions"},
+  {ar:"استعملت الهاتف أو أداة بشكل غير مسموح",he:"השתמשתי בטלפון או בחפץ בלי רשות",en:"I used my phone or an object when not allowed"},
+  {ar:"أتلفت أو رميت أغراضًا",he:"הרסתי או זרקתי חפצים",en:"I damaged or threw things"}]},
+ feel:{s:0,q:{ar:"بماذا شعرت في تلك اللحظة؟",he:"מה הרגשתי באותו רגע?",en:"How did I feel in that moment?"},opts:[
+  {k:"anger",ar:"غضب",he:"כעס",en:"Anger"},
+  {k:"bored",ar:"ملل",he:"שעמום",en:"Boredom"},
+  {k:"embar",ar:"إحراج",he:"מבוכה",en:"Embarrassment"},
+  {k:"unfair",ar:"ظلم",he:"תחושת עוול",en:"It felt unfair"},
+  {k:"attn",ar:"رغبة في لفت الانتباه",he:"רצון למשוך תשומת לב",en:"Wanting attention"},
+  {k:"peer",ar:"ضغط من الزملاء",he:"לחץ חברתי",en:"Peer pressure"},
+  {k:"outside",care:true,ar:"تعب أو انزعاج من شيء خارج الصف",he:"עייפות או משהו שמטריד אותי מחוץ לכיתה",en:"Tired or upset about something outside class"},
+  {k:"dk",ar:"لا أعرف",he:"לא יודע/ת",en:"I don't know"}]},
+ repair:{s:4,q:{ar:"ما الخطوة التي سأقوم بها لإصلاح ما حدث؟",he:"איזה צעד אעשה כדי לתקן את מה שקרה?",en:"What step will I take to make it right?"},opts:[
+  {ar:"أعتذر لزميلي / للمعلم/ة",he:"אתנצל בפני החבר / המורה",en:"Apologize to my classmate / teacher"},
+  {ar:"أعوّض ما أتلفته أو أرتّبه",he:"אתקן או אסדר את מה שהרסתי",en:"Fix or tidy what I damaged"},
+  {ar:"أتحدث مع المربّي/ة أو المستشار/ة",he:"אדבר עם המחנך/ת או היועץ/ת",en:"Talk with my homeroom teacher or counselor"},
+  {ar:"أبتعد قليلًا وأتنفّس عندما أغضب في المرة القادمة",he:"בפעם הבאה שאכעס, אתרחק קצת ואנשום",en:"Next time I'm angry, step away and breathe"},
+  {ar:"أجلس في مكان آخر بعيدًا عن المشتّتات",he:"אשב במקום אחר, רחוק מהסחות דעת",en:"Sit somewhere else, away from distractions"},
+  {ar:"أساعد في مهمة للصف",he:"אעזור במשימה למען הכיתה",en:"Help with a task for the class"}]}
+};
+
+const TIPS = {
+ anger:{ar:"عندما تشعر بالغضب: توقّف، خذ 3 أنفاس عميقة وعُدّ حتى 10. وإن احتجت، اطلب من المعلم/ة الخروج دقيقة لتهدأ.",he:"כשאתם כועסים: עצרו, קחו 3 נשימות עמוקות וספרו עד 10. אם צריך, בקשו מהמורה לצאת לדקה כדי להירגע.",en:"When you feel angry: stop, take 3 deep breaths and count to 10. If you need to, ask the teacher to step out for a minute to calm down."},
+ bored:{ar:"إذا شعرت بالملل، اسأل سؤالًا عن الدرس أو اطلب مهمة إضافية، وأخبر المعلم/ة بلطف بعد الحصة إن كانت المادة سهلة أو صعبة عليك.",he:"אם משעמם לכם, שאלו שאלה על השיעור או בקשו משימה נוספת, וספרו למורה בנימוס אחרי השיעור אם החומר קל או קשה לכם.",en:"If you're bored, ask a question about the lesson or ask for an extra task, and politely tell the teacher after class if the material feels too easy or too hard."},
+ embar:{ar:"الإحراج شعور طبيعي. بدل الرد بتصرّف يلفت الانتباه، تحدّث مع المعلم/ة بعد الحصة عمّا أحرجك.",he:"מבוכה היא תחושה טבעית. במקום להגיב במעשה שמושך תשומת לב, דברו עם המורה אחרי השיעור על מה שהביך אתכם.",en:"Embarrassment is normal. Instead of reacting with something attention-grabbing, talk to the teacher after class about what embarrassed you."},
+ unfair:{ar:"إذا شعرت بالظلم، عبّر عنه بهدوء وبعد الحصة: «شعرت أن… هل يمكن أن نتحدث؟» — الكلام الهادئ يُسمَع أكثر من الصراخ.",he:"אם הרגשתם עוול, אמרו זאת ברוגע ואחרי השיעור: «הרגשתי ש… אפשר לדבר?» — דיבור רגוע נשמע יותר מצעקה.",en:"If it felt unfair, say so calmly after class: “I felt that… can we talk?” — calm words are heard far more than shouting."},
+ attn:{ar:"من حقك أن تُلاحَظ! اطلب دورًا إيجابيًا في الصف (مسؤول، مساعد، عارض) لتنال الاهتمام بطريقة تفخر بها.",he:"מגיע לכם שישימו לב אליכם! בקשו תפקיד חיובי בכיתה (אחראי, עוזר, מציג) כדי לקבל תשומת לב בדרך שתהיו גאים בה.",en:"You deserve to be noticed! Ask for a positive role in class (monitor, helper, presenter) to get attention in a way you can be proud of."},
+ peer:{ar:"الصديق الحقيقي لا يدفعك للمشاكل. تدرّب على قول «لا، ليس الآن» وابتعد عن المجموعة عندما تبدأ الفوضى.",he:"חבר אמיתי לא דוחף אתכם לצרות. תרגלו לומר «לא, לא עכשיו» והתרחקו מהקבוצה כשמתחיל בלגן.",en:"A real friend doesn't push you into trouble. Practice saying “No, not now” and step away from the group when things get rowdy."},
+ outside:{ar:"أحيانًا نحمل همومًا من خارج الصف. لست مضطرًا لحملها وحدك — المربّي/ة والمستشار/ة موجودون ليستمعوا إليك.",he:"לפעמים אנחנו סוחבים דאגות מחוץ לכיתה. לא צריך לשאת אותן לבד — המחנך/ת והיועץ/ת כאן כדי להקשיב.",en:"Sometimes we carry worries from outside class. You don't have to carry them alone — your homeroom teacher and counselor are there to listen."},
+ dk:{ar:"لا بأس ألّا تعرف. في المرة القادمة لاحظ جسمك قبل التصرّف (حرارة الوجه، توتر، نبض سريع) — هذه إشارات أن عليك التوقّف.",he:"זה בסדר לא לדעת. בפעם הבאה שימו לב לגוף לפני שאתם מגיבים (חום בפנים, מתח, דופק מהיר) — אלה סימנים לעצור.",en:"It's okay not to know. Next time, notice your body before you act (hot face, tension, fast heartbeat) — those are signs to pause."}
+};
+
+// Likert items. r = reverse-scored; nos = not scored (help request)
+const ITEMS = [
+ {s:1,t:{ar:"أعترف أن تصرّفي كان جزءًا من المشكلة.",he:"אני מודה שההתנהגות שלי הייתה חלק מהבעיה.",en:"I admit my behavior was part of the problem."},
+  g:{ar:"الاعتراف بدورك",he:"הודאה בחלק שלך",en:"Owning your part"},
+  a:{ar:"الاعتراف ليس ضعفًا؛ إنه أول خطوة لحل المشكلة. حاول أن تكمل الجملة: «الجزء الذي كان مسؤوليتي هو…».",he:"הודאה אינה חולשה; זה הצעד הראשון לפתרון. נסו להשלים את המשפט: «החלק שהיה באחריותי הוא…».",en:"Admitting isn't weakness — it's the first step to solving the problem. Try finishing the sentence: “The part that was my responsibility was…”."}},
+ {s:1,t:{ar:"كان بإمكاني أن أتصرّف بطريقة مختلفة.",he:"יכולתי להתנהג אחרת.",en:"I could have acted differently."},
+  g:{ar:"رؤية بدائل للتصرّف",he:"לראות דרכי תגובה אחרות",en:"Seeing other options"},
+  a:{ar:"فكّر في تصرّفين آخرين كان يمكن أن تختارهما (مثل: طلب المساعدة، الابتعاد، الكلام بهدوء) واكتبهما في دفترك.",he:"חשבו על שתי תגובות אחרות שיכולתם לבחור (למשל: לבקש עזרה, להתרחק, לדבר ברוגע) וכתבו אותן במחברת.",en:"Think of two other things you could have done (e.g. ask for help, walk away, speak calmly) and write them in your notebook."}},
+ {s:1,r:true,t:{ar:"أعتقد أن المشكلة كلها خطأ الآخرين.",he:"אני חושב/ת שהבעיה כולה באשמת אחרים.",en:"I think the whole problem was other people's fault."},
+  g:{ar:"النظر إلى دورك وليس فقط دور الآخرين",he:"להסתכל על החלק שלך ולא רק של אחרים",en:"Looking at your role, not only others'"},
+  a:{ar:"حتى لو أخطأ غيرك، أنت مسؤول عن ردّة فعلك. ركّز على ما تستطيع أنت أن تغيّره.",he:"גם אם אחרים טעו, אתם אחראים לתגובה שלכם. התמקדו במה שאתם יכולים לשנות.",en:"Even if someone else was wrong, you're responsible for how you reacted. Focus on what you can change."}},
+ {s:1,r:true,t:{ar:"تصرّفت هكذا لأن الآخرين كانوا يفعلون ذلك.",he:"התנהגתי כך כי גם אחרים עשו את זה.",en:"I acted this way because others were doing it too."},
+  g:{ar:"اتخاذ قرارك بنفسك",he:"לקבל החלטות בעצמך",en:"Making your own choices"},
+  a:{ar:"قرارك ملكك وليس ملك المجموعة. تدرّب على قول «لا» والابتعاد عندما يبدأ الآخرون بالفوضى.",he:"ההחלטה שלכם שייכת לכם ולא לקבוצה. תרגלו לומר «לא» ולהתרחק כשאחרים מתחילים להשתולל.",en:"Your choices belong to you, not the group. Practice saying “no” and stepping away when others start acting up."}},
+ {s:2,t:{ar:"أفهم أن تصرّفي عطّل تعلّم زملائي.",he:"אני מבין/ה שההתנהגות שלי הפריעה לחבריי ללמוד.",en:"I understand my behavior disrupted my classmates' learning."},
+  g:{ar:"الوعي بحق الزملاء في التعلّم",he:"מודעות לזכות החברים ללמוד",en:"Respecting others' right to learn"},
+  a:{ar:"تخيّل أنك تحاول الفهم وأحدهم يشوّش عليك. كل دقيقة فوضى هي دقيقة تعلّم ضائعة على الجميع.",he:"דמיינו שאתם מנסים להבין ומישהו מפריע. כל דקה של בלגן היא דקת למידה שאבדה לכולם.",en:"Imagine trying to understand while someone disrupts you. Every minute of chaos is a minute of learning lost for everyone."}},
+ {s:2,t:{ar:"أفهم كيف شعر المعلم/ة في تلك اللحظة.",he:"אני מבין/ה איך המורה הרגיש/ה באותו רגע.",en:"I understand how the teacher felt in that moment."},
+  g:{ar:"تفهّم مشاعر المعلم/ة",he:"הבנת רגשות המורה",en:"Understanding the teacher's feelings"},
+  a:{ar:"ضع نفسك مكان المعلم/ة: ماذا كنت ستشعر؟ يمكنك أن تقول ذلك له/لها عندما تعتذر.",he:"שימו את עצמכם במקום המורה: מה הייתם מרגישים? אפשר לומר זאת כשאתם מתנצלים.",en:"Put yourself in the teacher's place: how would you feel? You can tell them that when you apologize."}},
+ {s:2,t:{ar:"أدرك أن هناك من تأذّى أو شعر بالإهانة.",he:"אני מבין/ה שמישהו נפגע או הרגיש מושפל.",en:"I realize someone was hurt or felt insulted."},
+  g:{ar:"الإحساس بمن تأذّى",he:"רגישות למי שנפגע",en:"Caring about who was hurt"},
+  a:{ar:"فكّر في الشخص الذي تأذّى: كيف كان يومه بعد ما حدث؟ كلمة اعتذار صادقة قد تعني له الكثير.",he:"חשבו על מי שנפגע: איך עבר עליו היום אחרי מה שקרה? מילת התנצלות כנה יכולה להיות משמעותית מאוד עבורו.",en:"Think about the person who was hurt: how was the rest of their day? A sincere apology can mean a lot to them."}},
+ {s:3,t:{ar:"أعرف ما الذي أغضبني أو دفعني لهذا التصرّف.",he:"אני יודע/ת מה הכעיס אותי או גרם לי להתנהג כך.",en:"I know what made me angry or pushed me to act this way."},
+  g:{ar:"فهم أسباب تصرّفك",he:"הבנת הסיבות להתנהגות",en:"Understanding your triggers"},
+  a:{ar:"عُد إلى اللحظة التي سبقت المشكلة: ماذا حدث بالضبط؟ معرفة «المحفّز» تساعدك على تجنّبه أو الاستعداد له.",he:"חזרו לרגע שלפני הבעיה: מה בדיוק קרה? זיהוי ה«טריגר» עוזר להימנע ממנו או להתכונן אליו.",en:"Go back to the moment just before: what exactly happened? Knowing your “trigger” helps you avoid it or prepare for it."}},
+ {s:3,t:{ar:"أستطيع أن ألاحظ متى أبدأ بفقدان السيطرة.",he:"אני יכול/ה לזהות מתי אני מתחיל/ה לאבד שליטה.",en:"I can notice when I'm starting to lose control."},
+  g:{ar:"ملاحظة إشارات الغضب",he:"זיהוי סימני כעס",en:"Spotting warning signs"},
+  a:{ar:"انتبه لإشارات جسمك (حرارة الوجه، شدّ اليدين، ارتفاع الصوت) — عندها توقّف واستعمل خطة التهدئة.",he:"שימו לב לסימני הגוף (חום בפנים, אגרופים קפוצים, קול שעולה) — אז עצרו והשתמשו בתוכנית ההרגעה.",en:"Watch for body signals (hot face, clenched fists, rising voice) — that's when to stop and use your calm-down plan."}},
+ {s:4,t:{ar:"أنا مستعد للاعتذار لمن تأذّى.",he:"אני מוכן/ה להתנצל בפני מי שנפגע.",en:"I'm ready to apologize to whoever was hurt."},
+  g:{ar:"الاستعداد للاعتذار",he:"נכונות להתנצל",en:"Willingness to apologize"},
+  a:{ar:"الاعتذار الجيد قصير وصادق: «أنا آسف لأنني…، وفي المرة القادمة سوف…».",he:"התנצלות טובה קצרה וכנה: «אני מצטער/ת ש…, ובפעם הבאה אני…».",en:"A good apology is short and sincere: “I'm sorry that I…, and next time I will…”."}},
+ {s:4,t:{ar:"أعرف ماذا سأفعل في المرة القادمة بدل هذا التصرّف.",he:"אני יודע/ת מה אעשה בפעם הבאה במקום ההתנהגות הזאת.",en:"I know what I'll do next time instead of this behavior."},
+  g:{ar:"خطة للمرة القادمة",he:"תוכנית לפעם הבאה",en:"A plan for next time"},
+  a:{ar:"اختر تصرّفًا بديلًا واحدًا وواضحًا (مثل: أرفع يدي وأطلب الخروج دقيقة) وتخيّل نفسك تقوم به.",he:"בחרו התנהגות חלופית אחת וברורה (למשל: להצביע ולבקש לצאת לדקה) ודמיינו את עצמכם עושים אותה.",en:"Pick one clear alternative (e.g. raise my hand and ask to step out for a minute) and picture yourself doing it."}},
+ {s:4,nos:true,t:{ar:"أحتاج مساعدة من شخص بالغ حتى لا يتكرّر ذلك.",he:"אני צריך/ה עזרה ממבוגר כדי שזה לא יחזור.",en:"I need help from an adult so this doesn't happen again."}}
+];
+const SCORED_SECTIONS=[1,2,3,4];
+
+
+return {UI,SECTIONS,ITEMS,MC,TIPS};
+})()},
+ {id:"group-self",kind:"self",mode:"score",icon:"👥",c:"var(--red)",cs:"rgba(255,71,87,.12)",minutes:4,
+  title:{ar:"تقييم ذاتي لمشروع جماعي",he:"הערכה עצמית בפרויקט קבוצתי",en:"Group Project Self-Assessment"},
+  desc:{ar:"تفحص مساهمتك في عمل المجموعة، والتزامك بالمهام والمواعيد، وتواصلك وتعاونك مع زملائك. تحصل على نتيجة من 100 واقتراحات لتكون عضوًا أفضل في الفريق.",he:"בודק את התרומה שלך לעבודת הקבוצה, את העמידה במשימות ובזמנים, ואת התקשורת ושיתוף הפעולה עם החברים. מקבלים תוצאה מתוך 100 והמלצות להיות חבר/ת צוות טוב/ה יותר.",en:"Looks at your contribution to the group's work, how you kept to tasks and deadlines, and how you communicated and cooperated. You get a result out of 100 and tips to be a better team member."},
+  data:(function(){
+const UI = {
+ ar:{subtitle:"كيف كانت مساهمتك في عمل المجموعة؟ قيّم نفسك بصدق.",subjLbl:"اسم المشروع (اختياري)",subjPh:"مثال: مشروع البيئة",
+  strengthsH:"💪 نقاط قوتك في العمل الجماعي",improveH:"🎯 كيف تكون عضوًا أفضل في المجموعة",none:"لا توجد نقاط ضعف واضحة — أنت عضو رائع في المجموعة!",
+  levels:[
+   ["عضو فريق متميّز 🌟","أنت عضو فعّال ومسؤول، والمجموعة تعتمد عليك.","استمر هكذا، وجرّب في المشروع القادم دورًا جديدًا مثل تنسيق المجموعة أو تقديم المشروع، لتطوّر مهاراتك القيادية."],
+   ["جيد جدًا 👍","ساهمت بشكل جيد، وبقي القليل لتكون عضوًا متميّزًا.","اختر نقطة أو نقطتين من قائمة التحسين وركّز عليهما في المشروع القادم."],
+   ["متوسط 🙂","لك مساهمة في المجموعة، لكن بعض الجوانب تحتاج إلى تقوية.","في المشروع القادم اتفق مع مجموعتك منذ البداية على مهامك ومواعيدها، واكتبها في مكان واضح."],
+   ["يحتاج إلى تحسين 💡","لا بأس — العمل الجماعي مهارة تُتعلَّم بالتدريج.","ابدأ بخطوة واحدة: اطلب مهمة واضحة وأنجزها في موعدها. وإن واجهت صعوبة مع المجموعة، تحدّث مع المعلم/ة."]]},
+ he:{subtitle:"איך הייתה התרומה שלך לעבודת הקבוצה? העריכו את עצמכם בכנות.",subjLbl:"שם הפרויקט (לא חובה)",subjPh:"לדוגמה: פרויקט הסביבה",
+  strengthsH:"💪 החוזקות שלך בעבודת צוות",improveH:"🎯 איך להיות חבר/ת קבוצה טוב/ה יותר",none:"אין נקודות חולשה בולטות — את/ה חבר/ת קבוצה נהדר/ת!",
+  levels:[
+   ["חבר/ת צוות מצטיין/ת 🌟","את/ה חבר/ת קבוצה פעיל/ה ואחראי/ת, והקבוצה סומכת עליך.","המשיכו כך, ונסו בפרויקט הבא תפקיד חדש כמו תיאום הקבוצה או הצגת הפרויקט, כדי לפתח מיומנויות הובלה."],
+   ["טוב מאוד 👍","תרמת יפה, ונשאר מעט כדי להצטיין.","בחרו נקודה אחת או שתיים מרשימת השיפור והתמקדו בהן בפרויקט הבא."],
+   ["בינוני 🙂","יש לך תרומה לקבוצה, אבל כמה תחומים צריכים חיזוק.","בפרויקט הבא סכמו עם הקבוצה כבר בהתחלה על המשימות שלכם ועל המועדים, וכתבו אותם במקום ברור."],
+   ["דורש שיפור 💡","זה בסדר — עבודת צוות היא מיומנות שלומדים בהדרגה.","התחילו בצעד אחד: בקשו משימה ברורה וסיימו אותה בזמן. אם יש קושי עם הקבוצה, דברו עם המורה."]]},
+ en:{subtitle:"How did you contribute to your group's work? Be honest.",subjLbl:"Project name (optional)",subjPh:"e.g. Environment project",
+  strengthsH:"💪 Your teamwork strengths",improveH:"🎯 How to be a better team member",none:"No clear weak spots — you're a great team member!",
+  levels:[
+   ["Outstanding team member 🌟","You're an active, responsible member, and the group relies on you.","Keep it up, and next time try a new role, like coordinating the group or presenting the project, to build leadership skills."],
+   ["Very good 👍","You contributed well and you're close to excellent.","Pick one or two points from the improvement list and focus on them in your next project."],
+   ["Average 🙂","You contributed, but some areas need strengthening.","In your next project, agree with your group from the start on your tasks and deadlines, and write them down somewhere visible."],
+   ["Needs improvement 💡","That's okay — teamwork is a skill you learn step by step.","Start with one step: ask for a clear task and finish it on time. If you're struggling with the group, talk to your teacher."]]}
+};
+const SECTIONS = [
+ {icon:"🧩",color:"var(--red)",soft:"rgba(255,71,87,.12)",t:{ar:"مساهمتي في العمل",he:"התרומה שלי לעבודה",en:"My contribution"}},
+ {icon:"⏰",color:"var(--orange)",soft:"rgba(255,165,2,.14)",t:{ar:"الالتزام والمسؤولية",he:"מחויבות ואחריות",en:"Commitment & responsibility"}},
+ {icon:"💬",color:"#20bf6b",soft:"rgba(46,213,115,.14)",t:{ar:"التواصل والتعاون",he:"תקשורת ושיתוף פעולה",en:"Communication & cooperation"}},
+ {icon:"🔍",color:"var(--blue)",soft:"rgba(30,144,255,.12)",t:{ar:"التفكير في التجربة",he:"חשיבה על החוויה",en:"Reflecting on the experience"}}
+];
+const ITEMS = [
+ {s:0,t:{ar:"قمت بالمهام التي كُلّفت بها في المجموعة بشكل كامل.",he:"ביצעתי באופן מלא את המשימות שהוטלו עליי בקבוצה.",en:"I fully completed the tasks I was assigned in the group."},
+  g:{ar:"إنجاز مهامك كاملة",he:"השלמת המשימות שלך",en:"Completing your tasks"},
+  a:{ar:"اكتب مهامك في قائمة واضحة مع موعد لكل مهمة، وأخبر المجموعة عند إنهاء كل واحدة.",he:"רשמו את המשימות שלכם ברשימה ברורה עם מועד לכל אחת, ועדכנו את הקבוצה כשסיימתם כל משימה.",en:"Write your tasks in a clear list with a deadline for each, and tell the group when you finish each one."}},
+ {s:0,t:{ar:"شاركت بأفكار واقتراحات ساعدت المشروع.",he:"הצעתי רעיונות והצעות שעזרו לפרויקט.",en:"I contributed ideas and suggestions that helped the project."},
+  g:{ar:"المشاركة بالأفكار",he:"שיתוף רעיונות",en:"Sharing ideas"},
+  a:{ar:"لا تنتظر أن تكون فكرتك كاملة؛ شارك بها، فقد تكون بداية لفكرة رائعة. جهّز فكرة واحدة على الأقل قبل كل لقاء.",he:"אל תחכו שהרעיון יהיה מושלם; שתפו אותו, הוא עשוי להיות התחלה של רעיון נהדר. הכינו לפחות רעיון אחד לפני כל מפגש.",en:"Don't wait for an idea to be perfect — share it; it may spark a great one. Prepare at least one idea before each meeting."}},
+ {s:0,t:{ar:"كان عملي في المشروع بجودة أفتخر بها.",he:"העבודה שלי בפרויקט הייתה באיכות שאני גאה בה.",en:"My work on the project was of a quality I'm proud of."},
+  g:{ar:"جودة العمل",he:"איכות העבודה",en:"Quality of work"},
+  a:{ar:"قبل تسليم جزئك راجعه مرة أخرى واسأل نفسك: هل هذا أفضل ما أستطيع؟ واطلب رأي زميل قبل التسليم.",he:"לפני שאתם מגישים את החלק שלכם, עברו עליו שוב ושאלו: האם זה הכי טוב שאני יכול/ה? בקשו חוות דעת מחבר לפני ההגשה.",en:"Before handing in your part, review it again and ask yourself: is this my best? Get a classmate's opinion first."}},
+ {s:0,r:true,t:{ar:"اعتمدت على زملائي ليقوموا بمعظم العمل.",he:"סמכתי על החברים שיעשו את רוב העבודה.",en:"I relied on my teammates to do most of the work."},
+  g:{ar:"المشاركة العادلة في العمل",he:"חלוקת עבודה הוגנת",en:"Doing your fair share"},
+  a:{ar:"المشروع الجماعي يعني أن لكل واحد دورًا. اطلب مهمة واضحة منذ البداية، وإن لم تعرف كيف تساعد فاسأل المجموعة.",he:"פרויקט קבוצתי פירושו שלכל אחד יש תפקיד. בקשו משימה ברורה כבר בהתחלה, ואם אינכם יודעים איך לעזור — שאלו את הקבוצה.",en:"Group work means everyone has a role. Ask for a clear task from the start, and if you're not sure how to help, ask the group."}},
+
+ {s:1,t:{ar:"التزمت بالمواعيد التي اتفقت عليها المجموعة.",he:"עמדתי בלוחות הזמנים שהקבוצה סיכמה.",en:"I kept to the deadlines the group agreed on."},
+  g:{ar:"الالتزام بالمواعيد",he:"עמידה בזמנים",en:"Meeting deadlines"},
+  a:{ar:"سجّل مواعيد المجموعة في مفكّرتك أو هاتفك مع تذكير قبلها بيوم، وأخبرهم مسبقًا إن لم تستطع الالتزام.",he:"רשמו את מועדי הקבוצה ביומן או בטלפון עם תזכורת יום לפני, ועדכנו מראש אם לא תוכלו לעמוד בהם.",en:"Put group deadlines in your planner or phone with a reminder a day before, and tell the group in advance if you can't make one."}},
+ {s:1,t:{ar:"حضرت لقاءات المجموعة وكنت مستعدًا لها.",he:"הגעתי למפגשי הקבוצה והייתי מוכן/ה אליהם.",en:"I attended group meetings and came prepared."},
+  g:{ar:"الحضور والاستعداد للقاءات",he:"נוכחות והכנה למפגשים",en:"Attending & preparing for meetings"},
+  a:{ar:"قبل كل لقاء خصّص 10 دقائق لتجهيز ما أنجزته وما تحتاجه من المجموعة.",he:"לפני כל מפגש הקדישו 10 דקות להכין מה עשיתם ומה אתם צריכים מהקבוצה.",en:"Before each meeting, take 10 minutes to prepare what you've done and what you need from the group."}},
+ {s:1,t:{ar:"تحمّلت مسؤولية الأخطاء أو التأخير في جزئي من العمل.",he:"לקחתי אחריות על טעויות או עיכובים בחלק שלי.",en:"I took responsibility for mistakes or delays in my part."},
+  g:{ar:"تحمّل المسؤولية",he:"לקיחת אחריות",en:"Taking responsibility"},
+  a:{ar:"إن تأخّرت أو أخطأت فاعترف بذلك مبكرًا واقترح حلًّا؛ هذا يحافظ على ثقة المجموعة بك.",he:"אם איחרתם או טעיתם, הודו בכך מוקדם והציעו פתרון; כך הקבוצה ממשיכה לסמוך עליכם.",en:"If you're late or make a mistake, admit it early and suggest a fix — that keeps the group's trust."}},
+ {s:1,t:{ar:"ساعدت زملائي في المجموعة عندما واجهوا صعوبة.",he:"עזרתי לחברי הקבוצה כשהם נתקלו בקושי.",en:"I helped my teammates when they had difficulties."},
+  g:{ar:"مساعدة أعضاء المجموعة",he:"עזרה לחברי הקבוצה",en:"Helping teammates"},
+  a:{ar:"اسأل زملاءك بين حين وآخر: «هل تحتاج مساعدة في جزئك؟» — نجاح المشروع نجاح للجميع.",he:"שאלו מדי פעם: «צריך עזרה בחלק שלך?» — הצלחת הפרויקט היא הצלחה של כולם.",en:"Check in now and then: “Need help with your part?” — the project's success is everyone's success."}},
+
+ {s:2,t:{ar:"استمعت لآراء زملائي باحترام حتى عندما اختلفت معهم.",he:"הקשבתי בכבוד לדעות החברים גם כשלא הסכמתי איתם.",en:"I listened respectfully to my teammates' views, even when I disagreed."},
+  g:{ar:"الإصغاء واحترام الآراء",he:"הקשבה וכבוד לדעות",en:"Listening & respecting views"},
+  a:{ar:"عندما يتكلم زميل، استمع حتى النهاية قبل الرد، وابدأ ردّك بنقطة توافقه عليها.",he:"כשחבר מדבר, הקשיבו עד הסוף לפני שאתם עונים, ופתחו את התגובה בנקודה שאתם מסכימים איתה.",en:"When a teammate speaks, listen to the end before replying, and start your answer with a point you agree on."}},
+ {s:2,t:{ar:"عبّرت عن رأيي بوضوح وبطريقة لطيفة.",he:"הבעתי את דעתי בבירור ובאופן נעים.",en:"I expressed my opinion clearly and kindly."},
+  g:{ar:"التعبير الواضح عن الرأي",he:"הבעת דעה ברורה",en:"Expressing your view clearly"},
+  a:{ar:"استعمل عبارات تبدأ بـ«أنا أقترح…» أو «أنا أرى…» بدل «أنت مخطئ»، واشرح سبب رأيك باختصار.",he:"השתמשו במשפטים שמתחילים ב«אני מציע/ה…» או «לדעתי…» במקום «אתה טועה», והסבירו בקצרה למה.",en:"Use phrases like “I suggest…” or “I think…” instead of “You're wrong,” and briefly explain why."}},
+ {s:2,t:{ar:"ساهمت في حل الخلافات داخل المجموعة بهدوء.",he:"תרמתי לפתרון מחלוקות בקבוצה ברוגע.",en:"I helped resolve disagreements in the group calmly."},
+  g:{ar:"حل الخلافات بهدوء",he:"פתרון מחלוקות ברוגע",en:"Resolving conflicts calmly"},
+  a:{ar:"عند الخلاف اقترح حلًّا وسطًا أو تصويتًا، وإن لم تتفق المجموعة اطلبوا رأي المعلم/ة.",he:"במחלוקת הציעו פשרה או הצבעה, ואם הקבוצה לא מגיעה להסכמה — בקשו את דעת המורה.",en:"In a disagreement, suggest a compromise or a vote; if the group still can't agree, ask the teacher."}},
+ {s:2,r:true,t:{ar:"شعرت أن صوتي غير مسموع في المجموعة.",he:"הרגשתי שלא שומעים את הקול שלי בקבוצה.",en:"I felt my voice wasn't heard in the group."},
+  g:{ar:"إسماع صوتك في المجموعة",he:"להשמיע את הקול שלך בקבוצה",en:"Making your voice heard"},
+  a:{ar:"من حقك أن تُسمَع. اقترح أن يتكلم كل عضو بدوره، وإن استمر هذا الشعور فتحدّث مع المعلم/ة.",he:"מגיע לכם שישמעו אתכם. הציעו שכל אחד ידבר בתורו, ואם התחושה נמשכת — דברו עם המורה.",en:"You deserve to be heard. Suggest that everyone speaks in turn, and if the feeling continues, talk to your teacher."}},
+
+ {s:3,t:{ar:"تعلّمت من زملائي أشياء جديدة خلال المشروع.",he:"למדתי דברים חדשים מחבריי במהלך הפרויקט.",en:"I learned new things from my teammates during the project."},
+  g:{ar:"التعلّم من الآخرين",he:"למידה מאחרים",en:"Learning from others"},
+  a:{ar:"لاحظ ما يجيده كل زميل واسأله كيف يفعل ذلك؛ المشروع الجماعي فرصة لتتعلّم مهارات لا تتعلّمها وحدك.",he:"שימו לב במה כל חבר טוב ושאלו איך הוא עושה את זה; פרויקט קבוצתי הוא הזדמנות ללמוד מיומנויות שלא לומדים לבד.",en:"Notice what each teammate does well and ask how they do it — group work lets you learn skills you wouldn't learn alone."}},
+ {s:3,t:{ar:"أعرف ما الذي أجدته في هذا المشروع وما الذي أحتاج إلى تحسينه.",he:"אני יודע/ת במה הצלחתי בפרויקט ומה עליי לשפר.",en:"I know what I did well in this project and what I need to improve."},
+  g:{ar:"معرفة نقاط قوتك وضعفك",he:"הכרת החוזקות והחולשות שלך",en:"Knowing your strengths & weaknesses"},
+  a:{ar:"اكتب في نهاية المشروع جملتين: «أجدت في…» و«في المرة القادمة سأحسّن…».",he:"בסוף הפרויקט כתבו שני משפטים: «הצלחתי ב…» ו«בפעם הבאה אשפר…».",en:"At the end of the project, write two sentences: “I did well at…” and “Next time I'll improve…”."}},
+ {s:3,t:{ar:"أنا راضٍ عن مساهمتي في نجاح المجموعة.",he:"אני מרוצה מהתרומה שלי להצלחת הקבוצה.",en:"I'm satisfied with my contribution to the group's success."},
+  g:{ar:"الرضا عن مساهمتك",he:"שביעות רצון מהתרומה שלך",en:"Satisfaction with your contribution"},
+  a:{ar:"إن لم تكن راضيًا، فاختر شيئًا واحدًا تفعله بشكل مختلف في المشروع القادم، مثل التطوّع لمهمة أكبر.",he:"אם אינכם מרוצים, בחרו דבר אחד שתעשו אחרת בפרויקט הבא, למשל להתנדב למשימה גדולה יותר.",en:"If you're not, pick one thing to do differently in your next project — like volunteering for a bigger task."}},
+ {s:3,t:{ar:"أرغب في العمل مع مجموعة مرة أخرى.",he:"הייתי רוצה לעבוד שוב בקבוצה.",en:"I'd like to work in a group again."},
+  g:{ar:"الانفتاح على العمل الجماعي",he:"פתיחות לעבודה קבוצתית",en:"Openness to teamwork"},
+  a:{ar:"إن كانت التجربة صعبة، فكّر ما الذي جعلها كذلك وما الذي يمكن أن يجعلها أفضل، وشارك ذلك مع المعلم/ة.",he:"אם החוויה הייתה קשה, חשבו מה גרם לכך ומה יכול לשפר אותה, ושתפו את המורה.",en:"If it was a tough experience, think about why and what could make it better, and share that with your teacher."}}
+];
+return {UI,SECTIONS,ITEMS};
+})()},
+ {id:"present-self",kind:"self",mode:"score",icon:"🎤",c:"var(--purple)",cs:"rgba(156,39,176,.12)",minutes:4,
+  title:{ar:"تقييم ذاتي لعرض تقديمي",he:"הערכה עצמית להצגה",en:"Presentation Self-Assessment"},
+  desc:{ar:"تفحص تحضيرك للعرض، وطريقة إلقائك وتواصلك مع الجمهور، وتنظيم المحتوى والشرائح، وما تعلّمته من التجربة. تحصل على نتيجة من 100 واقتراحات لعرض أفضل.",he:"בודק את ההכנה להצגה, את אופן ההעברה והקשר עם הקהל, את ארגון התוכן והשקפים, ומה למדת מהחוויה. מקבלים תוצאה מתוך 100 והמלצות להצגה טובה יותר.",en:"Looks at how you prepared, your delivery and connection with the audience, how you organized your content and slides, and what you learned. You get a result out of 100 and tips for a better presentation."},
+  data:(function(){
+const UI = {
+ ar:{subtitle:"كيف كان عرضك التقديمي؟ قيّم نفسك بصدق.",subjLbl:"موضوع العرض (اختياري)",subjPh:"مثال: الطاقة المتجددة",
+  strengthsH:"💪 نقاط قوتك في العرض",improveH:"🎯 كيف تجعل عرضك القادم أفضل",none:"لا توجد نقاط ضعف واضحة — عرض رائع!",
+  levels:[
+   ["متحدّث متميّز 🌟","كان عرضك قويًا ومنظّمًا، وأوصلت رسالتك بثقة.","استمر في تطوير مهارتك: جرّب في المرة القادمة إشراك الجمهور بسؤال أو نشاط قصير."],
+   ["جيد جدًا 👍","قدّمت عرضًا جيدًا، وبقي القليل ليكون متميّزًا.","ركّز على نقطة أو نقطتين من قائمة التحسين، وتدرّب عليهما قبل عرضك القادم."],
+   ["متوسط 🙂","في عرضك جوانب جيدة، وبعض المهارات تحتاج إلى تدريب.","اختر أهم 3 اقتراحات، وخصّص لها وقتًا في التحضير للعرض القادم."],
+   ["يحتاج إلى تحسين 💡","لا بأس — كل متحدّث جيد بدأ من هنا.","ابدأ بالتحضير المبكر والتدرّب بصوت عالٍ مرتين على الأقل. التدريب هو أسرع طريق للثقة."]]},
+ he:{subtitle:"איך הייתה ההצגה שלך? העריכו את עצמכם בכנות.",subjLbl:"נושא ההצגה (לא חובה)",subjPh:"לדוגמה: אנרגיה מתחדשת",
+  strengthsH:"💪 החוזקות שלך בהצגה",improveH:"🎯 איך לשפר את ההצגה הבאה",none:"אין נקודות חולשה בולטות — הצגה נהדרת!",
+  levels:[
+   ["מציג/ה מצטיין/ת 🌟","ההצגה שלך הייתה חזקה ומאורגנת, והעברת את המסר בביטחון.","המשיכו לפתח את המיומנות: בפעם הבאה נסו לשתף את הקהל בשאלה או בפעילות קצרה."],
+   ["טוב מאוד 👍","הצגת יפה, ונשאר מעט כדי להצטיין.","התמקדו בנקודה אחת או שתיים מרשימת השיפור, והתאמנו עליהן לפני ההצגה הבאה."],
+   ["בינוני 🙂","יש בהצגה שלך צדדים טובים, וכמה מיומנויות צריכות תרגול.","בחרו את 3 ההמלצות החשובות ביותר, והקדישו להן זמן בהכנה להצגה הבאה."],
+   ["דורש שיפור 💡","זה בסדר — כל מציג טוב התחיל מכאן.","התחילו בהכנה מוקדמת ובתרגול בקול רם לפחות פעמיים. תרגול הוא הדרך המהירה ביותר לביטחון."]]},
+ en:{subtitle:"How did your presentation go? Be honest.",subjLbl:"Presentation topic (optional)",subjPh:"e.g. Renewable energy",
+  strengthsH:"💪 Your presentation strengths",improveH:"🎯 How to make your next presentation better",none:"No clear weak spots — great presentation!",
+  levels:[
+   ["Outstanding presenter 🌟","Your presentation was strong and well organized, and you delivered your message with confidence.","Keep developing your skills: next time, try engaging the audience with a question or a short activity."],
+   ["Very good 👍","You gave a good presentation and you're close to excellent.","Focus on one or two points from the improvement list and practice them before your next presentation."],
+   ["Average 🙂","Your presentation had good parts, and some skills need practice.","Pick the 3 most important tips and set aside time for them when you prepare next time."],
+   ["Needs improvement 💡","That's okay — every good speaker started here.","Start preparing early and rehearse out loud at least twice. Practice is the fastest route to confidence."]]}
+};
+const SECTIONS = [
+ {icon:"🗂️",color:"var(--red)",soft:"rgba(255,71,87,.12)",t:{ar:"التحضير",he:"ההכנה",en:"Preparation"}},
+ {icon:"🗣️",color:"var(--orange)",soft:"rgba(255,165,2,.14)",t:{ar:"الإلقاء والتواصل",he:"ההצגה והתקשורת",en:"Delivery & connection"}},
+ {icon:"🖼️",color:"#20bf6b",soft:"rgba(46,213,115,.14)",t:{ar:"المحتوى والوسائل",he:"תוכן ועזרים",en:"Content & visuals"}},
+ {icon:"🔍",color:"var(--blue)",soft:"rgba(30,144,255,.12)",t:{ar:"بعد العرض",he:"אחרי ההצגה",en:"After the presentation"}}
+];
+const ITEMS = [
+ {s:0,t:{ar:"تدرّبت على العرض بصوت عالٍ قبل تقديمه.",he:"התאמנתי על ההצגה בקול רם לפני שהצגתי.",en:"I rehearsed my presentation out loud beforehand."},
+  g:{ar:"التدرّب المسبق",he:"תרגול מראש",en:"Rehearsing in advance"},
+  a:{ar:"تدرّب مرتين على الأقل بصوت عالٍ: مرة أمام المرآة ومرة أمام شخص من عائلتك، واطلب ملاحظاته.",he:"התאמנו לפחות פעמיים בקול רם: פעם מול המראה ופעם מול בן משפחה, ובקשו ממנו הערות.",en:"Rehearse out loud at least twice — once in front of a mirror and once for a family member — and ask for feedback."}},
+ {s:0,t:{ar:"فهمت موضوع العرض جيدًا ولم أعتمد على الحفظ فقط.",he:"הבנתי היטב את נושא ההצגה ולא הסתמכתי רק על שינון.",en:"I understood my topic well and didn't rely only on memorizing."},
+  g:{ar:"فهم الموضوع بعمق",he:"הבנה מעמיקה של הנושא",en:"Understanding the topic deeply"},
+  a:{ar:"اشرح الموضوع لنفسك بكلماتك دون النظر إلى الشرائح؛ إن استطعت ذلك فأنت تفهمه فعلًا.",he:"הסבירו לעצמכם את הנושא במילים שלכם בלי להסתכל על השקפים; אם הצלחתם — אתם באמת מבינים אותו.",en:"Explain the topic to yourself in your own words without the slides — if you can, you really understand it."}},
+ {s:0,t:{ar:"أنهيت تحضير العرض قبل موعده بوقت كافٍ.",he:"סיימתי להכין את ההצגה מספיק זמן לפני המועד.",en:"I finished preparing well before the deadline."},
+  g:{ar:"إنهاء التحضير مبكرًا",he:"סיום ההכנה מוקדם",en:"Finishing preparation early"},
+  a:{ar:"حدّد لنفسك موعدًا لإنهاء التحضير قبل يومين من العرض، واترك الوقت الباقي للتدرّب والتحسين.",he:"קבעו לעצמכם יעד לסיום ההכנה יומיים לפני ההצגה, והשאירו את שאר הזמן לתרגול ולשיפור.",en:"Set yourself a deadline two days before the presentation, and use the remaining time to rehearse and improve."}},
+ {s:0,t:{ar:"التزمت بالوقت المحدد للعرض.",he:"עמדתי בזמן שהוקצב להצגה.",en:"I kept to the time limit."},
+  g:{ar:"الالتزام بالوقت",he:"עמידה בזמן",en:"Keeping to time"},
+  a:{ar:"احسب وقت العرض أثناء التدرّب، واحذف أو اختصر ما يزيد عن الوقت المحدد.",he:"מדדו את הזמן בזמן התרגול, וקצרו או הורידו את מה שחורג מהזמן שהוקצב.",en:"Time yourself while rehearsing, and cut or shorten anything that goes over."}},
+
+ {s:1,t:{ar:"تكلّمت بصوت واضح ومسموع للجميع.",he:"דיברתי בקול ברור ונשמע לכולם.",en:"I spoke clearly and loudly enough for everyone."},
+  g:{ar:"وضوح الصوت",he:"קול ברור",en:"A clear voice"},
+  a:{ar:"تخيّل أنك تتحدث إلى آخر شخص في الصف، وتكلّم ببطء أكثر مما تظن أنه ضروري.",he:"דמיינו שאתם מדברים אל האדם האחרון בכיתה, ודברו לאט יותר ממה שנראה לכם נחוץ.",en:"Imagine you're talking to the last person in the room, and speak more slowly than you think you need to."}},
+ {s:1,t:{ar:"نظرت إلى الجمهور ولم أقرأ من الشرائح أو الورقة طوال الوقت.",he:"הסתכלתי על הקהל ולא קראתי מהשקפים או מהדף כל הזמן.",en:"I looked at the audience instead of reading from the slides or paper the whole time."},
+  g:{ar:"التواصل البصري",he:"קשר עין",en:"Eye contact"},
+  a:{ar:"اكتب على الشرائح كلمات مفتاحية فقط، وانظر إلى أشخاص مختلفين في الصف أثناء الكلام.",he:"כתבו על השקפים רק מילות מפתח, והסתכלו על אנשים שונים בכיתה בזמן הדיבור.",en:"Put only keywords on your slides, and look at different people around the room as you speak."}},
+ {s:1,t:{ar:"شعرت بالثقة أثناء العرض.",he:"הרגשתי ביטחון בזמן ההצגה.",en:"I felt confident during the presentation."},
+  g:{ar:"الثقة بالنفس",he:"ביטחון עצמי",en:"Self-confidence"},
+  a:{ar:"التوتر طبيعي. خذ نفسًا عميقًا قبل البدء، وابدأ بجملة افتتاحية جهّزتها جيدًا لتنطلق بثقة.",he:"לחץ הוא טבעי. קחו נשימה עמוקה לפני שמתחילים, ופתחו במשפט פתיחה שהכנתם היטב כדי להתחיל בביטחון.",en:"Nerves are normal. Take a deep breath before you start, and open with a first sentence you've prepared well so you start strong."}},
+ {s:1,r:true,t:{ar:"كان التوتر واضحًا عليّ وأثّر على العرض.",he:"הלחץ היה ניכר עליי והשפיע על ההצגה.",en:"My nervousness showed and affected the presentation."},
+  g:{ar:"السيطرة على التوتر",he:"שליטה בלחץ",en:"Managing nerves"},
+  a:{ar:"كلما تدرّبت أكثر قلّ التوتر. جرّب التدرّب أمام مجموعة صغيرة من الأصدقاء، وركّز على رسالتك لا على نفسك.",he:"ככל שמתאמנים יותר הלחץ קטן. נסו להתאמן מול קבוצה קטנה של חברים, והתמקדו במסר ולא בעצמכם.",en:"The more you practice, the less nervous you'll be. Try rehearsing for a few friends, and focus on your message, not yourself."}},
+
+ {s:2,t:{ar:"كان العرض منظّمًا: مقدمة، ثم عرض، ثم خاتمة.",he:"ההצגה הייתה מאורגנת: פתיחה, גוף וסיכום.",en:"My presentation was organized: introduction, body and conclusion."},
+  g:{ar:"تنظيم العرض",he:"מבנה ההצגה",en:"Structure"},
+  a:{ar:"ابنِ عرضك على ثلاثة أجزاء: مقدمة تشدّ الانتباه، ونقاط رئيسية واضحة، وخاتمة تلخّص الرسالة.",he:"בנו את ההצגה משלושה חלקים: פתיחה שמושכת תשומת לב, נקודות מרכזיות ברורות וסיכום שמחזק את המסר.",en:"Build it in three parts: an attention-grabbing opening, clear main points, and a closing that sums up your message."}},
+ {s:2,t:{ar:"كانت الشرائح أو الوسائل واضحة وغير مزدحمة بالنصوص.",he:"השקפים או העזרים היו ברורים ולא עמוסים בטקסט.",en:"My slides or visual aids were clear and not crowded with text."},
+  g:{ar:"وضوح الشرائح",he:"שקפים ברורים",en:"Clear slides"},
+  a:{ar:"قاعدة بسيطة: فكرة واحدة في كل شريحة، وخط كبير، وصورة تعبّر أكثر من فقرة.",he:"כלל פשוט: רעיון אחד בכל שקף, גופן גדול, ותמונה שאומרת יותר מפסקה.",en:"A simple rule: one idea per slide, a large font, and a picture that says more than a paragraph."}},
+ {s:2,t:{ar:"استعملت أمثلة أو صورًا جعلت الموضوع ممتعًا.",he:"השתמשתי בדוגמאות או בתמונות שהפכו את הנושא למעניין.",en:"I used examples or pictures that made the topic interesting."},
+  g:{ar:"جعل العرض ممتعًا",he:"הצגה מעניינת",en:"Making it engaging"},
+  a:{ar:"أضف مثالًا من الحياة اليومية، أو سؤالًا للجمهور، أو صورة مفاجئة؛ هذه تبقى في ذاكرة السامعين.",he:"הוסיפו דוגמה מחיי היום־יום, שאלה לקהל או תמונה מפתיעה; אלה נשארים בזיכרון.",en:"Add an everyday example, a question for the audience, or a surprising image — these stick in people's minds."}},
+ {s:2,t:{ar:"اعتمدت على مصادر موثوقة للمعلومات.",he:"הסתמכתי על מקורות מידע אמינים.",en:"I used reliable sources for my information."},
+  g:{ar:"مصادر موثوقة",he:"מקורות אמינים",en:"Reliable sources"},
+  a:{ar:"استعمل مصادر معروفة (كتب، مواقع رسمية، موسوعات)، واذكرها في الشريحة الأخيرة.",he:"השתמשו במקורות מוכרים (ספרים, אתרים רשמיים, אנציקלופדיות), וציינו אותם בשקף האחרון.",en:"Use well-known sources (books, official websites, encyclopedias) and list them on your final slide."}},
+
+ {s:3,t:{ar:"أجبت عن أسئلة الجمهور بشكل جيد.",he:"עניתי היטב על שאלות הקהל.",en:"I answered the audience's questions well."},
+  g:{ar:"الإجابة عن الأسئلة",he:"מענה לשאלות",en:"Answering questions"},
+  a:{ar:"توقّع 3 أسئلة قد تُطرح وجهّز إجاباتها. وإن لم تعرف الجواب فقل بصراحة: «سؤال جيد، سأبحث عنه».",he:"חשבו מראש על 3 שאלות שעשויות להישאל והכינו תשובות. אם אינכם יודעים — אמרו בכנות: «שאלה טובה, אבדוק את זה».",en:"Predict 3 questions you might get and prepare answers. If you don't know, say honestly: “Good question — I'll look into it.”"}},
+ {s:3,t:{ar:"استفاد زملائي وتعلّموا شيئًا من عرضي.",he:"החברים שלי הפיקו תועלת ולמדו משהו מההצגה שלי.",en:"My classmates benefited and learned something from my presentation."},
+  g:{ar:"إيصال الرسالة للجمهور",he:"העברת המסר לקהל",en:"Getting your message across"},
+  a:{ar:"اسأل نفسك قبل العرض: ما الشيء الواحد الذي أريد أن يتذكّره الجمهور؟ وكرّره في البداية والنهاية.",he:"שאלו את עצמכם לפני ההצגה: מה הדבר האחד שאני רוצה שהקהל יזכור? וחזרו עליו בהתחלה ובסוף.",en:"Before presenting, ask yourself: what's the one thing I want people to remember? Repeat it at the start and the end."}},
+ {s:3,t:{ar:"أعرف ما الذي أجدته وما الذي سأحسّنه في عرضي القادم.",he:"אני יודע/ת במה הצלחתי ומה אשפר בהצגה הבאה.",en:"I know what I did well and what I'll improve next time."},
+  g:{ar:"التعلّم من التجربة",he:"למידה מהחוויה",en:"Learning from the experience"},
+  a:{ar:"اطلب من المعلم/ة أو من زميل ملاحظة إيجابية واحدة وملاحظة واحدة للتحسين، واكتبهما لعرضك القادم.",he:"בקשו מהמורה או מחבר הערה חיובית אחת והערה אחת לשיפור, ורשמו אותן להצגה הבאה.",en:"Ask your teacher or a classmate for one positive comment and one thing to improve, and note them for next time."}},
+ {s:3,t:{ar:"أنا راضٍ عن عرضي بشكل عام.",he:"אני מרוצה מההצגה שלי באופן כללי.",en:"Overall, I'm satisfied with my presentation."},
+  g:{ar:"الرضا عن العرض",he:"שביעות רצון מההצגה",en:"Satisfaction with your presentation"},
+  a:{ar:"لا تقارن نفسك بالآخرين، بل بعرضك السابق. ضع هدفًا صغيرًا واحدًا للعرض القادم.",he:"אל תשוו את עצמכם לאחרים אלא להצגה הקודמת שלכם. הציבו יעד קטן אחד להצגה הבאה.",en:"Don't compare yourself with others, but with your last presentation. Set one small goal for the next one."}}
+];
+return {UI,SECTIONS,ITEMS};
+})()},
+ {id:"term-self",kind:"self",mode:"score",icon:"📅",c:"#00a8a8",cs:"rgba(0,210,211,.14)",minutes:5,
+  title:{ar:"تقييم ذاتي لنهاية الفصل",he:"הערכה עצמית לסוף המחצית",en:"End-of-Term Self-Assessment"},
+  desc:{ar:"نظرة شاملة على فصلك الدراسي: التعلّم والتحصيل، والالتزام والتنظيم، والعلاقات والمشاركة، والأهداف. تحصل على نتيجة من 100 وخطوات واضحة للفصل القادم.",he:"מבט כולל על המחצית: למידה והישגים, מחויבות וארגון, יחסים והשתתפות, ומטרות. מקבלים תוצאה מתוך 100 וצעדים ברורים למחצית הבאה.",en:"A full look back at your term: learning and achievement, commitment and organization, relationships and participation, and goals. You get a result out of 100 and clear steps for next term."},
+  data:(function(){
+const UI = {
+ ar:{subtitle:"توقّف لحظة وانظر إلى فصلك الدراسي: ماذا حقّقت، وماذا تريد أن تحسّن؟",subjLbl:"الصف (اختياري)",subjPh:"مثال: التاسع 3",
+  strengthsH:"💪 نقاط قوتك هذا الفصل",improveH:"🎯 خطوات للفصل القادم",none:"لا توجد نقاط ضعف واضحة — فصل رائع!",
+  careH:"💙 رسالة لك",care:"لاحظنا أنك لم تكن مرتاحًا في المدرسة هذا الفصل. هذا شعور مهم ويستحق الاهتمام — أنت لست وحدك. تحدّث مع المربّي/ة أو المستشار/ة التربوي/ة أو شخص بالغ تثق به.",
+  levels:[
+   ["فصل متميّز 🌟","كان فصلك ناجحًا على أكثر من صعيد — أحسنت!","احتفل بإنجازك، ثم ضع هدفًا جديدًا يتحدّاك في الفصل القادم حتى تستمر في التطوّر."],
+   ["فصل جيد جدًا 👍","حقّقت الكثير هذا الفصل، وبقي القليل لتصل إلى التميّز.","اختر نقطة أو نقطتين من قائمة الخطوات واجعلهما هدفك في الفصل القادم."],
+   ["فصل متوسط 🙂","كانت في فصلك نجاحات، وبعض الجوانب تحتاج إلى اهتمام.","ابدأ الفصل القادم بخطة واضحة من 3 خطوات من هذه الصفحة، وراجعها مع المربّي/ة في منتصف الفصل."],
+   ["يحتاج إلى اهتمام 💡","لا بأس — كل فصل جديد هو بداية جديدة.","اختر خطوة واحدة صغيرة تبدأ بها من اليوم الأول للفصل القادم، ولا تتردد في طلب الدعم من معلميك وأهلك."]]},
+ he:{subtitle:"עצרו לרגע והביטו על המחצית: מה השגתם, ומה תרצו לשפר?",subjLbl:"כיתה (לא חובה)",subjPh:"לדוגמה: ט'3",
+  strengthsH:"💪 החוזקות שלך במחצית",improveH:"🎯 צעדים למחצית הבאה",none:"אין נקודות חולשה בולטות — מחצית נהדרת!",
+  careH:"💙 מסר בשבילך",care:"שמנו לב שלא היה לך נוח בבית הספר במחצית הזאת. זו תחושה חשובה שראויה לתשומת לב — אינך לבד. דבר/י עם המחנך/ת, היועץ/ת או מבוגר/ת שאת/ה סומך/ת עליו.",
+  levels:[
+   ["מחצית מצטיינת 🌟","המחצית שלך הייתה מוצלחת בכמה תחומים — כל הכבוד!","חגגו את ההישג, ואז הציבו מטרה חדשה שמאתגרת אתכם במחצית הבאה כדי להמשיך להתפתח."],
+   ["מחצית טובה מאוד 👍","השגת הרבה במחצית הזאת, ונשאר מעט כדי להצטיין.","בחרו נקודה אחת או שתיים מרשימת הצעדים והפכו אותן למטרה שלכם במחצית הבאה."],
+   ["מחצית בינונית 🙂","היו הצלחות במחצית, וכמה תחומים צריכים תשומת לב.","פתחו את המחצית הבאה בתוכנית ברורה של 3 צעדים מהעמוד הזה, ועברו עליה עם המחנך/ת באמצע המחצית."],
+   ["דורש תשומת לב 💡","זה בסדר — כל מחצית חדשה היא התחלה חדשה.","בחרו צעד קטן אחד להתחיל בו מהיום הראשון של המחצית הבאה, ואל תהססו לבקש תמיכה מהמורים ומההורים."]]},
+ en:{subtitle:"Take a moment to look back on your term: what did you achieve, and what do you want to improve?",subjLbl:"Class (optional)",subjPh:"e.g. 9-3",
+  strengthsH:"💪 Your strengths this term",improveH:"🎯 Steps for next term",none:"No clear weak spots — a great term!",
+  careH:"💙 A note for you",care:"It looks like you didn't feel comfortable at school this term. That feeling matters and deserves attention — you're not alone. Talk to your homeroom teacher, the school counselor, or an adult you trust.",
+  levels:[
+   ["An outstanding term 🌟","Your term was a success on several fronts — well done!","Celebrate your achievement, then set a new goal that challenges you next term so you keep growing."],
+   ["A very good term 👍","You achieved a lot this term, and you're close to excellent.","Pick one or two points from the steps list and make them your goal for next term."],
+   ["An average term 🙂","There were successes this term, and some areas need attention.","Start next term with a clear 3-step plan from this page, and review it with your homeroom teacher mid-term."],
+   ["Needs attention 💡","That's okay — every new term is a fresh start.","Choose one small step to begin on day one of next term, and don't hesitate to ask your teachers and parents for support."]]}
+};
+const SECTIONS = [
+ {icon:"📚",color:"var(--red)",soft:"rgba(255,71,87,.12)",t:{ar:"التعلّم والتحصيل",he:"למידה והישגים",en:"Learning & achievement"}},
+ {icon:"⏰",color:"var(--orange)",soft:"rgba(255,165,2,.14)",t:{ar:"الالتزام والتنظيم",he:"מחויבות וארגון",en:"Commitment & organization"}},
+ {icon:"🤝",color:"#20bf6b",soft:"rgba(46,213,115,.14)",t:{ar:"العلاقات والمشاركة",he:"יחסים והשתתפות",en:"Relationships & participation"}},
+ {icon:"🌱",color:"var(--blue)",soft:"rgba(30,144,255,.12)",t:{ar:"التطوّر والأهداف",he:"התפתחות ומטרות",en:"Growth & goals"}}
+];
+const ITEMS = [
+ {s:0,t:{ar:"فهمت معظم المواد التي تعلّمناها هذا الفصل.",he:"הבנתי את רוב החומר שלמדנו במחצית הזאת.",en:"I understood most of what we learned this term."},
+  g:{ar:"فهم المواد",he:"הבנת החומר",en:"Understanding the material"},
+  a:{ar:"حدّد المواضيع التي لم تفهمها جيدًا واكتبها في قائمة، وخصّص لكل موضوع وقتًا للمراجعة في العطلة أو في بداية الفصل القادم.",he:"זהו את הנושאים שלא הבנתם היטב ורשמו אותם ברשימה, והקדישו לכל נושא זמן לחזרה בחופשה או בתחילת המחצית הבאה.",en:"List the topics you didn't fully understand, and set aside review time for each during the break or early next term."}},
+ {s:0,t:{ar:"أنا راضٍ عن علاماتي هذا الفصل.",he:"אני מרוצה מהציונים שלי במחצית הזאת.",en:"I'm satisfied with my grades this term."},
+  g:{ar:"الرضا عن العلامات",he:"שביעות רצון מהציונים",en:"Satisfaction with your grades"},
+  a:{ar:"اختر مادة واحدة تريد رفع علامتك فيها، وضع هدفًا واقعيًا (مثل +10 علامات) وخطة أسبوعية للوصول إليه.",he:"בחרו מקצוע אחד שבו תרצו לשפר את הציון, הציבו יעד מציאותי (למשל +10 נקודות) ותוכנית שבועית להשגתו.",en:"Pick one subject to raise your grade in, set a realistic goal (e.g. +10 points) and make a weekly plan to reach it."}},
+ {s:0,t:{ar:"تحسّن تحصيلي مقارنة بالفصل السابق.",he:"ההישגים שלי השתפרו בהשוואה למחצית הקודמת.",en:"My achievement improved compared to last term."},
+  g:{ar:"التقدّم في التحصيل",he:"התקדמות בהישגים",en:"Progress in achievement"},
+  a:{ar:"قارن علاماتك بالفصل السابق: أين تقدّمت وأين تراجعت؟ وما الذي فعلته بشكل مختلف في كل حالة؟",he:"השוו את הציונים למחצית הקודמת: איפה התקדמתם ואיפה ירדתם? ומה עשיתם אחרת בכל מקרה?",en:"Compare your grades with last term: where did you improve and where did you slip? What did you do differently in each case?"}},
+ {s:0,t:{ar:"أدرس بانتظام وليس فقط قبل الامتحانات.",he:"אני לומד/ת באופן קבוע ולא רק לפני מבחנים.",en:"I study regularly, not just before exams."},
+  g:{ar:"الدراسة المنتظمة",he:"למידה סדירה",en:"Studying regularly"},
+  a:{ar:"خصّص وقتًا ثابتًا للدراسة كل يوم، ولو 30 دقيقة، بدل الدراسة المكثّفة قبل الامتحان فقط.",he:"קבעו זמן קבוע ללמידה בכל יום, אפילו 30 דקות, במקום ללמוד בלחץ רק לפני מבחן.",en:"Set a fixed daily study time — even 30 minutes — instead of cramming only before exams."}},
+ {s:0,t:{ar:"أطلب المساعدة عندما لا أفهم شيئًا.",he:"אני מבקש/ת עזרה כשאני לא מבין/ה משהו.",en:"I ask for help when I don't understand something."},
+  g:{ar:"طلب المساعدة",he:"בקשת עזרה",en:"Asking for help"},
+  a:{ar:"لا تؤجّل ما لم تفهمه؛ اسأل المعلم/ة في نفس الأسبوع، أو اطلب من زميل أن يشرح لك.",he:"אל תדחו את מה שלא הבנתם; שאלו את המורה באותו שבוע, או בקשו מחבר להסביר לכם.",en:"Don't put off what you don't understand; ask the teacher that same week, or ask a classmate to explain."}},
+
+ {s:1,t:{ar:"حضرت الحصص بانتظام ووصلت في الوقت المحدد.",he:"הגעתי לשיעורים באופן סדיר ובזמן.",en:"I attended lessons regularly and arrived on time."},
+  g:{ar:"الحضور والانضباط",he:"נוכחות ודייקנות",en:"Attendance & punctuality"},
+  a:{ar:"إن كان التأخير أو الغياب مشكلة، فحدّد سببها (النوم، المواصلات…) وابحث عن حل مع أهلك أو المربّي/ة.",he:"אם איחורים או היעדרויות הם בעיה, זהו את הסיבה (שינה, הסעות…) וחפשו פתרון עם ההורים או עם המחנך/ת.",en:"If lateness or absence is a problem, find the cause (sleep, transport…) and look for a solution with your parents or homeroom teacher."}},
+ {s:1,t:{ar:"أنجزت وظائفي ومهامي في مواعيدها.",he:"הגשתי את שיעורי הבית והמשימות בזמן.",en:"I completed my homework and assignments on time."},
+  g:{ar:"إنجاز المهام في وقتها",he:"הגשת משימות בזמן",en:"Handing in work on time"},
+  a:{ar:"استعمل مفكّرة أو تطبيقًا لتسجيل كل وظيفة وموعد تسليمها، وراجعه كل مساء.",he:"השתמשו ביומן או באפליקציה כדי לרשום כל משימה ואת מועד הגשתה, ועברו עליו בכל ערב.",en:"Use a planner or an app to record every assignment and its due date, and check it every evening."}},
+ {s:1,t:{ar:"نظّمت وقتي بين الدراسة والراحة والنشاطات.",he:"ארגנתי את הזמן שלי בין למידה, מנוחה ופעילויות.",en:"I balanced my time between studying, rest and activities."},
+  g:{ar:"تنظيم الوقت",he:"ניהול זמן",en:"Time management"},
+  a:{ar:"ارسم جدولًا أسبوعيًا يوضّح أوقات الدراسة والراحة والنشاطات، والتزم به لأسبوعين ثم عدّله حسب الحاجة.",he:"שרטטו מערכת שבועית עם זמני למידה, מנוחה ופעילויות, עמדו בה שבועיים ואז התאימו אותה לפי הצורך.",en:"Draw a weekly schedule with study, rest and activity times, stick to it for two weeks, then adjust as needed."}},
+ {s:1,t:{ar:"حافظت على دفاتري وموادي منظّمة.",he:"שמרתי על מחברות וחומרים מסודרים.",en:"I kept my notebooks and materials organized."},
+  g:{ar:"تنظيم الدفاتر والمواد",he:"סדר במחברות ובחומרים",en:"Organized notebooks & materials"},
+  a:{ar:"خصّص 10 دقائق في نهاية كل أسبوع لترتيب دفاترك وأوراقك، وضع لكل مادة ملفًا أو لونًا.",he:"הקדישו 10 דקות בסוף כל שבוע לסידור המחברות והדפים, ותנו לכל מקצוע תיקייה או צבע.",en:"Spend 10 minutes at the end of each week tidying your notebooks and papers, with a folder or color for each subject."}},
+ {s:1,r:true,t:{ar:"كثيرًا ما أجّلت مهامي إلى اللحظة الأخيرة.",he:"לעיתים קרובות דחיתי משימות לרגע האחרון.",en:"I often put off my tasks until the last minute."},
+  g:{ar:"تجنّب التأجيل",he:"הימנעות מדחיינות",en:"Avoiding procrastination"},
+  a:{ar:"قسّم كل مهمة كبيرة إلى خطوات صغيرة، وابدأ بالخطوة الأولى اليوم ولو لعشر دقائق فقط.",he:"חלקו כל משימה גדולה לצעדים קטנים, והתחילו את הצעד הראשון היום, אפילו לעשר דקות בלבד.",en:"Break each big task into small steps, and start the first one today — even for just ten minutes."}},
+
+ {s:2,t:{ar:"كانت علاقتي جيدة مع زملائي في الصف.",he:"היו לי יחסים טובים עם חבריי לכיתה.",en:"I had good relationships with my classmates."},
+  g:{ar:"العلاقة مع الزملاء",he:"יחסים עם החברים",en:"Relationships with classmates"},
+  a:{ar:"بادر بالتعرّف على زميل لا تعرفه جيدًا، وكن لطيفًا ومستعدًا للمساعدة.",he:"יזמו היכרות עם חבר שאינכם מכירים היטב, והיו נחמדים ומוכנים לעזור.",en:"Make an effort to get to know a classmate you don't know well, and be kind and ready to help."}},
+ {s:2,t:{ar:"كانت علاقتي جيدة مع معلميّ.",he:"היו לי יחסים טובים עם המורים שלי.",en:"I had good relationships with my teachers."},
+  g:{ar:"العلاقة مع المعلمين",he:"יחסים עם המורים",en:"Relationships with teachers"},
+  a:{ar:"العلاقة الجيدة مع المعلم تبدأ بالاحترام والمشاركة. لا تتردد في الحديث معه عن صعوباتك.",he:"קשר טוב עם המורה מתחיל בכבוד ובהשתתפות. אל תהססו לדבר איתו על הקשיים שלכם.",en:"A good relationship with a teacher starts with respect and participation. Don't hesitate to talk to them about your difficulties."}},
+ {s:2,t:{ar:"شاركت بفاعلية في الحصص.",he:"השתתפתי באופן פעיל בשיעורים.",en:"I participated actively in lessons."},
+  g:{ar:"المشاركة في الحصص",he:"השתתפות בשיעורים",en:"Participating in lessons"},
+  a:{ar:"ضع لنفسك هدفًا: مشاركة واحدة على الأقل في كل حصة، بسؤال أو إجابة أو رأي.",he:"הציבו לעצמכם יעד: לפחות השתתפות אחת בכל שיעור — שאלה, תשובה או דעה.",en:"Set yourself a goal: at least one contribution per lesson — a question, an answer or an opinion."}},
+ {s:2,t:{ar:"شاركت في نشاطات المدرسة خارج الحصص.",he:"השתתפתי בפעילויות בית הספר מחוץ לשיעורים.",en:"I took part in school activities outside lessons."},
+  g:{ar:"المشاركة في نشاطات المدرسة",he:"השתתפות בפעילויות בית הספר",en:"Joining school activities"},
+  a:{ar:"اختر نشاطًا واحدًا في الفصل القادم (فريق، نادٍ، مجلس طلاب، تطوّع) وانضم إليه.",he:"בחרו פעילות אחת במחצית הבאה (נבחרת, חוג, מועצת תלמידים, התנדבות) והצטרפו אליה.",en:"Choose one activity next term (a team, club, student council or volunteering) and join it."}},
+ {s:2,care:true,t:{ar:"شعرت بالراحة والسعادة في المدرسة هذا الفصل.",he:"הרגשתי נוח ושמח בבית הספר במחצית הזאת.",en:"I felt comfortable and happy at school this term."},
+  g:{ar:"الشعور بالراحة في المدرسة",he:"תחושת נוחות בבית הספר",en:"Feeling good at school"},
+  a:{ar:"إن لم تكن مرتاحًا في المدرسة، فحاول أن تحدّد السبب، وتحدّث عنه مع المربّي/ة أو المستشار/ة؛ هم موجودون لمساعدتك.",he:"אם לא נוח לכם בבית הספר, נסו לזהות את הסיבה ולדבר עליה עם המחנך/ת או עם היועץ/ת; הם כאן כדי לעזור.",en:"If you don't feel comfortable at school, try to pinpoint why and talk about it with your homeroom teacher or counselor — they're there to help."}},
+
+ {s:3,t:{ar:"حقّقت الأهداف التي وضعتها لنفسي في بداية الفصل.",he:"השגתי את המטרות שהצבתי לעצמי בתחילת המחצית.",en:"I achieved the goals I set for myself at the start of the term."},
+  g:{ar:"تحقيق الأهداف",he:"השגת מטרות",en:"Reaching your goals"},
+  a:{ar:"اكتب الآن 2–3 أهداف واضحة للفصل القادم، وعلّقها في مكان تراه كل يوم.",he:"כתבו עכשיו 2–3 מטרות ברורות למחצית הבאה, ותלו אותן במקום שתראו בכל יום.",en:"Write 2–3 clear goals for next term now, and put them somewhere you'll see every day."}},
+ {s:3,t:{ar:"اكتسبت مهارات جديدة هذا الفصل.",he:"רכשתי מיומנויות חדשות במחצית הזאת.",en:"I gained new skills this term."},
+  g:{ar:"اكتساب مهارات جديدة",he:"רכישת מיומנויות חדשות",en:"Gaining new skills"},
+  a:{ar:"فكّر في مهارة واحدة تريد تعلّمها في الفصل القادم (تنظيم، عرض، برمجة، كتابة…) وابحث عن فرصة لتتدرّب عليها.",he:"חשבו על מיומנות אחת שתרצו ללמוד במחצית הבאה (ארגון, הצגה, תכנות, כתיבה…) וחפשו הזדמנות לתרגל אותה.",en:"Think of one skill you'd like to learn next term (organization, presenting, coding, writing…) and look for a chance to practice it."}},
+ {s:3,t:{ar:"أعرف نقاط قوتي ونقاط ضعفي في الدراسة.",he:"אני מכיר/ה את החוזקות והחולשות שלי בלימודים.",en:"I know my strengths and weaknesses as a learner."},
+  g:{ar:"معرفة نقاط القوة والضعف",he:"הכרת חוזקות וחולשות",en:"Knowing your strengths & weaknesses"},
+  a:{ar:"اكتب ثلاث نقاط قوة وثلاث نقاط تريد تحسينها، واطلب رأي المعلم/ة فيها.",he:"כתבו שלוש חוזקות ושלושה דברים שתרצו לשפר, ובקשו את דעת המורה עליהם.",en:"Write down three strengths and three things you want to improve, and ask your teacher what they think."}},
+ {s:3,t:{ar:"أنا فخور بما أنجزته هذا الفصل.",he:"אני גאה במה שהשגתי במחצית הזאת.",en:"I'm proud of what I achieved this term."},
+  g:{ar:"الفخر بالإنجاز",he:"גאווה בהישגים",en:"Pride in your achievements"},
+  a:{ar:"خذ لحظة لتتذكّر ثلاثة أشياء نجحت فيها هذا الفصل، مهما كانت صغيرة؛ الاعتراف بالنجاح يمنحك طاقة للمستقبل.",he:"הקדישו רגע להיזכר בשלושה דברים שהצלחתם בהם במחצית, גם אם הם קטנים; הכרה בהצלחה נותנת כוח להמשך.",en:"Take a moment to recall three things you succeeded at this term, however small — recognizing success gives you energy for what's next."}},
+ {s:3,t:{ar:"لدي خطة واضحة لما أريد تحسينه في الفصل القادم.",he:"יש לי תוכנית ברורה למה שאני רוצה לשפר במחצית הבאה.",en:"I have a clear plan for what I want to improve next term."},
+  g:{ar:"خطة للفصل القادم",he:"תוכנית למחצית הבאה",en:"A plan for next term"},
+  a:{ar:"اختر أهم 3 اقتراحات من هذه الصفحة واكتبها كخطة: ماذا سأفعل؟ متى؟ وكيف سأعرف أنني نجحت؟",he:"בחרו את 3 ההמלצות החשובות ביותר מהעמוד הזה וכתבו אותן כתוכנית: מה אעשה? מתי? ואיך אדע שהצלחתי?",en:"Pick the 3 most important tips on this page and write them as a plan: What will I do? When? How will I know I succeeded?"}}
+];
+return {UI,SECTIONS,ITEMS};
+})()},
+ {id:"school-trip",kind:"event",mode:"event",icon:"🚌",c:"var(--purple)",cs:"rgba(156,39,176,.12)",minutes:4,
+  title:{ar:"تقييم الرحلة المدرسية",he:"הערכת הטיול השנתי",en:"School Trip Evaluation"},
+  desc:{ar:"شاركنا رأيك في الرحلة: التنظيم، والأماكن، والإرشاد، والأمان، والأجواء. رأيك يصل للمعلمة بدون اسمك ويساعد في تخطيط الرحلات القادمة.",he:"שתפו את דעתכם על הטיול: ארגון, מקומות, הדרכה, ביטחון ואווירה. הדעה מגיעה למורה בלי שם ועוזרת לתכנן את הטיולים הבאים.",en:"Tell us about the trip: organization, places, guiding, safety and atmosphere. Your feedback reaches the teacher anonymously and helps plan future trips."},
+  data:(function(){
+const UI = {
+ ar:{subtitle:"رأيك يصنع رحلات أفضل!",submit:"أرسل رأيي",
+  ratingQ:"كم تعطي الرحلة بشكل عام؟ (من 1 إلى 10)",openQ:"ما اقتراحك لتحسين الرحلة القادمة؟",
+  thanksText:"رأيك يساعدنا على تخطيط رحلات أجمل وأكثر فائدة.",sumH:"📋 ملخّص رأيك",barsH:"📊 رضاك عن جوانب الرحلة",
+  pEvent:"الفعالية",pOverall:"التقييم العام",pLiked:"أكثر ما أعجبني",pSugg:"اقتراحي"},
+ he:{subtitle:"הדעה שלך יוצרת טיולים טובים יותר!",submit:"שלח/י את דעתי",
+  ratingQ:"איזה ציון כללי תיתן/י לטיול? (מ-1 עד 10)",openQ:"מה ההצעה שלך לשיפור הטיול הבא?",
+  thanksText:"הדעה שלך עוזרת לנו לתכנן טיולים יפים ומועילים יותר.",sumH:"📋 סיכום הדעה שלך",barsH:"📊 שביעות הרצון שלך מתחומי הטיול",
+  pEvent:"האירוע",pOverall:"ציון כללי",pLiked:"מה הכי אהבתי",pSugg:"ההצעה שלי"},
+ en:{subtitle:"Your opinion makes better trips!",submit:"Send my feedback",
+  ratingQ:"Overall, how would you rate the trip? (1 to 10)",openQ:"What would you suggest to improve the next trip?",
+  thanksText:"Your feedback helps us plan better, more meaningful trips.",sumH:"📋 Your feedback summary",barsH:"📊 Your satisfaction by area",
+  pEvent:"Event",pOverall:"Overall rating",pLiked:"What I liked most",pSugg:"My suggestion"}
+};
+const SECTIONS = [
+ {icon:"🚌",color:"var(--red)",soft:"rgba(255,71,87,.12)",t:{ar:"التنظيم والبرنامج",he:"ארגון ותוכנית",en:"Organization & schedule"}},
+ {icon:"📖",color:"var(--orange)",soft:"rgba(255,165,2,.14)",t:{ar:"التعلّم والإرشاد",he:"למידה והדרכה",en:"Learning & guiding"}},
+ {icon:"🤝",color:"#20bf6b",soft:"rgba(46,213,115,.14)",t:{ar:"الأجواء والأمان",he:"אווירה וביטחון",en:"Atmosphere & safety"}},
+ {icon:"⭐",color:"var(--blue)",soft:"rgba(30,144,255,.12)",t:{ar:"رأيي العام",he:"הדעה הכללית שלי",en:"My overall opinion"}}
+];
+const ITEMS = [
+ {s:0,h:"س1 التنظيم (المواعيد والمواصلات)",t:{ar:"كانت الرحلة منظّمة جيدًا من حيث المواعيد والمواصلات.",he:"הטיול היה מאורגן היטב מבחינת זמנים והסעות.",en:"The trip was well organized (timing and transport)."}},
+ {s:0,h:"س2 متعة المسار والأماكن",t:{ar:"كان مسار الرحلة والأماكن التي زرناها ممتعًا.",he:"המסלול והמקומות שביקרנו בהם היו מהנים.",en:"The route and the places we visited were enjoyable."}},
+ {s:1,h:"س3 تعلّمت أشياء جديدة",t:{ar:"تعلّمت أشياء جديدة في هذه الرحلة.",he:"למדתי דברים חדשים בטיול הזה.",en:"I learned new things on this trip."}},
+ {s:1,h:"س4 وضوح الإرشاد والشرح",t:{ar:"كان الإرشاد والشرح واضحًا ومفيدًا.",he:"ההדרכה וההסברים היו ברורים ומועילים.",en:"The guiding and explanations were clear and useful."}},
+ {s:2,h:"س5 الشعور بالأمان",t:{ar:"شعرت بالأمان طوال الرحلة.",he:"הרגשתי בטוח/ה לאורך כל הטיול.",en:"I felt safe throughout the trip."}},
+ {s:0,h:"س6 كفاية الوقت لكل محطة",t:{ar:"كان الوقت كافيًا في كل محطة.",he:"היה מספיק זמן בכל תחנה.",en:"There was enough time at each stop."}},
+ {s:2,h:"س7 التقرّب من الزملاء",t:{ar:"كانت الرحلة فرصة للتقرّب من زملائي.",he:"הטיול היה הזדמנות להתקרב לחבריי.",en:"The trip was a chance to get closer to my classmates."}},
+ {s:0,h:"س8 الطعام والاستراحات",t:{ar:"كان الطعام وأوقات الاستراحة مناسبة.",he:"האוכל וזמני ההפסקות היו מתאימים.",en:"Food and break times were suitable."}},
+ {s:2,h:"س9 التزام الطلاب بالتعليمات",t:{ar:"التزم الطلاب بالتعليمات خلال الرحلة.",he:"התלמידים עמדו בהוראות במהלך הטיול.",en:"Students followed the instructions during the trip."}},
+ {s:3,h:"س10 أنصح بتكرار الرحلة",t:{ar:"أنصح بتكرار هذه الرحلة للصفوف القادمة.",he:"הייתי ממליץ/ה לחזור על הטיול הזה בשכבות הבאות.",en:"I'd recommend repeating this trip for future classes."}}
+];
+const MC = {
+ liked:{s:3,end:true,h:"أكثر ما أعجبني",q:{ar:"ما أكثر ما أعجبك في الرحلة؟",he:"מה הכי אהבת בטיול?",en:"What did you like most about the trip?"},opts:[
+  {ar:"المكان",he:"המקום",en:"The place"},
+  {ar:"النشاطات",he:"הפעילויות",en:"The activities"},
+  {ar:"الإرشاد",he:"ההדרכה",en:"The guiding"},
+  {ar:"الوقت مع الأصدقاء",he:"הזמן עם החברים",en:"Time with friends"},
+  {ar:"الطعام",he:"האוכל",en:"The food"},
+  {ar:"الحافلة والطريق",he:"האוטובוס והדרך",en:"The bus ride"}]}
+};
+const RATING = {s:3,h:"التقييم العام (من 10)"};
+const OPEN = {s:3,h:"اقتراح للتحسين"};
+return {UI,SECTIONS,ITEMS,MC,RATING,OPEN};
+})()},
+ {id:"sports-day",kind:"event",mode:"event",icon:"🏅",c:"var(--orange)",cs:"rgba(255,165,2,.14)",minutes:4,
+  title:{ar:"تقييم يوم رياضي أو احتفال",he:"הערכת יום ספורט או חגיגה",en:"Sports Day or Celebration Evaluation"},
+  desc:{ar:"شاركنا رأيك في اليوم الرياضي أو الاحتفال المدرسي: التنظيم، والفقرات، والأجواء، والأمان. رأيك يصل للمعلمة بدون اسمك ويساعد في تخطيط الفعاليات القادمة.",he:"שתפו את דעתכם על יום הספורט או החגיגה הבית־ספרית: ארגון, תוכן, אווירה וביטחון. הדעה מגיעה למורה בלי שם ועוזרת לתכנן את האירועים הבאים.",en:"Tell us about the sports day or school celebration: organization, program, atmosphere and safety. Your feedback reaches the teacher anonymously and helps plan future events."},
+  data:(function(){
+const UI = {
+ ar:{subtitle:"رأيك يصنع فعاليات أجمل!",evPh:"مثال: اليوم الرياضي 2026",
+  ratingQ:"كم تعطي الفعالية بشكل عام؟ (من 1 إلى 10)",openQ:"ما اقتراحك لتحسين الفعالية القادمة؟",
+  thanksText:"رأيك يساعدنا على تنظيم فعاليات أجمل وأكثر متعة.",barsH:"📊 رضاك عن جوانب الفعالية"},
+ he:{subtitle:"הדעה שלך יוצרת אירועים טובים יותר!",evPh:"לדוגמה: יום הספורט 2026",
+  ratingQ:"איזה ציון כללי תיתן/י לאירוע? (מ-1 עד 10)",openQ:"מה ההצעה שלך לשיפור האירוע הבא?",
+  thanksText:"הדעה שלך עוזרת לנו לארגן אירועים יפים ומהנים יותר.",barsH:"📊 שביעות הרצון שלך מתחומי האירוע"},
+ en:{subtitle:"Your opinion makes better events!",evPh:"e.g. Sports Day 2026",
+  ratingQ:"Overall, how would you rate the event? (1 to 10)",openQ:"What would you suggest to improve the next event?",
+  thanksText:"Your feedback helps us organize better, more enjoyable events.",barsH:"📊 Your satisfaction by area"}
+};
+const SECTIONS = [
+ {icon:"🗓️",color:"var(--red)",soft:"rgba(255,71,87,.12)",t:{ar:"التنظيم",he:"ארגון",en:"Organization"}},
+ {icon:"🎉",color:"var(--orange)",soft:"rgba(255,165,2,.14)",t:{ar:"الفقرات والمشاركة",he:"התוכן וההשתתפות",en:"Program & participation"}},
+ {icon:"🤝",color:"#20bf6b",soft:"rgba(46,213,115,.14)",t:{ar:"الأجواء والأمان",he:"אווירה וביטחון",en:"Atmosphere & safety"}},
+ {icon:"⭐",color:"var(--blue)",soft:"rgba(30,144,255,.12)",t:{ar:"رأيي العام",he:"הדעה הכללית שלי",en:"My overall opinion"}}
+];
+const ITEMS = [
+ {s:0,h:"س1 التنظيم والمواعيد",t:{ar:"كانت الفعالية منظّمة جيدًا، وبدأت وانتهت في الوقت المحدد.",he:"האירוע היה מאורגן היטב, והתחיל והסתיים בזמן.",en:"The event was well organized, and it started and ended on time."}},
+ {s:0,h:"س2 وضوح التعليمات",t:{ar:"كانت التعليمات واضحة، وعرفت ماذا عليّ أن أفعل.",he:"ההוראות היו ברורות, וידעתי מה עליי לעשות.",en:"The instructions were clear, and I knew what to do."}},
+ {s:0,h:"س3 المكان والتجهيزات",t:{ar:"كان المكان والتجهيزات مناسبة للفعالية.",he:"המקום והציוד התאימו לאירוע.",en:"The venue and equipment suited the event."}},
+ {s:1,h:"س4 متعة الفقرات",t:{ar:"كانت الفقرات والنشاطات ممتعة.",he:"הפעילויות והקטעים היו מהנים.",en:"The activities and program were enjoyable."}},
+ {s:1,h:"س5 فرصة للمشاركة",t:{ar:"أُتيحت لي فرصة للمشاركة الفعلية وليس للمشاهدة فقط.",he:"הייתה לי הזדמנות להשתתף באמת ולא רק לצפות.",en:"I had a real chance to take part, not just to watch."}},
+ {s:1,h:"س6 تنوّع النشاطات",t:{ar:"كانت النشاطات متنوّعة وتناسب اهتمامات مختلفة.",he:"הפעילויות היו מגוונות והתאימו לתחומי עניין שונים.",en:"The activities were varied and suited different interests."}},
+ {s:2,h:"س7 الأجواء والروح الرياضية",t:{ar:"سادت أجواء إيجابية وروح رياضية بين الطلاب.",he:"שררה אווירה חיובית ורוח ספורטיבית בין התלמידים.",en:"There was a positive atmosphere and good sportsmanship among students."}},
+ {s:2,h:"س8 الشعور بالأمان",t:{ar:"شعرت بالأمان طوال الفعالية.",he:"הרגשתי בטוח/ה לאורך כל האירוע.",en:"I felt safe throughout the event."}},
+ {s:2,h:"س9 التقرّب من الزملاء",t:{ar:"ساعدتني الفعالية على التقرّب من زملائي.",he:"האירוע עזר לי להתקרב לחבריי.",en:"The event helped me get closer to my classmates."}},
+ {s:3,h:"س10 أنصح بتكرار الفعالية",t:{ar:"أنصح بتكرار هذه الفعالية في السنة القادمة.",he:"הייתי ממליץ/ה לחזור על האירוע בשנה הבאה.",en:"I'd recommend holding this event again next year."}}
+];
+const MC = {
+ liked:{s:3,end:true,h:"أكثر ما أعجبني",q:{ar:"ما أكثر ما أعجبك في الفعالية؟",he:"מה הכי אהבת באירוע?",en:"What did you like most about the event?"},opts:[
+  {ar:"المسابقات والألعاب",he:"התחרויות והמשחקים",en:"Competitions & games"},
+  {ar:"العروض والفقرات الفنية",he:"ההופעות והקטעים האמנותיים",en:"Shows & performances"},
+  {ar:"العمل بروح الفريق",he:"העבודה בצוות",en:"Teamwork"},
+  {ar:"الوقت مع الأصدقاء",he:"הזמן עם החברים",en:"Time with friends"},
+  {ar:"الجوائز",he:"הפרסים",en:"The prizes"},
+  {ar:"الطعام والضيافة",he:"האוכל והכיבוד",en:"Food & refreshments"}]}
+};
+const RATING = {s:3,h:"التقييم العام (من 10)"};
+const OPEN = {s:3,h:"اقتراح للتحسين"};
+return {UI,SECTIONS,ITEMS,MC,RATING,OPEN};
+})()},
+ {id:"workshop",kind:"event",mode:"event",icon:"🎓",c:"#20bf6b",cs:"rgba(46,213,115,.14)",minutes:4,
+  title:{ar:"تقييم ورشة أو محاضرة",he:"הערכת סדנה או הרצאה",en:"Workshop or Lecture Evaluation"},
+  desc:{ar:"شاركنا رأيك في الورشة أو المحاضرة: وضوح المحتوى، وأسلوب المحاضر، والفائدة، والتنظيم. رأيك يصل للمعلمة بدون اسمك ويساعد في اختيار الورشات القادمة.",he:"שתפו את דעתכם על הסדנה או ההרצאה: בהירות התוכן, סגנון המרצה, התועלת והארגון. הדעה מגיעה למורה בלי שם ועוזרת לבחור את הסדנאות הבאות.",en:"Tell us about the workshop or lecture: clarity of content, the speaker's style, usefulness and organization. Your feedback reaches the teacher anonymously and helps choose future workshops."},
+  data:(function(){
+const UI = {
+ ar:{subtitle:"رأيك يساعدنا على اختيار ورشات أفضل!",evLbl:"اسم الورشة أو المحاضرة",evPh:"مثال: ورشة الأمان على الإنترنت",
+  ratingQ:"كم تعطي الورشة أو المحاضرة بشكل عام؟ (من 1 إلى 10)",openQ:"ما اقتراحك لتحسين الورشات القادمة؟",
+  thanksText:"رأيك يساعدنا على اختيار ورشات ومحاضرات أكثر فائدة ومتعة.",barsH:"📊 رضاك عن جوانب الورشة",pEvent:"الورشة أو المحاضرة"},
+ he:{subtitle:"הדעה שלך עוזרת לנו לבחור סדנאות טובות יותר!",evLbl:"שם הסדנה או ההרצאה",evPh:"לדוגמה: סדנת בטיחות ברשת",
+  ratingQ:"איזה ציון כללי תיתן/י לסדנה או להרצאה? (מ-1 עד 10)",openQ:"מה ההצעה שלך לשיפור הסדנאות הבאות?",
+  thanksText:"הדעה שלך עוזרת לנו לבחור סדנאות והרצאות מועילות ומעניינות יותר.",barsH:"📊 שביעות הרצון שלך מתחומי הסדנה",pEvent:"הסדנה או ההרצאה"},
+ en:{subtitle:"Your opinion helps us choose better workshops!",evLbl:"Workshop or lecture name",evPh:"e.g. Online safety workshop",
+  ratingQ:"Overall, how would you rate the workshop or lecture? (1 to 10)",openQ:"What would you suggest to improve future workshops?",
+  thanksText:"Your feedback helps us choose more useful and engaging workshops and lectures.",barsH:"📊 Your satisfaction by area",pEvent:"Workshop / lecture"}
+};
+const SECTIONS = [
+ {icon:"📖",color:"var(--red)",soft:"rgba(255,71,87,.12)",t:{ar:"المحتوى",he:"התוכן",en:"Content"}},
+ {icon:"🎙️",color:"var(--orange)",soft:"rgba(255,165,2,.14)",t:{ar:"المحاضر وأسلوب العرض",he:"המרצה וסגנון ההעברה",en:"Speaker & delivery"}},
+ {icon:"🗓️",color:"#20bf6b",soft:"rgba(46,213,115,.14)",t:{ar:"التنظيم",he:"ארגון",en:"Organization"}},
+ {icon:"⭐",color:"var(--blue)",soft:"rgba(30,144,255,.12)",t:{ar:"الفائدة ورأيي العام",he:"התועלת והדעה הכללית שלי",en:"Value & overall opinion"}}
+];
+const ITEMS = [
+ {s:0,h:"س1 وضوح المحتوى",t:{ar:"كان محتوى الورشة واضحًا وسهل الفهم.",he:"תוכן הסדנה היה ברור וקל להבנה.",en:"The content was clear and easy to understand."}},
+ {s:0,h:"س2 أهمية الموضوع",t:{ar:"كان الموضوع مهمًا ومرتبطًا بحياتي.",he:"הנושא היה חשוב וקשור לחיים שלי.",en:"The topic was important and relevant to my life."}},
+ {s:0,h:"س3 معلومات جديدة",t:{ar:"تعلّمت معلومات أو مهارات جديدة.",he:"למדתי מידע או מיומנויות חדשים.",en:"I learned new information or skills."}},
+ {s:1,h:"س4 أسلوب المحاضر",t:{ar:"كان أسلوب المحاضر/ة شيّقًا وجذب انتباهي.",he:"הסגנון של המרצה היה מעניין ומשך את תשומת ליבי.",en:"The speaker's style was engaging and held my attention."}},
+ {s:1,h:"س5 فرصة للأسئلة والمشاركة",t:{ar:"أُتيحت لنا فرصة لطرح الأسئلة والمشاركة.",he:"הייתה לנו הזדמנות לשאול שאלות ולהשתתף.",en:"We had a chance to ask questions and take part."}},
+ {s:1,h:"س6 الوسائل والأمثلة",t:{ar:"ساعدت الوسائل والأمثلة على فهم الموضوع.",he:"העזרים והדוגמאות עזרו להבין את הנושא.",en:"The visuals and examples helped me understand the topic."}},
+ {s:2,h:"س7 مدة الورشة",t:{ar:"كانت مدة الورشة مناسبة.",he:"משך הסדנה היה מתאים.",en:"The length of the workshop was appropriate."}},
+ {s:2,h:"س8 المكان والأجواء",t:{ar:"كان المكان مريحًا ومناسبًا.",he:"המקום היה נוח ומתאים.",en:"The venue was comfortable and suitable."}},
+ {s:3,h:"س9 الفائدة العملية",t:{ar:"سأستفيد مما تعلّمته في حياتي أو في دراستي.",he:"אשתמש במה שלמדתי בחיים או בלימודים.",en:"I'll use what I learned in my life or studies."}},
+ {s:3,h:"س10 أنصح بالورشة",t:{ar:"أنصح بتقديم هذه الورشة لصفوف أخرى.",he:"הייתי ממליץ/ה להעביר את הסדנה לכיתות נוספות.",en:"I'd recommend this workshop for other classes."}}
+];
+const MC = {
+ liked:{s:3,end:true,h:"أكثر ما أعجبني",q:{ar:"ما أكثر ما أفادك أو أعجبك؟",he:"מה הכי עזר לך או מצא חן בעיניך?",en:"What helped you or did you like most?"},opts:[
+  {ar:"المعلومات الجديدة",he:"המידע החדש",en:"New information"},
+  {ar:"النشاطات العملية",he:"הפעילויות המעשיות",en:"Hands-on activities"},
+  {ar:"أسلوب المحاضر/ة",he:"הסגנון של המרצה",en:"The speaker's style"},
+  {ar:"الأمثلة والقصص",he:"הדוגמאות והסיפורים",en:"Examples & stories"},
+  {ar:"النقاش والأسئلة",he:"הדיון והשאלות",en:"Discussion & questions"},
+  {ar:"الوسائل والعروض",he:"העזרים והמצגות",en:"Visuals & slides"}]}
+};
+const RATING = {s:3,h:"التقييم العام (من 10)"};
+const OPEN = {s:3,h:"اقتراح للتحسين"};
+return {UI,SECTIONS,ITEMS,MC,RATING,OPEN};
+})()},
+ {id:"enrichment",kind:"event",mode:"event",icon:"🚀",c:"var(--blue)",cs:"rgba(30,144,255,.12)",minutes:4,
+  title:{ar:"تقييم برنامج إثرائي",he:"הערכת תוכנית העשרה",en:"Enrichment Program Evaluation"},
+  desc:{ar:"شاركنا رأيك في البرنامج الإثرائي أو الدورة: المحتوى، والنشاطات، والمرشد/ة، وما اكتسبته منه. رأيك يصل للمعلمة بدون اسمك ويساعد في تطوير البرامج.",he:"שתפו את דעתכם על תוכנית ההעשרה או החוג: התוכן, הפעילויות, המדריך/ה ומה שרכשתם. הדעה מגיעה למורה בלי שם ועוזרת לפתח את התוכניות.",en:"Tell us about the enrichment program or course: content, activities, the instructor and what you gained. Your feedback reaches the teacher anonymously and helps improve programs."},
+  data:(function(){
+const UI = {
+ ar:{subtitle:"رأيك يساعدنا على تطوير برامج أفضل!",evLbl:"اسم البرنامج",evPh:"مثال: برنامج الروبوتيكا",
+  ratingQ:"كم تعطي البرنامج بشكل عام؟ (من 1 إلى 10)",openQ:"ما اقتراحك لتحسين البرنامج؟",
+  thanksText:"رأيك يساعدنا على تطوير برامج إثرائية أغنى وأكثر فائدة.",barsH:"📊 رضاك عن جوانب البرنامج",pEvent:"البرنامج"},
+ he:{subtitle:"הדעה שלך עוזרת לנו לפתח תוכניות טובות יותר!",evLbl:"שם התוכנית",evPh:"לדוגמה: תוכנית רובוטיקה",
+  ratingQ:"איזה ציון כללי תיתן/י לתוכנית? (מ-1 עד 10)",openQ:"מה ההצעה שלך לשיפור התוכנית?",
+  thanksText:"הדעה שלך עוזרת לנו לפתח תוכניות העשרה עשירות ומועילות יותר.",barsH:"📊 שביעות הרצון שלך מתחומי התוכנית",pEvent:"התוכנית"},
+ en:{subtitle:"Your opinion helps us build better programs!",evLbl:"Program name",evPh:"e.g. Robotics program",
+  ratingQ:"Overall, how would you rate the program? (1 to 10)",openQ:"What would you suggest to improve the program?",
+  thanksText:"Your feedback helps us build richer, more valuable enrichment programs.",barsH:"📊 Your satisfaction by area",pEvent:"Program"}
+};
+const SECTIONS = [
+ {icon:"📖",color:"var(--red)",soft:"rgba(255,71,87,.12)",t:{ar:"المحتوى والنشاطات",he:"תוכן ופעילויות",en:"Content & activities"}},
+ {icon:"🧑‍🏫",color:"var(--orange)",soft:"rgba(255,165,2,.14)",t:{ar:"المرشد/ة والأجواء",he:"המדריך/ה והאווירה",en:"Instructor & atmosphere"}},
+ {icon:"🌱",color:"#20bf6b",soft:"rgba(46,213,115,.14)",t:{ar:"ما اكتسبته",he:"מה רכשתי",en:"What I gained"}},
+ {icon:"⭐",color:"var(--blue)",soft:"rgba(30,144,255,.12)",t:{ar:"رأيي العام",he:"הדעה הכללית שלי",en:"My overall opinion"}}
+];
+const ITEMS = [
+ {s:0,h:"س1 أهداف واضحة",t:{ar:"كانت أهداف البرنامج واضحة لي.",he:"מטרות התוכנית היו ברורות לי.",en:"The program's goals were clear to me."}},
+ {s:0,h:"س2 متعة النشاطات",t:{ar:"كانت النشاطات ممتعة ومتنوّعة.",he:"הפעילויות היו מהנות ומגוונות.",en:"The activities were fun and varied."}},
+ {s:0,h:"س3 مستوى مناسب",t:{ar:"كان مستوى البرنامج مناسبًا لي (ليس سهلًا جدًا ولا صعبًا جدًا).",he:"רמת התוכנית התאימה לי (לא קלה מדי ולא קשה מדי).",en:"The level suited me (not too easy and not too hard)."}},
+ {s:1,h:"س4 المرشد/ة",t:{ar:"كان المرشد/ة متمكّنًا من المجال ويشرح بوضوح.",he:"המדריך/ה שלט/ה בתחום והסביר/ה בבהירות.",en:"The instructor knew the subject well and explained clearly."}},
+ {s:1,h:"س5 التشجيع والدعم",t:{ar:"شعرت بالتشجيع والدعم خلال البرنامج.",he:"הרגשתי עידוד ותמיכה במהלך התוכנית.",en:"I felt encouraged and supported during the program."}},
+ {s:1,h:"س6 أجواء المجموعة",t:{ar:"كانت أجواء المجموعة إيجابية ومريحة.",he:"האווירה בקבוצה הייתה חיובית ונוחה.",en:"The group atmosphere was positive and comfortable."}},
+ {s:2,h:"س7 مهارات جديدة",t:{ar:"اكتسبت مهارات أو معرفة جديدة.",he:"רכשתי מיומנויות או ידע חדשים.",en:"I gained new skills or knowledge."}},
+ {s:2,h:"س8 زيادة الاهتمام",t:{ar:"زاد البرنامج اهتمامي بهذا المجال.",he:"התוכנית הגבירה את העניין שלי בתחום.",en:"The program increased my interest in this field."}},
+ {s:2,h:"س9 الثقة بالنفس",t:{ar:"ساعدني البرنامج على الثقة بنفسي وبقدراتي.",he:"התוכנית עזרה לי להאמין בעצמי וביכולות שלי.",en:"The program helped me believe in myself and my abilities."}},
+ {s:3,h:"س10 أرغب في الاستمرار",t:{ar:"أرغب في الاستمرار في البرنامج أو المشاركة في برنامج مشابه.",he:"הייתי רוצה להמשיך בתוכנית או להשתתף בתוכנית דומה.",en:"I'd like to continue the program or join a similar one."}}
+];
+const MC = {
+ liked:{s:3,end:true,h:"أكثر ما أعجبني",q:{ar:"ما أكثر ما أعجبك في البرنامج؟",he:"מה הכי אהבת בתוכנית?",en:"What did you like most about the program?"},opts:[
+  {ar:"النشاطات العملية",he:"הפעילויות המעשיות",en:"Hands-on activities"},
+  {ar:"المرشد/ة",he:"המדריך/ה",en:"The instructor"},
+  {ar:"المواضيع الجديدة",he:"הנושאים החדשים",en:"New topics"},
+  {ar:"العمل مع المجموعة",he:"העבודה בקבוצה",en:"Working with the group"},
+  {ar:"المشاريع والإنجازات",he:"הפרויקטים וההישגים",en:"Projects & achievements"},
+  {ar:"الجولات والزيارات",he:"הסיורים והביקורים",en:"Tours & visits"}]}
+};
+const RATING = {s:3,h:"التقييم العام (من 10)"};
+const OPEN = {s:3,h:"اقتراح للتحسين"};
+return {UI,SECTIONS,ITEMS,MC,RATING,OPEN};
+})()}
+];
+FORMS.find(f=>f.id==="incident-self").data.OPEN={s:4,q:{ar:"هل هناك شيء تريد أن يعرفه المعلم/ة عمّا حدث؟",he:"יש משהו שאת/ה רוצה שהמורה ידע/תדע על מה שקרה?",en:"Is there anything you want the teacher to know about what happened?"}};
+FORMS.find(f=>f.id==="incident-self").data.MC.repair.end=true;
+
+const SOON = [];
+
+/* ================= engine ================= */
+let lang="ar", F=null, keep=null, started=false, shown=false, sendState=null, lastPayload=null, copyText="";
+const $=id=>document.getElementById(id);
+const qa=s=>[...document.querySelectorAll(s)];
+const val=id=>{const e=$(id);return e?e.value:"";};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const C=()=>COMMON[lang];
+const L=()=>Object.assign({},COMMON[lang],F?(F.kind==="event"?EVDEF:SELFDEF)[lang]:{},F?F.data.UI[lang]:{});
+const sep=()=>lang==="ar"?"، ":", ";
+const qsCount=f=>f.data.ITEMS.length+Object.keys(f.data.MC||{}).length+(f.data.RATING?1:0)+(f.data.OPEN?1:0);
+let presetEvent="";try{presetEvent=new URLSearchParams(location.search).get("event")||"";}catch(e){}
+
+(function(){const cols=["#ff4757","#ffa502","#eccc68","#2ed573","#1e90ff","#9c27b0"],box=$("sparks");
+ for(let i=0;i<26;i++){const s=document.createElement("i");s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.background=cols[i%6];s.style.animationDelay=(Math.random()*5)+"s";const z=3+Math.random()*5;s.style.width=s.style.height=z+"px";box.appendChild(s);}})();
+
+function langBar(){
+  return `<div class="lang-switcher" role="group" aria-label="Language">${[["ar","العربية"],["he","עברית"],["en","English"]].map(([k,n])=>`<button class="lang-btn ${k===lang?"active":""}" data-lang="${k}">${n}</button>`).join("")}</div>`;
+}
+function footer(){const c=C();return `<footer><p>${c.footer}</p><p style="margin-top:6px"><a href="${PLATFORM_URL}" target="_blank" rel="noopener">${c.platform}</a></p></footer>`;}
+
+/* ---------- home ---------- */
+function renderHome(){
+  const c=C();
+  const card=f=>`<div class="fcard" role="link" tabindex="0" data-go="${f.id}" style="--c:${f.c};--cs:${f.cs}">
+     <button class="info-btn" aria-label="info" data-info>i</button>
+     <span class="ficon">${f.icon}</span><span class="ftitle">${f.title[lang]}</span>
+     <span class="fmeta">${c.min(f.minutes)} · ${c.qn(qsCount(f))}</span>
+     <span class="tip">${f.desc[lang]}</span></div>`;
+  const soon=s=>`<div class="fcard soon" style="--cs:rgba(164,176,190,.15)"><span class="ficon">${s.icon}</span><span class="ftitle">${s.t[lang]}</span><span class="soon-badge">${c.soon}</span></div>`;
+  $("app").innerHTML=`
+   <nav class="top-nav">${langBar()}</nav>
+   <header>
+     <div class="logo-container"><img class="logo-img" src="${LOGO}" alt="Smart Sparks logo"></div>
+     <div class="brand">${c.brand}</div>
+     <h1>${c.hubTitle}</h1>
+     <p class="subtitle">${c.hubSub}</p>
+   </header>
+   <p class="home-intro">${c.hubIntro}</p>
+   <section class="hub-section"><h2>${c.selfH}</h2><p>${c.selfP}</p></section>
+   <div class="grid">${FORMS.filter(f=>f.kind==="self").map(card).join("")}${SOON.filter(s=>s.kind==="self").map(soon).join("")}</div>
+   <section class="hub-section"><h2>${c.evH}</h2><p>${c.evP}</p></section>
+   <div class="grid">${FORMS.filter(f=>f.kind==="event").map(card).join("")}${SOON.filter(s=>s.kind==="event").map(soon).join("")}</div>
+   ${footer()}`;
+  document.title=`${c.hubTitle} – ${c.brand}`;
+  qa(".fcard[data-go]").forEach(el=>{
+    el.addEventListener("click",e=>{ if(e.target.closest("[data-info]")||e.target.closest(".tip"))return; location.hash=el.dataset.go; });
+    el.addEventListener("keydown",e=>{ if(e.key==="Enter")location.hash=el.dataset.go; });
+  });
+  qa("[data-info]").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();const card=b.closest(".fcard");const was=card.classList.contains("open");qa(".fcard.open").forEach(x=>x.classList.remove("open"));if(!was)card.classList.add("open");}));
+}
+document.addEventListener("click",e=>{ if(!e.target.closest(".fcard"))qa(".fcard.open").forEach(x=>x.classList.remove("open")); });
+
+/* ---------- form ---------- */
+function snap(){
+  const D=F.data,s={lik:[],mc:{},other:{},open:"",rating:null,f1:"",f2:""};
+  if(!$("questions"))return keep;
+  s.lik=D.ITEMS.map((_,i)=>{const r=document.querySelector(`input[name="q${i}"]:checked`);return r?+r.value:null;});
+  for(const k in (D.MC||{})){s.mc[k]=qa(`input[name="mc_${k}"]:checked`).map(x=>x.value);s.other[k]=val("oth_"+k);}
+  s.open=val("openq");const rr=document.querySelector('input[name="rating"]:checked');s.rating=rr?+rr.value:null;
+  s.f1=val("f1");s.f2=val("f2");return s;
+}
+function blank(){const D=F.data,s={lik:D.ITEMS.map(()=>null),mc:{},other:{},open:"",rating:null,f1:F.kind==="event"?presetEvent:"",f2:""};for(const k in (D.MC||{})){s.mc[k]=[];s.other[k]="";}return s;}
+
+function mcCard(k,sec,st){
+  const m=F.data.MC[k],l=L(),sel=st.mc[k]||[];
+  let chips=m.opts.map((o,j)=>`<input type="checkbox" name="mc_${k}" id="mc_${k}_${j}" value="${j}" ${sel.includes(String(j))?"checked":""}><label for="mc_${k}_${j}">${o[lang]}</label>`).join("");
+  chips+=`<input type="checkbox" name="mc_${k}" id="mc_${k}_o" value="o" ${sel.includes("o")?"checked":""}><label for="mc_${k}_o">${l.other}</label>`;
+  return `<div class="card" id="mcc_${k}"><div class="q"><div class="num" style="background:${sec.soft};color:${sec.color}">✓</div><div style="flex:1"><p>${m.q[lang]}</p><div class="hint">${l.multi}</div><div class="chips" style="--chip:${sec.color}">${chips}</div><input class="other-in" id="oth_${k}" placeholder="${l.otherPh}" style="display:${sel.includes("o")?"block":"none"}" value="${esc(st.other[k]||"")}"></div></div></div>`;
+}
+function ratingCard(sec,st){
+  const l=L();let r="";for(let v=1;v<=10;v++)r+=`<input type="radio" name="rating" id="rt${v}" value="${v}" ${st.rating===v?"checked":""}><label for="rt${v}">${v}</label>`;
+  return `<div class="card" id="ratingc"><div class="q"><div class="num" style="background:${sec.soft};color:${sec.color}">★</div><div style="flex:1"><p>${l.ratingQ}</p><div class="rating10">${r}</div></div></div></div>`;
+}
+function openCard(sec,st){
+  const l=L(),q=F.data.OPEN.q?F.data.OPEN.q[lang]:l.openQ;
+  return `<div class="card"><div class="q"><div class="num" style="background:${sec.soft};color:${sec.color}">✎</div><div style="flex:1"><p>${q} <span class="opt">${l.optional}</span></p><textarea id="openq" placeholder="${l.otherPh}">${esc(st.open||"")}</textarea></div></div></div>`;
+}
+function questionsHTML(st){
+  const D=F.data,l=L();let h="",n=0;
+  D.SECTIONS.forEach((sec,si)=>{
+    h+=`<div class="section-head"><div class="dot" style="background:${sec.color}">${sec.icon}</div><h2>${sec.t[lang]}</h2></div>`;
+    for(const k in (D.MC||{}))if(D.MC[k].s===si&&!D.MC[k].end)h+=mcCard(k,sec,st);
+    D.ITEMS.forEach((it,i)=>{if(it.s!==si)return;n++;
+      let sc="";for(let v=1;v<=5;v++)sc+=`<input type="radio" name="q${i}" id="q${i}v${v}" value="${v}" ${st.lik[i]===v?"checked":""}><label for="q${i}v${v}"><b>${v}</b><small>${l.scale[v-1]}</small></label>`;
+      h+=`<div class="card" id="q${i}"><div class="q"><div class="num" style="background:${sec.soft};color:${sec.color}">${n}</div><div style="flex:1"><p>${it.t[lang]}</p><div class="scale">${sc}</div></div></div></div>`;});
+    if(D.RATING&&D.RATING.s===si)h+=ratingCard(sec,st);
+    for(const k in (D.MC||{}))if(D.MC[k].s===si&&D.MC[k].end)h+=mcCard(k,sec,st);
+    if(D.OPEN&&D.OPEN.s===si)h+=openCard(sec,st);
+  });
+  return h;
+}
+function renderForm(){
+  const c=C(),l=L(),st=keep||blank(),ev=F.kind==="event";
+  const f1L=ev?l.evLbl:l.nameLbl, f1P=ev?l.evPh:l.namePh, f2L=ev?c.clsLbl:(l.subjLbl||l.classLbl), f2P=ev?c.clsPh:(l.subjPh||l.classPh);
+  $("app").innerHTML=`
+   <div class="topbar"><a class="backlink" href="#">${c.back}</a>${langBar()}</div>
+   <div class="mini-brand"><img src="${LOGO}" alt=""><span>${c.hubTitle} · ${c.brand}</span></div>
+   <div class="fhead"><div class="ficon" style="background:${F.cs}">${F.icon}</div><h1>${F.title[lang]}</h1><p class="subtitle">${l.subtitle}</p></div>
+   <div class="card intro" id="intro" style="display:${started?"none":"block"}">
+     <h3>${c.aboutH}</h3><p>${F.desc[lang]}</p>
+     <div class="metas"><span>${c.min(F.minutes)}</span><span>${c.qn(qsCount(F))}</span><span>${l.legend1}</span><span>${l.legend5}</span></div>
+     <p class="priv">${ev?c.privEvent:c.privSelf}</p>
+     <div class="btns"><button type="button" class="main" id="startBtn">${c.start}</button></div>
+   </div>
+   <div id="formwrap" style="display:${started?"block":"none"}">
+     <div class="card">
+       <div class="info">
+         <div><label for="f1">${f1L}</label><input id="f1" placeholder="${f1P}" value="${esc(st.f1||"")}"></div>
+         <div><label for="f2">${f2L}</label><input id="f2" placeholder="${f2P}" value="${esc(st.f2||"")}"></div>
+       </div>
+       <div class="legend"><span>${l.legend1}</span><span>${l.legend5}</span></div>
+       <div class="progress"><span id="bar"></span></div><div class="ptext" id="ptext"></div>
+     </div>
+     <form id="form" novalidate><div id="questions">${questionsHTML(st)}</div>
+       <div class="btns"><button type="submit" class="main">${l.submit}</button>${ev&&sendState==="ok"?"":`<button type="button" class="ghost" id="reset">${c.reset}</button>`}</div>
+       <div class="msg" id="msg"></div></form>
+   </div>
+   <div id="result" class="card" aria-live="polite"></div>
+   ${footer()}`;
+  document.title=`${F.title[lang]} – ${c.hubTitle}`;
+  keep=st; progress();
+  $("startBtn").addEventListener("click",()=>{started=true;$("intro").style.display="none";$("formwrap").style.display="block";$("formwrap").scrollIntoView({behavior:"smooth"});});
+  const form=$("form");
+  form.addEventListener("change",e=>{
+    if(e.target.name&&e.target.name.startsWith("mc_")&&e.target.value==="o"){const k=e.target.name.slice(3);$("oth_"+k).style.display=e.target.checked?"block":"none";if(e.target.checked)$("oth_"+k).focus();}
+    progress();const cd=e.target.closest(".card");if(cd)cd.classList.remove("missing");
+  });
+  $("f1").addEventListener("input",()=>$("f1").closest(".card").classList.remove("missing"));
+  form.addEventListener("submit",onSubmit);
+  const rs=$("reset");if(rs)rs.addEventListener("click",()=>{keep=blank();shown=false;sendState=null;renderForm();window.scrollTo({top:0,behavior:"smooth"});});
+  if(shown)renderResult(false);
+}
+function progress(){
+  const s=snap();if(!s)return;const D=F.data;let n=s.lik.filter(v=>v!==null).length,t=D.ITEMS.length;
+  for(const k in (D.MC||{})){t++;if(s.mc[k].length)n++;}
+  if(D.RATING){t++;if(s.rating)n++;}
+  $("bar").style.width=(n/t*100)+"%";$("ptext").textContent=L().progress(n,t);
+}
+function onSubmit(e){
+  e.preventDefault();const s=snap(),D=F.data,miss=[];
+  if(F.kind==="event"&&!s.f1.trim())miss.push($("f1").closest(".card"));
+  for(const k in (D.MC||{}))if(D.MC[k].s===0&&!D.MC[k].end&&!s.mc[k].length)miss.push($("mcc_"+k));
+  D.ITEMS.forEach((_,i)=>{if(s.lik[i]===null)miss.push($("q"+i));});
+  if(D.RATING&&!s.rating)miss.push($("ratingc"));
+  for(const k in (D.MC||{}))if(!(D.MC[k].s===0&&!D.MC[k].end)&&!s.mc[k].length)miss.push($("mcc_"+k));
+  if(miss.length){miss.forEach(x=>x.classList.add("missing"));
+    $("msg").textContent=(F.kind==="event"&&!s.f1.trim()&&miss.length===1)?L().evMissing:L().missing(miss.length);
+    miss[0].scrollIntoView({behavior:"smooth",block:"center"});return;}
+  $("msg").textContent="";keep=s;shown=true;
+  if(F.mode==="event"&&sendState!=="ok"){sendState=null;}
+  renderResult(true);$("result").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- results ---------- */
+const effOf=s=>s.lik.map((v,i)=>F.data.ITEMS[i].nos?null:(F.data.ITEMS[i].r?6-v:v));
+const pct=(arr)=>arr.length?(arr.reduce((a,b)=>a+b,0)-arr.length)/(arr.length*4)*100:0;
+function secPcts(eff,sections){return sections.map(si=>pct(F.data.ITEMS.map((it,i)=>it.s===si&&eff[i]!=null?eff[i]:null).filter(v=>v!=null)));}
+function barsHTML(sections,vals,showNum){
+  return `<div class="bars">${sections.map((si,j)=>{const s=F.data.SECTIONS[si];const w=Math.max(3,Math.round(vals[j]));
+   return `<div class="bar-row ${showNum?"":"nop"}"><span>${s.icon} ${s.t[lang]}</span><div class="bar-track"><div class="bar-fill" style="background:${s.color}" data-w="${w}"></div></div>${showNum?`<span class="pct" style="color:${s.color}">${Math.round(vals[j])}%</span>`:""}</div>`;}).join("")}</div>`;
+}
+function siList(eff){
+  const l=L(),D=F.data;
+  const strengths=D.ITEMS.filter((it,i)=>!it.nos&&eff[i]>=4);
+  const improve=D.ITEMS.map((it,i)=>({it,v:eff[i]})).filter(x=>!x.it.nos&&x.v<=3).sort((a,b)=>a.v-b.v);
+  return {strengths,improve,html:
+   (strengths.length?`<h3>${l.strengthsH}</h3><ul>${strengths.map(it=>`<li>${it.g[lang]}</li>`).join("")}</ul>`:"")+
+   `<h3>${l.improveH}</h3><ul>${improve.length?improve.map(x=>`<li><b>${x.it.g[lang]}</b><span class="tag ${x.v<=2?"low":""}">${x.v<=2?l.priority:l.improveTag}</span><br>${x.it.a[lang]}</li>`).join(""):`<li>${l.none}</li>`}</ul>`};
+}
+function mcList(s,k){const m=F.data.MC[k];return s.mc[k].map(v=>v==="o"?(s.other[k].trim()||L().other.replace("…","")):m.opts[+v][lang]);}
+function mcListAr(s,k){const m=F.data.MC[k];return s.mc[k].map(v=>v==="o"?(s.other[k].trim()||"أخرى"):m.opts[+v].ar);}
+function afterRender(){
+  requestAnimationFrame(()=>qa(".bar-fill").forEach(b=>b.style.width=b.dataset.w+"%"));
+  const cp=$("copy");if(cp)cp.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(copyText);$("copyMsg").textContent=C().copied;}catch(e){$("copyMsg").textContent=C().copyFail;}});
+  const ag=$("again");if(ag)ag.addEventListener("click",()=>$("questions").scrollIntoView({behavior:"smooth"}));
+}
+function who(s){return [s.f1,s.f2].map(x=>(x||"").trim()).filter(Boolean).join(" · ");}
+
+function renderResult(animate){
+  const r=$("result");r.style.display="block";
+  if(F.mode==="score")return resScore(animate);
+  if(F.mode==="stage")return resStage();
+  return resEvent();
+}
+function resScore(animate){
+  const l=L(),c=C(),s=keep,eff=effOf(s),D=F.data;
+  const score=Math.round(pct(eff.filter(v=>v!=null)));
+  const li=score>=85?0:score>=70?1:score>=50?2:3,color=["#1e90ff","#20bf6b","#e0a800","#ff4757"][li];
+  const secIdx=D.SECTIONS.map((_,i)=>i),secs=secPcts(eff,secIdx),sl=siList(eff);
+  const care=l.care&&D.ITEMS.some((it,i)=>it.care&&eff[i]<=2);
+  $("result").innerHTML=`
+   <div class="score"><div class="ring" id="ring" style="--rc:${color}"><div><strong id="scoreNum">${animate?0:score}</strong><span>/ 100</span></div></div>
+     <div style="flex:1;min-width:200px"><div class="who">${esc(who(s))}</div><p class="level" style="color:${color}">${l.levels[li][0]}</p><p>${l.levels[li][1]}</p></div></div>
+   ${barsHTML(secIdx,secs,true)}${sl.html}
+   <h3>${l.generalH}</h3><p class="general">${l.levels[li][2]}</p>
+   ${care?`<h3>${l.careH}</h3><p class="general" style="background:rgba(156,39,176,.07)">${l.care}</p>`:""}
+   <div class="btns"><button type="button" class="main" id="copy">${c.copy}</button><button type="button" class="ghost" id="again">${c.edit}</button></div>
+   <div class="msg" id="copyMsg" style="color:#20bf6b"></div>`;
+  const ring=$("ring");
+  if(animate){let cur=0;const step=()=>{const el=$("scoreNum");if(!el||!ring.isConnected)return;cur=Math.min(score,cur+2);el.textContent=cur;ring.style.setProperty("--p",cur);if(cur<score)requestAnimationFrame(step);};step();}else ring.style.setProperty("--p",score);
+  copyText=`${F.title[lang]}${who(s)?" – "+who(s):""}\n${l.scoreW}: ${score}/100 – ${l.levels[li][0]}\n`+secIdx.map((si,j)=>`${D.SECTIONS[si].t[lang]}: ${Math.round(secs[j])}%`).join("\n")+
+    `\n${l.strW}: ${sl.strengths.map(x=>x.g[lang]).join(sep())||"-"}\n${l.impW}: ${sl.improve.map(x=>x.it.g[lang]).join(sep())||"-"}`;
+  afterRender();
+}
+function resStage(){
+  const l=L(),c=C(),s=keep,eff=effOf(s),D=F.data;
+  const p=pct(eff.filter(v=>v!=null)),stage=p>=80?2:p>=50?1:0,colors=["#ffa502","#1e90ff","#20bf6b"];
+  const scored=[...new Set(D.ITEMS.filter(it=>!it.nos).map(it=>it.s))],secs=secPcts(eff,scored),sl=siList(eff);
+  const helpI=D.ITEMS.findIndex(it=>it.nos),needHelp=helpI>=0&&s.lik[helpI]>=4;
+  const feel=(s.mc.feel||[]).filter(v=>v!=="o").map(v=>D.MC.feel.opts[+v]);
+  const care=needHelp||feel.some(o=>o.care)||(s.mc.what||[]).includes("2");
+  const rows=[[l.pStage,l.stages[stage][0]+" "+l.stages[stage][1]],[l.pWhat,mcList(s,"what").join(sep())],[l.pFeel,mcList(s,"feel").join(sep())],[l.pSteps,mcList(s,"repair").join(sep())]];
+  if(s.open.trim())rows.push([l.pMsg,s.open.trim()]);
+  $("result").innerHTML=`
+   <div class="who">${esc(who(s))}</div>
+   <h3 style="margin-top:6px">${l.indicatorH}</h3>
+   <div class="stages">${l.stages.map((x,i)=>`<div class="stage ${i===stage?"on":""}" style="${i===stage?"background:"+colors[i]:""}"><span class="ic">${x[0]}</span>${x[1]}</div>`).join("")}</div>
+   <p class="level" style="color:${colors[stage]}">${l.stages[stage][0]} ${l.stages[stage][1]}</p><p>${l.levelText[stage]}</p>
+   ${barsHTML(scored,secs,false)}${sl.html}
+   ${feel.length?`<h3>${l.tipsH}</h3>${feel.map(o=>`<div class="tip-row"><b>${o[lang]}</b><br>${D.TIPS[o.k][lang]}</div>`).join("")}`:""}
+   ${care?`<h3>${l.careH}</h3><p class="general" style="background:rgba(156,39,176,.07)">${l.care}</p>`:""}
+   <h3>${l.planH}</h3><dl class="plan">${rows.map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join("")}${needHelp?`<dt>🤝</dt><dd>${l.pHelp}</dd>`:""}</dl>
+   <h3>${l.generalH}</h3><p class="general">${l.general}</p>
+   <div class="btns"><button type="button" class="main" id="copy">${l.copy}</button><button type="button" class="ghost" id="again">${c.edit}</button></div>
+   <div class="msg" id="copyMsg" style="color:#20bf6b"></div>`;
+  copyText=`${l.resultFor}${who(s)?" – "+who(s):""}\n`+rows.map(r=>`${r[0]}: ${r[1]}`).join("\n")+(needHelp?`\n${l.pHelp}`:"");
+  afterRender();
+}
+function buildPayload(s){
+  const D=F.data,a={"الاستمارة":F.id,"اسم الفعالية":s.f1.trim(),"الصف":s.f2.trim(),"اللغة":lang};
+  D.ITEMS.forEach((it,i)=>a[it.h]=s.lik[i]);
+  if(D.RATING)a[D.RATING.h]=s.rating;
+  for(const k in (D.MC||{}))a[D.MC[k].h]=mcListAr(s,k).join("، ");
+  if(D.OPEN)a[D.OPEN.h]=s.open.trim();
+  return {form:F.id,answers:a};
+}
+async function doSend(){
+  const st=$("sendStatus"),c=C(),mine=F,body=JSON.stringify(lastPayload);sendState="sending";if(st){st.textContent=c.sending;st.style.color="var(--muted)";}
+  let ok=false;
+  try{
+    const ctrl=new AbortController();const t=setTimeout(()=>ctrl.abort(),15000);
+    await fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body,signal:ctrl.signal});
+    clearTimeout(t);ok=true;
+  }catch(e){ok=false;}
+  if(F!==mine)return;
+  sendState=ok?"ok":"fail";
+  paintSend();
+}
+function paintSend(){
+  const st=$("sendStatus"),c=C(),rb=$("retry");if(!st)return;
+  if(sendState==="ok"){st.textContent=c.sent;st.style.color="#20bf6b";if(rb)rb.style.display="none";const r=$("reset");if(r)r.remove();}
+  else if(sendState==="fail"){st.textContent=c.sendFail;st.style.color="var(--red)";if(rb)rb.style.display="inline-block";}
+  else{st.textContent=c.sending;st.style.color="var(--muted)";}
+}
+function resEvent(){
+  const l=L(),c=C(),s=keep,D=F.data,eff=effOf(s);
+  const secIdx=D.SECTIONS.map((_,i)=>i),secs=secPcts(eff,secIdx);
+  const rows=[[l.pEvent,s.f1.trim()],[l.pOverall,`${s.rating} / 10`],[l.pLiked,mcList(s,"liked").join(sep())]];
+  if(s.open.trim())rows.push([l.pSugg,s.open.trim()]);
+  $("result").innerHTML=`
+   <div style="text-align:center"><div style="font-size:3rem;line-height:1.2">💌</div><p class="level" style="color:#20bf6b">${c.thanks}</p><p>${l.thanksText}</p>
+   <div class="send-status" id="sendStatus"></div>
+   <div class="btns"><button type="button" class="main" id="retry" style="display:none">${c.retry}</button></div></div>
+   <h3>${l.barsH}</h3>${barsHTML(secIdx,secs,true)}
+   <h3>${l.sumH}</h3><dl class="plan">${rows.map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join("")}</dl>
+   <div class="btns"><a class="backlink" href="#">${c.back}</a></div>`;
+  $("retry").addEventListener("click",doSend);
+  afterRender();
+  if(sendState===null){lastPayload=buildPayload(s);doSend();}else paintSend();
+}
+
+/* ---------- routing & language ---------- */
+function route(){
+  const h=decodeURIComponent(location.hash.slice(1));const f=FORMS.find(x=>x.id===h);
+  if(f){ if(F!==f){F=f;keep=null;started=false;shown=false;sendState=null;} renderForm(); }
+  else { F=null; renderHome(); }
+  window.scrollTo(0,0);
+}
+function setLang(l){
+  if(F)keep=snap()||keep;
+  lang=l;document.documentElement.lang=l;document.documentElement.dir=C().dir;
+  try{localStorage.setItem("me-lang",l);}catch(e){}
+  if(F)renderForm();else renderHome();
+}
+document.addEventListener("click",e=>{const b=e.target.closest(".lang-btn");if(b)setLang(b.dataset.lang);});
+window.addEventListener("hashchange",route);
+try{const s=localStorage.getItem("me-lang");if(COMMON[s])lang=s;}catch(e){}
+document.documentElement.lang=lang;document.documentElement.dir=C().dir;
+route();
+</script>
+</body>
+</html>
